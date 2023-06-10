@@ -7,26 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DoJudo.Model.Database
+namespace DoJudo.Models.Database
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Group
+    public partial class Participant
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Group()
+        public Participant()
         {
-            this.Participants = new HashSet<Participant>();
+            this.Groups = new HashSet<Group>();
         }
     
         public int Id { get; set; }
-        public int IdCompetition { get; set; }
-        public int IdCategory { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public System.DateTime Birthdate { get; set; }
+        public string Gender { get; set; }
+        public int IdAddress { get; set; }
+        public string Phone { get; set; }
+        public Nullable<double> Weight { get; set; }
     
-        public virtual Category Category { get; set; }
-        public virtual Competition Competition { get; set; }
+        public virtual Address Address { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Participant> Participants { get; set; }
+        public virtual ICollection<Group> Groups { get; set; }
     }
 }

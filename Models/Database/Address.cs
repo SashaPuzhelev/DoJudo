@@ -7,30 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DoJudo.Model.Database
+namespace DoJudo.Models.Database
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Participant
+    public partial class Address
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Participant()
+        public Address()
         {
-            this.Groups = new HashSet<Group>();
+            this.Competitions = new HashSet<Competition>();
+            this.Participants = new HashSet<Participant>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public System.DateTime Birthdate { get; set; }
-        public string Gender { get; set; }
-        public int IdAddress { get; set; }
-        public string Phone { get; set; }
-        public Nullable<double> Weight { get; set; }
+        public int Index { get; set; }
+        public string Street { get; set; }
+        public string Number { get; set; }
+        public int IdCity { get; set; }
     
-        public virtual Address Address { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Group> Groups { get; set; }
+        public virtual ICollection<Competition> Competitions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Participant> Participants { get; set; }
+        public virtual City City { get; set; }
     }
 }
