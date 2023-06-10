@@ -15,7 +15,7 @@ namespace DoJudo.Models.Database
     
     public partial class DoJudoEntities : DbContext
     {
-        public DoJudoEntities()
+        protected DoJudoEntities()
             : base("name=DoJudoEntities")
         {
         }

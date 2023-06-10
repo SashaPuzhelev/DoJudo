@@ -129,6 +129,7 @@
     <Compile Include="Models\Database\Competition.cs">
       <DependentUpon>ModelDoJudo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Repositories\DoJudoRepository.cs" />
     <Compile Include="Models\Database\Group.cs">
       <DependentUpon>ModelDoJudo.tt</DependentUpon>
     </Compile>
@@ -162,7 +163,7 @@
     <Compile Include="Models\Database\WeightCategory.cs">
       <DependentUpon>ModelDoJudo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="Views\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -209,9 +210,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Models\Database\ModelDoJudo.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
