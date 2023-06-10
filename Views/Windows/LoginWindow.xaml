@@ -17,7 +17,7 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <!--<Image Source="/Resources/calendar.png" Grid.Column="0"></Image>-->
+            <Image Source="/Resources/logoImage.png" Grid.Column="0"></Image>
             <TextBlock Grid.Column="1" Style="{StaticResource HeaderTextBlock}" Text="DoJudo"></TextBlock>
         </Grid>
         <StackPanel Grid.Row="1" Width="300">

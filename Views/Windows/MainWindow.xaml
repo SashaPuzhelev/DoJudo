@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:DoJudo"
         mc:Ignorable="d"
         Title="DoJudo" Height="450" Width="800" WindowStartupLocation="CenterScreen" MinHeight="300" MinWidth="600">
-    <Grid>
+    <Grid Background="{StaticResource VeryLightColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="70"></RowDefinition>
             <RowDefinition  Height="30"></RowDefinition>
@@ -18,7 +18,7 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <!--Image Source="/Resources/calendar.png" Grid.Column="0"></Image>-->
+            <Image Source="/Resources/logoImage.png" Grid.Column="0"></Image>
             <TextBlock Grid.Column="1" Style="{StaticResource HeaderTextBlock}" Text="DoJudo"></TextBlock>
         </Grid>
         <Grid Grid.Row="1">
