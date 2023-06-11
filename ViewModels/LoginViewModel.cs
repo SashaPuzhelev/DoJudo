@@ -1,17 +1,10 @@
-﻿using DevExpress.Mvvm;
-using DoJudo.Models.Repositories;
-using DoJudo.UI.Windows;
+﻿using DoJudo.Models.Repositories;
 using GalaSoft.MvvmLight.Command;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Markup;
 
 namespace DoJudo.ViewModels
 {
@@ -53,11 +46,12 @@ namespace DoJudo.ViewModels
         }
         public LoginViewModel()
         {
-            LoginCommand = new RelayCommand(Login, CanLogin(null));
+            LoginCommand = new RelayCommand(Login, CanLogin());
+            ShutdownAppCommand = new RelayCommand(ShutdownApp);
         }
-        public ICommand LoginCommand { get; }
-
-        private bool CanLogin(object parameter)
+        public ICommand LoginCommand { get; private set; }
+        public ICommand ShutdownAppCommand { get; private set; }
+        private bool CanLogin()
         {
             return !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password);
         }
@@ -73,18 +67,26 @@ namespace DoJudo.ViewModels
             {
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
-                LoginWindow loginWindow = new LoginWindow();
-                loginWindow.Close();
+                CloseWindow();
             }
+        }
+        private void ShutdownApp()
+        {
+            Application.Current.Shutdown();
         }
         private void UpdateLoginEnabled()
         {
-            IsLoginEnabled = CanLogin(null);
+            IsLoginEnabled = CanLogin();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnProperyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public event EventHandler CloseWindowEvent;
+        public void CloseWindow()
+        {
+            CloseWindowEvent?.Invoke(this, EventArgs.Empty);
         }
 
     }
