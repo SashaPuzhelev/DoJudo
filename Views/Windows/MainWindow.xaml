@@ -3,9 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:DoJudo.ViewModels"
         xmlns:local="clr-namespace:DoJudo"
         mc:Ignorable="d"
         Title="DoJudo" Height="450" Width="800" WindowStartupLocation="CenterScreen" MinHeight="300" MinWidth="600">
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
     <Grid Background="{StaticResource VeryLightColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="70"></RowDefinition>
@@ -20,6 +24,7 @@
             </Grid.ColumnDefinitions>
             <Image Source="/Resources/logoImage.png" Grid.Column="0"></Image>
             <TextBlock Grid.Column="1" Style="{StaticResource HeaderTextBlock}" Text="DoJudo"></TextBlock>
+            <TextBlock Style="{StaticResource MainTextBlock}" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2" Text="{Binding FullNameWithRoleName}"></TextBlock>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

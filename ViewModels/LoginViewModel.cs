@@ -1,5 +1,6 @@
 ﻿using DoJudo.Models.Repositories;
 using GalaSoft.MvvmLight.Command;
+using DoJudo.Models;
 using System;
 using System.ComponentModel;
 using System.Data.Entity;
@@ -65,6 +66,7 @@ namespace DoJudo.ViewModels
             }
             else
             {
+                CurrentUser currentUser = new CurrentUser(user);
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
                 CloseWindow();
