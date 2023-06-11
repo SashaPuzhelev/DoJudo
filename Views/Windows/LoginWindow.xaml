@@ -3,9 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DoJudo.UI.Windows"
+        xmlns:mv="clr-namespace:DoJudo.ViewModels"
         mc:Ignorable="d"
-        Title="DoJudo" Height="400" Width="350" MinHeight="300" MinWidth="300">
+        Title="DoJudo" Height="400" Width="350" MinHeight="300" MinWidth="300" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <mv:LoginViewModel />
+    </Window.DataContext>
     <Grid Background="{StaticResource VeryLightColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="70"></RowDefinition>
@@ -17,20 +20,25 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <!--<Image Source="/Resources/calendar.png" Grid.Column="0"></Image>-->
+            <Image Source="/Resources/logoImage.png" Grid.Column="0"></Image>
             <TextBlock Grid.Column="1" Style="{StaticResource HeaderTextBlock}" Text="DoJudo"></TextBlock>
         </Grid>
         <StackPanel Grid.Row="1" Width="300">
             <TextBlock Style="{StaticResource HeaderTextBlock}" Margin="20">Вход</TextBlock>
             <TextBlock Style="{StaticResource MainTextBlock}">Логин</TextBlock>
-            <TextBox x:Name="TextBoxLogin" Style="{StaticResource MainTextBox}"></TextBox>
+            <TextBox x:Name="TextBoxUsername" Style="{StaticResource MainTextBox}" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             <TextBlock Style="{StaticResource MainTextBlock}">Пароль</TextBlock>
-            <PasswordBox x:Name="PasswordBox"></PasswordBox>
-            <TextBox x:Name="TextBoxPassword" Style="{StaticResource PasswordTextBox}"></TextBox>
-            <CheckBox x:Name="CheckBoxPassword" Style="{StaticResource PasswordCheckBox}" Checked="CheckBoxPassword_Checked" Unchecked="CheckBoxPassword_Unchecked">Показать пароль</CheckBox>
+            <PasswordBox x:Name="PasswordBox" PasswordChanged="PasswordBox_PasswordChanged"></PasswordBox>
+            <TextBox x:Name="TextBoxPassword" Style="{StaticResource PasswordTextBox}" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <CheckBox 
+                x:Name="CheckBoxPassword"
+                Style="{StaticResource PasswordCheckBox}"
+                Unchecked="CheckBoxPassword_Unchecked"
+                Content="Показать пароль">
+            </CheckBox>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
-                <Button  Content="Войти" x:Name="ButtonLogin" Style="{StaticResource MainButton}"></Button>
-                <Button  Style="{StaticResource MainButton}" Content="Отмена"></Button>
+                <Button  Content="Войти" Style="{StaticResource MainButton}" Command="{Binding LoginCommand}" IsEnabled="{Binding IsLoginEnabled}"></Button>
+                <Button  Style="{StaticResource MainButton}" Content="Отменить" Command="{Binding ShutdownAppCommand}"></Button>
             </StackPanel>
         </StackPanel>
     </Grid>

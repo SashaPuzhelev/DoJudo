@@ -7,24 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DoJudo.Model.Database
+namespace DoJudo.Models.Database
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class WeightCategory
+    public partial class Address
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public WeightCategory()
+        public Address()
         {
-            this.Categories = new HashSet<Category>();
+            this.Competitions = new HashSet<Competition>();
+            this.Participants = new HashSet<Participant>();
         }
     
         public int Id { get; set; }
-        public int StartWeight { get; set; }
-        public int EndWeight { get; set; }
+        public int Index { get; set; }
+        public string Street { get; set; }
+        public string Number { get; set; }
+        public int IdCity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<Competition> Competitions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Participant> Participants { get; set; }
+        public virtual City City { get; set; }
     }
 }

@@ -7,23 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DoJudo.Model.Database
+namespace DoJudo.Models.Database
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class City
+    public partial class AgeCategory
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public City()
+        public AgeCategory()
         {
-            this.Addresses = new HashSet<Address>();
+            this.Categories = new HashSet<Category>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
+        public int StartAge { get; set; }
+        public int EndAge { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Address> Addresses { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
     }
 }

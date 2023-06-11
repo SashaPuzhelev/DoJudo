@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DoJudo.Model.Database
+namespace DoJudo.Models.Database
 {
     using System;
     using System.Collections.Generic;
@@ -18,9 +18,9 @@ namespace DoJudo.Model.Database
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Phone { get; set; }
-        public string Login { get; set; }
         public string Password { get; set; }
         public int IdRole { get; set; }
+        public string Username { get; set; }
     
         public virtual Role Role { get; set; }
     }

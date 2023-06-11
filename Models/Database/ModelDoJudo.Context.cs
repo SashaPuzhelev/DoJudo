@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DoJudo.Model.Database
+namespace DoJudo.Models.Database
 {
     using System;
     using System.Data.Entity;
@@ -15,7 +15,7 @@ namespace DoJudo.Model.Database
     
     public partial class DoJudoEntities : DbContext
     {
-        public DoJudoEntities()
+        protected DoJudoEntities()
             : base("name=DoJudoEntities")
         {
         }
