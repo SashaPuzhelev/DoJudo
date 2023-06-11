@@ -24,14 +24,20 @@ namespace DoJudo.UI.Windows
             InitializeComponent();
         }
 
-        private void CheckBoxPassword_Checked(object sender, RoutedEventArgs e)
-        {
-            TextBoxPassword.Text = PasswordBox.Password;
-        }
 
         private void CheckBoxPassword_Unchecked(object sender, RoutedEventArgs e)
         {
             PasswordBox.Password = TextBoxPassword.Text;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            TextBoxPassword.Text = PasswordBox.Password;
         }
     }
 }

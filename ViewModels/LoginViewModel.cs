@@ -1,5 +1,7 @@
 ﻿using DevExpress.Mvvm;
 using DoJudo.Models.Repositories;
+using DoJudo.UI.Windows;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +13,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Markup;
 
-namespace DoJudo.Model
+namespace DoJudo.ViewModels
 {
     internal class LoginViewModel : INotifyPropertyChanged
 
@@ -51,6 +53,7 @@ namespace DoJudo.Model
         }
         public LoginViewModel()
         {
+            LoginCommand = new RelayCommand(Login, CanLogin(null));
         }
         public ICommand LoginCommand { get; }
 
@@ -70,6 +73,8 @@ namespace DoJudo.Model
             {
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
+                LoginWindow loginWindow = new LoginWindow();
+                loginWindow.Close();
             }
         }
         private void UpdateLoginEnabled()
