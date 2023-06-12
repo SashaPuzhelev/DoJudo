@@ -58,7 +58,7 @@ namespace DoJudo.ViewModels
         }
         private async void Login()
         {
-            var user = await DoJudoRepository.GetInstance().Users.
+            var user = await DbDoJudo.GetInstance().Users.
                 FirstOrDefaultAsync(x => x.Username == Username && x.Password == Password);
             if (user == null)
             {

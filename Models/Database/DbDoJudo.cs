@@ -7,14 +7,14 @@ using DoJudo.Models.Database;
 
 namespace DoJudo.Models.Repositories
 {
-    internal class DoJudoRepository : DoJudoEntities
+    internal class DbDoJudo : DoJudoEntities
     {
         //you need to make constr is PROTECTED in DoJudoEntitites
-        private static DoJudoRepository instance;
-        public static DoJudoRepository GetInstance() 
+        private static DbDoJudo instance;
+        public static DbDoJudo GetInstance() 
         {
             if (instance == null)
-                instance = new DoJudoRepository();
+                instance = new DbDoJudo();
             return instance;
         }
     }
