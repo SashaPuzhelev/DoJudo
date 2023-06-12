@@ -32,9 +32,9 @@ namespace DoJudo.Models.Repositories
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Participant> GetAll()
+        public async Task<IEnumerable<Participant>> GetAll()
         {
-            return _dbDoJudo.Participants.ToList();
+            return await _dbDoJudo.Participants.ToListAsync();
         }
 
         public Participant GetByPhone(string phone)

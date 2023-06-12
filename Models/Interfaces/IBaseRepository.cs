@@ -10,6 +10,6 @@ namespace DoJudo.Models.Interfaces
         bool Update(T entity);
         bool Delete(T entity);
         T Get(int id);
-        IEnumerable<T> GetAll();
+        Task<IEnumerable<T>> GetAll();
     }
 }

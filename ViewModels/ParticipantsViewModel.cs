@@ -4,6 +4,7 @@ using DoJudo.Models.Repositories;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DoJudo.ViewModels
 {
@@ -15,7 +16,7 @@ namespace DoJudo.ViewModels
         public ObservableCollection<Participant> Participants
         {
             get { return _participants; }
-            set
+            private set
             {
                 _participants = value;
                 OnPropertyChanged(_nameCollectionParticipants);
@@ -24,7 +25,12 @@ namespace DoJudo.ViewModels
         public ParticipantsViewModel()
         {
             _participantRepository = new ParticipantRepository();
-            Participants = new ObservableCollection<Participant>(_participantRepository.GetAll());
+            _ = LoadParticipantsAsync();
+        }
+        private async Task LoadParticipantsAsync()
+        {
+            var participantsList = await _participantRepository.GetAll();
+            Participants = new ObservableCollection<Participant>(participantsList);
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
