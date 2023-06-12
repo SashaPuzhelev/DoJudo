@@ -16,7 +16,11 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding Participants}" AutoGenerateColumns="False">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <DataGrid Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Participants}" SelectedItem="{Binding SelectedParticipants}"
+                  AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
@@ -52,7 +56,7 @@
         </DataGrid>
         <Grid Grid.Row="1" Background="{StaticResource PrimaryColor}">
             <Button Style="{StaticResource MainButton}" HorizontalAlignment="Left" Content="Добавить"></Button>
-            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Right" Content="Удалить"></Button>
+            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Right" Content="Удалить" Command="{Binding DeleteCommand}"/>
         </Grid>
     </Grid>
 </Page>

@@ -19,7 +19,7 @@ namespace DoJudo.Models.Repositories
             return await _dbDoJudo.Users.FirstOrDefaultAsync(x => x.Username == username && x.Password == password);
         }
 
-        public bool Create(User entity)
+        public bool Add(User entity)
         {
             throw new NotImplementedException();
         }
@@ -40,6 +40,11 @@ namespace DoJudo.Models.Repositories
         }
 
         public bool Update(User entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteItems(IEnumerable<User> entities)
         {
             throw new NotImplementedException();
         }

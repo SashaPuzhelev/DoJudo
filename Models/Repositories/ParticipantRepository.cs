@@ -3,6 +3,7 @@ using DoJudo.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,14 +18,46 @@ namespace DoJudo.Models.Repositories
             _dbDoJudo = DbDoJudo.GetInstance();
         }
 
-        public bool Create(Participant entity)
+        public bool Add(Participant entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _dbDoJudo.Participants.Add(entity);
+                _dbDoJudo.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public bool Delete(Participant entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _dbDoJudo.Participants.Remove(entity);
+                _dbDoJudo.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+           
+        }
+        public bool DeleteItems(IEnumerable<Participant> items)
+        {
+            try
+            {
+                _dbDoJudo.Participants.RemoveRange(items);
+                _dbDoJudo.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            { 
+                return false; 
+            }
         }
 
         public Participant Get(int id)
@@ -44,7 +77,16 @@ namespace DoJudo.Models.Repositories
 
         public bool Update(Participant entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _dbDoJudo.Participants.AddOrUpdate(entity);
+                _dbDoJudo.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

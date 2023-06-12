@@ -23,7 +23,7 @@ namespace DoJudo.ViewModels
             set
             {
                 _username = value;
-                OnProperyChanged(nameof(Username));
+                OnPropertyChanged(nameof(Username));
                 UpdateLoginEnabled();
             }
         }
@@ -33,7 +33,7 @@ namespace DoJudo.ViewModels
             set
             {
                 _password = value;
-                OnProperyChanged(nameof(Password));
+                OnPropertyChanged(nameof(Password));
                 UpdateLoginEnabled();
             }
         }
@@ -43,7 +43,7 @@ namespace DoJudo.ViewModels
             private set
             {
                 _isLoginEnabled = value;
-                OnProperyChanged(nameof(IsLoginEnabled));
+                OnPropertyChanged(nameof(IsLoginEnabled));
             }
         }
         public LoginViewModel()
@@ -84,7 +84,7 @@ namespace DoJudo.ViewModels
             IsLoginEnabled = CanLogin();
         }
         public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnProperyChanged(string propertyName)
+        protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
