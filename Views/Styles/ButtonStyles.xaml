@@ -4,6 +4,11 @@
         <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
         <Setter Property="FontFamily" Value="Arial"/>
         <Setter Property="FontSize" Value="14"/>
+        <Style.Triggers>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource AccentedColor}"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
     <Style TargetType="Button" x:Key="MainButton" BasedOn="{StaticResource BaseButton}">
         <Setter Property="Margin" Value="5"/>
