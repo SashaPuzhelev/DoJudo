@@ -11,22 +11,19 @@ namespace DoJudo.Models
 {
     internal class CurrentUser 
     {
+        private static User _user;
         public CurrentUser(User user)
         {
-            Id = user.Id;
-            Name = user.Name;
-            Surname = user.Surname;
-            IdRole = user.IdRole;
-            RoleName = user.Role.Name;
+            _user = user;
         }
-        public static int Id { get; private set; }
-        public static string Name { get; private set; }
-        public static string Surname { get; private set; }
-        public static int IdRole { get; private set; }
-        public static string RoleName { get; private set; }
-        public static string FullName => $"{Name} {Surname}";
-        public static string FullNameWithRoleName => $"{RoleName}: {FullName}";
+        public static int Id => _user.Id;
+        public static string Name => _user.Name;
+        public static string Surname => _user.Surname;
+        public static int IdRole => _user.IdRole;
+        public static string RoleName => _user.Role.Name;
+        public static string FullName => $"{_user.Name} {_user.Surname}";
+        public static string FullNameWithRoleName => $"{_user.Role.Name}: {FullName}";
 
-        public static bool CanEdit => IdRole == 1;
+        public static bool CanEdit => _user.IdRole == 1;
     }
 }
