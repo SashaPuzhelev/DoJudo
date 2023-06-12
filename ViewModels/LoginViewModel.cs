@@ -40,7 +40,7 @@ namespace DoJudo.ViewModels
         public bool IsLoginEnabled
         {
             get { return _isLoginEnabled; }
-            set
+            private set
             {
                 _isLoginEnabled = value;
                 OnProperyChanged(nameof(IsLoginEnabled));
@@ -59,15 +59,17 @@ namespace DoJudo.ViewModels
         }
         private async void Login()
         {
+            IsLoginEnabled = false;
             var userRepository = new UserRepository();
-            var user = userRepository.CheckLogin(Username, Password);
+            var user = await userRepository.CheckLogin(Username, Password);
             if (user == null)
             {
                 MessageBox.Show("Неверный логин или пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                IsLoginEnabled = true;
             }
             else
             {
-                CurrentUser currentUser = new CurrentUser(await user);
+                CurrentUser currentUser = new CurrentUser(user);
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
                 CloseWindow();
@@ -87,7 +89,7 @@ namespace DoJudo.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         public event EventHandler CloseWindowEvent;
-        public void CloseWindow()
+        private void CloseWindow()
         {
             CloseWindowEvent?.Invoke(this, EventArgs.Empty);
         }
