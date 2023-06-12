@@ -6,7 +6,7 @@
         xmlns:vm="clr-namespace:DoJudo.ViewModels"
         xmlns:local="clr-namespace:DoJudo"
         mc:Ignorable="d"
-        Title="DoJudo" Height="450" Width="800" WindowStartupLocation="CenterScreen" MinHeight="300" MinWidth="600">
+        Title="DoJudo" Height="450" Width="800" WindowStartupLocation="CenterScreen" MinHeight="300" MinWidth="500">
     <Window.DataContext>
         <vm:MainWindowViewModel />
     </Window.DataContext>
@@ -25,7 +25,7 @@
             </Grid.ColumnDefinitions>
             <Image Source="/Resources/logoImage.png" Grid.Column="0"></Image>
             <TextBlock Grid.Column="1" Style="{StaticResource HeaderTextBlock}" HorizontalAlignment="Left" Text="DoJudo"></TextBlock>
-            <TextBlock Style="{StaticResource MainTextBlock}" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2"  Text="{Binding FullNameWithRoleName}"></TextBlock>
+            <TextBlock Style="{StaticResource MainTextBlock}" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2"  Text="{Binding FullNameWithRoleName}" Grid.ColumnSpan="2"></TextBlock>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -35,12 +35,12 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Style="{StaticResource BaseButton}" Content="Участники"></Button>
+            <Button Grid.Column="0" Style="{StaticResource BaseButton}" Content="Участники" Command="{Binding NavigateCommand}" CommandParameter="ParticipantsPage"></Button>
             <Button Grid.Column="1" Style="{StaticResource BaseButton}" Content="Расписание"></Button>
             <Button Grid.Column="2" Style="{StaticResource BaseButton}" Content="Магазин"></Button>
             <Button Grid.Column="3" Style="{StaticResource BaseButton}" Content="История посещения"></Button>
             <Button Grid.Column="4" Style="{StaticResource BaseButton}" Content="Профиль"></Button>
         </Grid>
-        <Frame Grid.Row="2" x:Name="MainFrame" NavigationUIVisibility="Hidden"></Frame>
+        <Frame Grid.Row="2" NavigationUIVisibility="Hidden" Content="{Binding CurrentPage}"></Frame>
     </Grid>
 </Window>
