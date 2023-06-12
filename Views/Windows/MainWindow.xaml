@@ -6,7 +6,7 @@
         xmlns:vm="clr-namespace:DoJudo.ViewModels"
         xmlns:local="clr-namespace:DoJudo"
         mc:Ignorable="d"
-        Title="DoJudo" Height="450" Width="800" WindowStartupLocation="CenterScreen" MinHeight="300" MinWidth="500">
+        Title="DoJudo" Height="600" Width="1000" WindowStartupLocation="CenterScreen" MinHeight="300" MinWidth="500">
     <Window.DataContext>
         <vm:MainWindowViewModel />
     </Window.DataContext>

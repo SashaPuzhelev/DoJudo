@@ -19,7 +19,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <DataGrid Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Participants}" SelectedItem="{Binding SelectedParticipants}"
+        <DataGrid Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Participants}" SelectedItem="{Binding SelectedParticipant}" SelectionMode="Single"
+                  CanUserAddRows="False"
                   AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>

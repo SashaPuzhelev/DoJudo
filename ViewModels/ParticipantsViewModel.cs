@@ -4,10 +4,9 @@ using DoJudo.Models.Repositories;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data.Entity.Core.Objects;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace DoJudo.ViewModels
@@ -16,7 +15,8 @@ namespace DoJudo.ViewModels
     {
         private readonly IParticipantRepository _participantRepository;
         private ObservableCollection<Participant> _participants;
-        private ObservableCollection<Participant> _selectedParticipant;
+        private Participant _selectedParticipant;
+        private DataGrid _gridParticipant;
         public ObservableCollection<Participant> Participants
         {
             get { return _participants; }
@@ -26,7 +26,9 @@ namespace DoJudo.ViewModels
                 OnPropertyChanged(nameof(Participants));
             }
         }
-        public ObservableCollection<Participant> SelectedParticipants
+        public DataGrid DataGrid
+        { get; private set; }
+        public Participant SelectedParticipant
         { 
             get { return _selectedParticipant; }
             set
@@ -34,7 +36,7 @@ namespace DoJudo.ViewModels
                 if (_selectedParticipant != value)
                 {
                     _selectedParticipant = value;
-                    OnPropertyChanged(nameof(SelectedParticipants));
+                    OnPropertyChanged(nameof(SelectedParticipant));
                 }
             }
         }
@@ -42,7 +44,7 @@ namespace DoJudo.ViewModels
         {
             _participantRepository = new ParticipantRepository();
             _ = LoadParticipantsAsync();
-            SelectedParticipants = new ObservableCollection<Participant>();
+            SelectedParticipant = new Participant();
             DeleteCommand = new RelayCommand(DeleteParticipants, CanDeleteParticipants);
         }
         private async Task LoadParticipantsAsync()
@@ -52,20 +54,25 @@ namespace DoJudo.ViewModels
         }
         private void DeleteParticipants()
         {
-            if (_participantRepository.DeleteItems(_selectedParticipant))
+            MessageBoxResult messageBoxResult = 
+                MessageBox.Show("Вы точно хотите удалить? Восстановление будет невозможным!", "Информация",
+                    MessageBoxButton.OKCancel, MessageBoxImage.Information);
+            if (MessageBoxResult.OK == messageBoxResult)
             {
-                MessageBox.Show("Удаление прошло успешно!","Информация",
-                    MessageBoxButton.OK, MessageBoxImage.Information);
-                _ = LoadParticipantsAsync();
-                SelectedParticipants.Clear();
-                return;
+                if (_participantRepository.Delete(_selectedParticipant))
+                {
+                    MessageBox.Show("Удаление прошло успешно!", "Информация",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+                    _ = LoadParticipantsAsync();
+                    return;
+                }
+                MessageBox.Show("Удаление провалено!", "Ошибка",
+                   MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            MessageBox.Show("Удаление провалено!", "Ошибка",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
         }
         private bool CanDeleteParticipants()
         {
-            return SelectedParticipants != null && SelectedParticipants.Any();
+            return SelectedParticipant != null;
         }
         public ICommand AddCommand { get; private set; }
         public ICommand UpdateCommand { get; private set; }

@@ -50,7 +50,10 @@ namespace DoJudo.Models.Repositories
         {
             try
             {
-                _dbDoJudo.Participants.RemoveRange(items);
+                foreach (var item in items)
+                {
+                    _dbDoJudo.Participants.Remove(item);
+                }
                 _dbDoJudo.SaveChanges();
                 return true;
             }
