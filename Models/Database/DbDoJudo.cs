@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DoJudo.Models.Database;
 
-namespace DoJudo.Models.Repositories
+namespace DoJudo.Models.Database
 {
     internal class DbDoJudo : DoJudoEntities
     {

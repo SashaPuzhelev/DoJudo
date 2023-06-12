@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DoJudo.Models.Interfaces
 {
-    internal interface IBaseRepository
+    internal interface IBaseRepository<T>
     {
+        bool Create(T entity);
 
+        bool Update(T entity);
+        bool Delete(T entity);
+        T Get(int id);
+        IEnumerable<T> GetAll();
     }
 }

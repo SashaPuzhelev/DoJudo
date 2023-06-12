@@ -1,11 +1,12 @@
-﻿using DoJudo.Models.Repositories;
-using GalaSoft.MvvmLight.Command;
+﻿using GalaSoft.MvvmLight.Command;
 using DoJudo.Models;
 using System;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Windows;
 using System.Windows.Input;
+using DoJudo.Models.Database;
+using DoJudo.Models.Repositories;
 
 namespace DoJudo.ViewModels
 {
@@ -58,15 +59,15 @@ namespace DoJudo.ViewModels
         }
         private async void Login()
         {
-            var user = await DbDoJudo.GetInstance().Users.
-                FirstOrDefaultAsync(x => x.Username == Username && x.Password == Password);
+            var userRepository = new UserRepository();
+            var user = userRepository.CheckLogin(Username, Password);
             if (user == null)
             {
                 MessageBox.Show("Неверный логин или пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
-                CurrentUser currentUser = new CurrentUser(user);
+                CurrentUser currentUser = new CurrentUser(await user);
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
                 CloseWindow();
