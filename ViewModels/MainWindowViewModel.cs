@@ -25,7 +25,7 @@ namespace DoJudo.ViewModels
         {
             get { return _currentUser.FullNameWithRoleName; }
         }
-        public ICommand NavigateCommand { get; set; }
+        public ICommand NavigateCommand { get; private set; }
         public MainWindowViewModel()
         {
             _currentUser = CurrentUser.GetInstance();

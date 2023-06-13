@@ -71,8 +71,7 @@ namespace DoJudo.ViewModels
         {
             return SelectedParticipant != null;
         }
-        public ICommand AddCommand { get; private set; }
-        public ICommand UpdateCommand { get; private set; }
+        public ICommand EditCommand { get; private set; }
         public ICommand DeleteCommand { get; private set; }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)

@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:DoJudo.Views.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddEditParticipantsPage">
+      Title="EditParticipantsPage">
 
     <Grid Background="{StaticResource VeryLightColor}">
         <Grid.ColumnDefinitions>
@@ -30,9 +30,33 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource CenterTextBlock}"
                        Text="Имя">
+            </TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource CenterTextBlock}"
+                       Text="Фамилия">
+            </TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource CenterTextBlock}"
+                       Text="Дата рождения">
+            </TextBlock>
+            <TextBlock Grid.Row="6" Grid.Column="0" Style="{StaticResource CenterTextBlock}"
+                       Text="Телефон">
+            </TextBlock>
+            <TextBlock Grid.Row="7" Grid.Column="0" Style="{StaticResource CenterTextBlock}"
+                       Text="Пол">
+            </TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource CenterTextBlock}"
+                       Text="Город">
+            </TextBlock>
+            <TextBlock Grid.Row="4" Grid.Column="0" Style="{StaticResource CenterTextBlock}"
+                       Text="Улица">
+            </TextBlock>
+            <TextBlock Grid.Row="5" Grid.Column="0" Style="{StaticResource CenterTextBlock}"
+                       Text="Дом">
             </TextBlock>
         </Grid>
     </Grid>

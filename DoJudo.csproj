@@ -93,7 +93,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\Pages\AddEditParticipantsPage.xaml">
+    <Page Include="Views\Pages\EditParticipantsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,26 +146,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="Models\CurrentUser.cs" />
-    <Compile Include="Models\Database\Address.cs">
-      <DependentUpon>ModelDoJudo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Database\AgeCategory.cs">
-      <DependentUpon>ModelDoJudo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Database\Category.cs">
-      <DependentUpon>ModelDoJudo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Database\City.cs">
-      <DependentUpon>ModelDoJudo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Database\Competition.cs">
-      <DependentUpon>ModelDoJudo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Interfaces\IBaseRepository.cs" />
-    <Compile Include="Models\Database\DbDoJudo.cs" />
-    <Compile Include="Models\Database\Group.cs">
-      <DependentUpon>ModelDoJudo.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Database\ModelDoJudo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -181,21 +161,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelDoJudo.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Database\Participant.cs">
-      <DependentUpon>ModelDoJudo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Database\Role.cs">
-      <DependentUpon>ModelDoJudo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Database\sysdiagram.cs">
-      <DependentUpon>ModelDoJudo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Database\User.cs">
-      <DependentUpon>ModelDoJudo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Database\WeightCategory.cs">
-      <DependentUpon>ModelDoJudo.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Interfaces\IBaseRepository.cs" />
+    <Compile Include="Models\Database\DbDoJudo.cs" />
     <Compile Include="Models\Interfaces\IParticipantRepository.cs" />
     <Compile Include="Models\Interfaces\IUserRepository.cs" />
     <Compile Include="Models\Repositories\ParticipantRepository.cs" />
@@ -207,8 +174,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\Pages\AddEditParticipantsPage.xaml.cs">
-      <DependentUpon>AddEditParticipantsPage.xaml</DependentUpon>
+    <Compile Include="Views\Pages\EditParticipantsPage.xaml.cs">
+      <DependentUpon>EditParticipantsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\ParticipantsPage.xaml.cs">
       <DependentUpon>ParticipantsPage.xaml</DependentUpon>

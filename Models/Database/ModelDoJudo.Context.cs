@@ -15,8 +15,8 @@ namespace DoJudo.Models.Database
     
     public partial class DoJudoEntities : DbContext
     {
-        protected DoJudoEntities()
-            : base("name=DoJudoEntities")
+        public DoJudoEntities()
+            : base("name=DoJudoEntities1")
         {
         }
     
@@ -26,9 +26,9 @@ namespace DoJudo.Models.Database
         }
     
         public virtual DbSet<Address> Addresses { get; set; }
-        public virtual DbSet<AgeCategory> AgeCategories { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<Club> Clubs { get; set; }
         public virtual DbSet<Competition> Competitions { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<Participant> Participants { get; set; }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DoJudoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DoJudoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="Id" />
@@ -14,14 +14,6 @@
           <Property Name="Street" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IdCity" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AgeCategory">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StartAge" Type="int" Nullable="false" />
-          <Property Name="EndAge" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -38,14 +30,20 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Competition">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StartDate" Type="datetime" Nullable="false" />
-          <Property Name="EndDate" Type="datetime" />
-          <Property Name="IdAddress" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -77,6 +75,7 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
           <Property Name="IdAddress" Type="int" Nullable="false" />
           <Property Name="Phone" Type="nvarchar" MaxLength="11" />
           <Property Name="Weight" Type="float" />
+          <Property Name="IdClub" Type="int" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -115,18 +114,6 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
           <Property Name="StartWeight" Type="int" Nullable="false" />
           <Property Name="EndWeight" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="for_key_idaddress_Competition">
-          <End Role="Address" Type="Self.Address" Multiplicity="1" />
-          <End Role="Competition" Type="Self.Competition" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Address">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Competition">
-              <PropertyRef Name="IdAddress" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="for_key_idaddress_Participant">
           <End Role="Address" Type="Self.Address" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -138,18 +125,6 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
             </Principal>
             <Dependent Role="Participant">
               <PropertyRef Name="IdAddress" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="for_key_IdAgeCategory_Group">
-          <End Role="AgeCategory" Type="Self.AgeCategory" Multiplicity="1" />
-          <End Role="Category" Type="Self.Category" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AgeCategory">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Category">
-              <PropertyRef Name="IdAgeCategory" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -174,6 +149,18 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
             </Principal>
             <Dependent Role="Address">
               <PropertyRef Name="IdCity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="for_key_idClub_Pirticipant">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="Participant" Type="Self.Participant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Participant">
+              <PropertyRef Name="IdClub" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -239,9 +226,9 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
         </Association>
         <EntityContainer Name="DoJudoModelStoreContainer">
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AgeCategory" EntityType="Self.AgeCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Competition" EntityType="Self.Competition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Participant" EntityType="Self.Participant" Schema="dbo" store:Type="Tables" />
@@ -255,17 +242,9 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
     [GroupParticipant].[IdParticipant] AS [IdParticipant]
     FROM [dbo].[GroupParticipant] AS [GroupParticipant]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="for_key_idaddress_Competition" Association="Self.for_key_idaddress_Competition">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="Competition" EntitySet="Competition" />
-          </AssociationSet>
           <AssociationSet Name="for_key_idaddress_Participant" Association="Self.for_key_idaddress_Participant">
             <End Role="Address" EntitySet="Address" />
             <End Role="Participant" EntitySet="Participant" />
-          </AssociationSet>
-          <AssociationSet Name="for_key_IdAgeCategory_Group" Association="Self.for_key_IdAgeCategory_Group">
-            <End Role="AgeCategory" EntitySet="AgeCategory" />
-            <End Role="Category" EntitySet="Category" />
           </AssociationSet>
           <AssociationSet Name="for_key_IdCategory_Group" Association="Self.for_key_IdCategory_Group">
             <End Role="Category" EntitySet="Category" />
@@ -274,6 +253,10 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
           <AssociationSet Name="for_key_idCity_Address" Association="Self.for_key_idCity_Address">
             <End Role="City" EntitySet="City" />
             <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="for_key_idClub_Pirticipant" Association="Self.for_key_idClub_Pirticipant">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Participant" EntitySet="Participant" />
           </AssociationSet>
           <AssociationSet Name="for_key_idcompetition_Group" Association="Self.for_key_idcompetition_Group">
             <End Role="Competition" EntitySet="Competition" />
@@ -296,7 +279,8 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
             <End Role="Category" EntitySet="Category" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DoJudoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -309,18 +293,8 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
           <Property Name="Street" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IdCity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Competitions" Relationship="Self.for_key_idaddress_Competition" FromRole="Address" ToRole="Competition" />
           <NavigationProperty Name="Participants" Relationship="Self.for_key_idaddress_Participant" FromRole="Address" ToRole="Participant" />
           <NavigationProperty Name="City" Relationship="Self.for_key_idCity_Address" FromRole="Address" ToRole="City" />
-        </EntityType>
-        <EntityType Name="AgeCategory">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StartAge" Type="Int32" Nullable="false" />
-          <Property Name="EndAge" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Categories" Relationship="Self.for_key_IdAgeCategory_Group" FromRole="AgeCategory" ToRole="Category" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -329,7 +303,6 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdWeightCategory" Type="Int32" Nullable="false" />
           <Property Name="IdAgeCategory" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AgeCategory" Relationship="Self.for_key_IdAgeCategory_Group" FromRole="Category" ToRole="AgeCategory" />
           <NavigationProperty Name="Groups" Relationship="Self.for_key_IdCategory_Group" FromRole="Category" ToRole="Group" />
           <NavigationProperty Name="WeightCategory" Relationship="Self.for_key_IdWeightCategory_Group" FromRole="Category" ToRole="WeightCategory" />
         </EntityType>
@@ -341,15 +314,21 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Addresses" Relationship="Self.for_key_idCity_Address" FromRole="City" ToRole="Address" />
         </EntityType>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Participants" Relationship="Self.for_key_idClub_Pirticipant" FromRole="Club" ToRole="Participant" />
+        </EntityType>
         <EntityType Name="Competition">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EndDate" Type="DateTime" Precision="3" />
-          <Property Name="IdAddress" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Address" Relationship="Self.for_key_idaddress_Competition" FromRole="Competition" ToRole="Address" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Groups" Relationship="Self.for_key_idcompetition_Group" FromRole="Competition" ToRole="Group" />
         </EntityType>
         <EntityType Name="Group">
@@ -375,7 +354,9 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
           <Property Name="IdAddress" Type="Int32" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
           <Property Name="Weight" Type="Double" />
+          <Property Name="IdClub" Type="Int32" />
           <NavigationProperty Name="Address" Relationship="Self.for_key_idaddress_Participant" FromRole="Participant" ToRole="Address" />
+          <NavigationProperty Name="Club" Relationship="Self.for_key_idClub_Pirticipant" FromRole="Participant" ToRole="Club" />
           <NavigationProperty Name="Groups" Relationship="Self.GroupParticipant" FromRole="Participant" ToRole="Group" />
         </EntityType>
         <EntityType Name="Role">
@@ -404,10 +385,10 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IdRole" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Role" Relationship="Self.for_key_idRole_User" FromRole="User" ToRole="Role" />
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="WeightCategory">
           <Key>
@@ -418,20 +399,10 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
           <Property Name="EndWeight" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Categories" Relationship="Self.for_key_IdWeightCategory_Group" FromRole="WeightCategory" ToRole="Category" />
         </EntityType>
-        <Association Name="for_key_idaddress_Competition">
-          <End Role="Address" Type="Self.Address" Multiplicity="1" />
-          <End Role="Competition" Type="Self.Competition" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Address">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Competition">
-              <PropertyRef Name="IdAddress" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="for_key_idaddress_Participant">
-          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Participant" Type="Self.Participant" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
@@ -451,18 +422,6 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
             </Principal>
             <Dependent Role="Address">
               <PropertyRef Name="IdCity" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="for_key_IdAgeCategory_Group">
-          <End Role="AgeCategory" Type="Self.AgeCategory" Multiplicity="1" />
-          <End Role="Category" Type="Self.Category" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AgeCategory">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Category">
-              <PropertyRef Name="IdAgeCategory" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -487,6 +446,18 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
             </Principal>
             <Dependent Role="Category">
               <PropertyRef Name="IdWeightCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="for_key_idClub_Pirticipant">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="Participant" Type="Self.Participant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Participant">
+              <PropertyRef Name="IdClub" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -518,11 +489,11 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
           <End Role="Group" Type="Self.Group" Multiplicity="*" />
           <End Role="Participant" Type="Self.Participant" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="DoJudoEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DoJudoEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Addresses" EntityType="Self.Address" />
-          <EntitySet Name="AgeCategories" EntityType="Self.AgeCategory" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="Clubs" EntityType="Self.Club" />
           <EntitySet Name="Competitions" EntityType="Self.Competition" />
           <EntitySet Name="Groups" EntityType="Self.Group" />
           <EntitySet Name="Participants" EntityType="Self.Participant" />
@@ -530,10 +501,6 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="WeightCategories" EntityType="Self.WeightCategory" />
-          <AssociationSet Name="for_key_idaddress_Competition" Association="Self.for_key_idaddress_Competition">
-            <End Role="Address" EntitySet="Addresses" />
-            <End Role="Competition" EntitySet="Competitions" />
-          </AssociationSet>
           <AssociationSet Name="for_key_idaddress_Participant" Association="Self.for_key_idaddress_Participant">
             <End Role="Address" EntitySet="Addresses" />
             <End Role="Participant" EntitySet="Participants" />
@@ -542,10 +509,6 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
             <End Role="City" EntitySet="Cities" />
             <End Role="Address" EntitySet="Addresses" />
           </AssociationSet>
-          <AssociationSet Name="for_key_IdAgeCategory_Group" Association="Self.for_key_IdAgeCategory_Group">
-            <End Role="AgeCategory" EntitySet="AgeCategories" />
-            <End Role="Category" EntitySet="Categories" />
-          </AssociationSet>
           <AssociationSet Name="for_key_IdCategory_Group" Association="Self.for_key_IdCategory_Group">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Group" EntitySet="Groups" />
@@ -553,6 +516,10 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
           <AssociationSet Name="for_key_IdWeightCategory_Group" Association="Self.for_key_IdWeightCategory_Group">
             <End Role="WeightCategory" EntitySet="WeightCategories" />
             <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="for_key_idClub_Pirticipant" Association="Self.for_key_idClub_Pirticipant">
+            <End Role="Club" EntitySet="Clubs" />
+            <End Role="Participant" EntitySet="Participants" />
           </AssociationSet>
           <AssociationSet Name="for_key_idcompetition_Group" Association="Self.for_key_idcompetition_Group">
             <End Role="Competition" EntitySet="Competitions" />
@@ -572,7 +539,7 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DoJudoModelStoreContainer" CdmEntityContainer="DoJudoEntities">
+        <EntityContainerMapping StorageEntityContainer="DoJudoModelStoreContainer" CdmEntityContainer="DoJudoEntities1">
           <EntitySetMapping Name="Addresses">
             <EntityTypeMapping TypeName="DoJudoModel.Address">
               <MappingFragment StoreEntitySet="Address">
@@ -581,15 +548,6 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
                 <ScalarProperty Name="Street" ColumnName="Street" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="IdCity" ColumnName="IdCity" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AgeCategories">
-            <EntityTypeMapping TypeName="DoJudoModel.AgeCategory">
-              <MappingFragment StoreEntitySet="AgeCategory">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="StartAge" ColumnName="StartAge" />
-                <ScalarProperty Name="EndAge" ColumnName="EndAge" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -610,13 +568,20 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Clubs">
+            <EntityTypeMapping TypeName="DoJudoModel.Club">
+              <MappingFragment StoreEntitySet="Club">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Competitions">
             <EntityTypeMapping TypeName="DoJudoModel.Competition">
               <MappingFragment StoreEntitySet="Competition">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="IdAddress" ColumnName="IdAddress" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -640,6 +605,7 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
                 <ScalarProperty Name="IdAddress" ColumnName="IdAddress" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="IdClub" ColumnName="IdClub" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -665,11 +631,11 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DoJudoModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="IdRole" ColumnName="IdRole" />
               </MappingFragment>
