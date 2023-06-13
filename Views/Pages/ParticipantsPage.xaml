@@ -22,6 +22,8 @@
         <DataGrid Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Participants}" SelectedItem="{Binding SelectedParticipant}"
                   SelectionMode="Single"
                   IsReadOnly="True"
+                  AllowDrop="False"
+                  CanUserDeleteRows="False"
                   CanUserAddRows="False"
                   AutoGenerateColumns="False">
             <DataGrid.Columns>
