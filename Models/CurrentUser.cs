@@ -12,18 +12,31 @@ namespace DoJudo.Models
     internal class CurrentUser 
     {
         private static User _user;
-        public CurrentUser(User user)
+        private static CurrentUser instance;
+        private CurrentUser(User user)
         {
             _user = user;
         }
-        public static int Id => _user.Id;
-        public static string Name => _user.Name;
-        public static string Surname => _user.Surname;
-        public static int IdRole => _user.IdRole;
-        public static string RoleName => _user.Role.Name;
-        public static string FullName => $"{_user.Name} {_user.Surname}";
-        public static string FullNameWithRoleName => $"{_user.Role.Name}: {FullName}";
+        public static CurrentUser SetInstance(User user)
+        {
+            if (instance == null)
+            {
+                instance = new CurrentUser(user);
+            }
+            return instance;
+        }
+        public static CurrentUser GetInstance()
+        {
+            return instance;
+        }
+        public int Id => _user.Id;
+        public string Name => _user.Name;
+        public string Surname => _user.Surname;
+        public int IdRole => _user.IdRole;
+        public string RoleName => _user.Role.Name;
+        public string FullName => $"{_user.Name} {_user.Surname}";
+        public string FullNameWithRoleName => $"{_user.Role.Name}: {FullName}";
 
-        public static bool CanEdit => _user.IdRole == 1;
+        public bool CanEdit => _user.IdRole == 1;
     }
 }

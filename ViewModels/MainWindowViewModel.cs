@@ -11,6 +11,7 @@ namespace DoJudo.ViewModels
     {
         private readonly string _pathToPages = "DoJudo.Views.Pages.";
         private Page _currentPage;
+        private readonly CurrentUser _currentUser;
         public Page CurrentPage
         {
             get { return _currentPage; }
@@ -22,11 +23,12 @@ namespace DoJudo.ViewModels
         }
         public string FullNameWithRoleName
         {
-            get { return CurrentUser.FullNameWithRoleName; }
+            get { return _currentUser.FullNameWithRoleName; }
         }
         public ICommand NavigateCommand { get; set; }
         public MainWindowViewModel()
         {
+            _currentUser = CurrentUser.GetInstance();
             NavigateCommand = new RelayCommand<string>((pageName) =>
             {
                 CurrentPage = (Page)Activator.CreateInstance(Type.GetType(_pathToPages + pageName));

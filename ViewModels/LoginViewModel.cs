@@ -70,7 +70,7 @@ namespace DoJudo.ViewModels
             else
             {
                 MessageBox.Show("Вы успешно вошли!", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
-                CurrentUser currentUser = new CurrentUser(user);
+                CurrentUser.SetInstance(user);
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
                 CloseWindow();
