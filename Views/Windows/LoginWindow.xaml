@@ -37,8 +37,8 @@
                 Content="Показать пароль">
             </CheckBox>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
-                <Button  Content="Войти" Style="{StaticResource MainButton}" Command="{Binding LoginCommand}" IsEnabled="{Binding IsLoginEnabled}"></Button>
-                <Button  Style="{StaticResource MainButton}" Content="Отменить" Command="{Binding ShutdownAppCommand}"></Button>
+                <Button  Content="Войти" Style="{StaticResource MainButton}" Width="120" Command="{Binding LoginCommand}" IsEnabled="{Binding IsLoginEnabled}"></Button>
+                <Button  Style="{StaticResource MainButton}" Content="Войти как гость" Width="120" Command="{Binding ShutdownAppCommand}"></Button>
             </StackPanel>
         </StackPanel>
     </Grid>

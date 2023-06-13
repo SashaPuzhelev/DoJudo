@@ -128,7 +128,9 @@ warning 6002: The table/view 'DoJudo.dbo.GroupParticipant' does not have a prima
           </ReferentialConstraint>
         </Association>
         <Association Name="for_key_idaddress_Participant">
-          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Participant" Type="Self.Participant" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
