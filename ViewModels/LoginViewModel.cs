@@ -69,6 +69,7 @@ namespace DoJudo.ViewModels
             }
             else
             {
+                MessageBox.Show("Вы успешно вошли!", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                 CurrentUser currentUser = new CurrentUser(user);
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
@@ -77,7 +78,12 @@ namespace DoJudo.ViewModels
         }
         private void ShutdownApp()
         {
-            Application.Current.Shutdown();
+            var messageBoxResult =
+                MessageBox.Show("Вы действительно хотите выйти?", "Информация", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+            if (messageBoxResult == MessageBoxResult.OK)
+            {
+                Application.Current.Shutdown();
+            }
         }
         private void UpdateLoginEnabled()
         {

@@ -16,7 +16,6 @@ namespace DoJudo.ViewModels
         private readonly IParticipantRepository _participantRepository;
         private ObservableCollection<Participant> _participants;
         private Participant _selectedParticipant;
-        private DataGrid _gridParticipant;
         public ObservableCollection<Participant> Participants
         {
             get { return _participants; }
@@ -26,8 +25,6 @@ namespace DoJudo.ViewModels
                 OnPropertyChanged(nameof(Participants));
             }
         }
-        public DataGrid DataGrid
-        { get; private set; }
         public Participant SelectedParticipant
         { 
             get { return _selectedParticipant; }
