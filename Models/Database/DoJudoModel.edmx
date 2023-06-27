@@ -1,0 +1,719 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DoJudoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Index" Type="int" Nullable="false" />
+          <Property Name="Street" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdCity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AgeCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartAge" Type="int" Nullable="false" />
+          <Property Name="EndAge" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Competition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCompetition" Type="int" Nullable="false" />
+          <Property Name="IdWeightCategory" Type="int" Nullable="false" />
+          <Property Name="IdAgeCategory" Type="int" Nullable="false" />
+          <Property Name="GenderCategory" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Participant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdGroup" Type="int" Nullable="false" />
+          <Property Name="IdSportsman" Type="int" Nullable="false" />
+          <Property Name="Weight" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sportsman">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Birthdate" Type="date" Nullable="false" />
+          <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdAddress" Type="int" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="11" />
+          <Property Name="IdClub" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="11" />
+          <Property Name="Username" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdRole" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WeightCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartWeight" Type="int" Nullable="false" />
+          <Property Name="EndWeight" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="for_key_idaddress_Participant">
+          <End Role="Address" Type="Self.Address" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Sportsman" Type="Self.Sportsman" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sportsman">
+              <PropertyRef Name="IdAddress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="for_key_idagecategory_group">
+          <End Role="AgeCategory" Type="Self.AgeCategory" Multiplicity="1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgeCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="IdAgeCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="for_key_idCity_Address">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="IdCity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="for_key_idClub_Pirticipant">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="Sportsman" Type="Self.Sportsman" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sportsman">
+              <PropertyRef Name="IdClub" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="for_key_idcompetition_Group">
+          <End Role="Competition" Type="Self.Competition" Multiplicity="1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competition">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="IdCompetition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="for_key_idgroup_GroupParticipant">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="Participant" Type="Self.Participant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Participant">
+              <PropertyRef Name="IdGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="for_key_idParticipant_GroupParticipant">
+          <End Role="Sportsman" Type="Self.Sportsman" Multiplicity="1" />
+          <End Role="Participant" Type="Self.Participant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sportsman">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Participant">
+              <PropertyRef Name="IdSportsman" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="for_key_idRole_User">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="for_key_idWeightcategory_group">
+          <End Role="WeightCategory" Type="Self.WeightCategory" Multiplicity="1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WeightCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="IdWeightCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DoJudoModelStoreContainer">
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AgeCategory" EntityType="Self.AgeCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Competition" EntityType="Self.Competition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participant" EntityType="Self.Participant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sportsman" EntityType="Self.Sportsman" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WeightCategory" EntityType="Self.WeightCategory" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="for_key_idaddress_Participant" Association="Self.for_key_idaddress_Participant">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Sportsman" EntitySet="Sportsman" />
+          </AssociationSet>
+          <AssociationSet Name="for_key_idagecategory_group" Association="Self.for_key_idagecategory_group">
+            <End Role="AgeCategory" EntitySet="AgeCategory" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+          <AssociationSet Name="for_key_idCity_Address" Association="Self.for_key_idCity_Address">
+            <End Role="City" EntitySet="City" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="for_key_idClub_Pirticipant" Association="Self.for_key_idClub_Pirticipant">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Sportsman" EntitySet="Sportsman" />
+          </AssociationSet>
+          <AssociationSet Name="for_key_idcompetition_Group" Association="Self.for_key_idcompetition_Group">
+            <End Role="Competition" EntitySet="Competition" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+          <AssociationSet Name="for_key_idgroup_GroupParticipant" Association="Self.for_key_idgroup_GroupParticipant">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Participant" EntitySet="Participant" />
+          </AssociationSet>
+          <AssociationSet Name="for_key_idParticipant_GroupParticipant" Association="Self.for_key_idParticipant_GroupParticipant">
+            <End Role="Sportsman" EntitySet="Sportsman" />
+            <End Role="Participant" EntitySet="Participant" />
+          </AssociationSet>
+          <AssociationSet Name="for_key_idRole_User" Association="Self.for_key_idRole_User">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="for_key_idWeightcategory_group" Association="Self.for_key_idWeightcategory_group">
+            <End Role="WeightCategory" EntitySet="WeightCategory" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DoJudoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Index" Type="Int32" Nullable="false" />
+          <Property Name="Street" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdCity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sportsmen" Relationship="Self.for_key_idaddress_Participant" FromRole="Address" ToRole="Sportsman" />
+          <NavigationProperty Name="City" Relationship="Self.for_key_idCity_Address" FromRole="Address" ToRole="City" />
+        </EntityType>
+        <EntityType Name="AgeCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartAge" Type="Int32" Nullable="false" />
+          <Property Name="EndAge" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Groups" Relationship="Self.for_key_idagecategory_group" FromRole="AgeCategory" ToRole="Group" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Addresses" Relationship="Self.for_key_idCity_Address" FromRole="City" ToRole="Address" />
+        </EntityType>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Sportsmen" Relationship="Self.for_key_idClub_Pirticipant" FromRole="Club" ToRole="Sportsman" />
+        </EntityType>
+        <EntityType Name="Competition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Groups" Relationship="Self.for_key_idcompetition_Group" FromRole="Competition" ToRole="Group" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCompetition" Type="Int32" Nullable="false" />
+          <Property Name="IdWeightCategory" Type="Int32" Nullable="false" />
+          <Property Name="IdAgeCategory" Type="Int32" Nullable="false" />
+          <Property Name="GenderCategory" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AgeCategory" Relationship="Self.for_key_idagecategory_group" FromRole="Group" ToRole="AgeCategory" />
+          <NavigationProperty Name="Competition" Relationship="Self.for_key_idcompetition_Group" FromRole="Group" ToRole="Competition" />
+          <NavigationProperty Name="Participants" Relationship="Self.for_key_idgroup_GroupParticipant" FromRole="Group" ToRole="Participant" />
+          <NavigationProperty Name="WeightCategory" Relationship="Self.for_key_idWeightcategory_group" FromRole="Group" ToRole="WeightCategory" />
+        </EntityType>
+        <EntityType Name="Participant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdGroup" Type="Int32" Nullable="false" />
+          <Property Name="IdSportsman" Type="Int32" Nullable="false" />
+          <Property Name="Weight" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="Self.for_key_idgroup_GroupParticipant" FromRole="Participant" ToRole="Group" />
+          <NavigationProperty Name="Sportsman" Relationship="Self.for_key_idParticipant_GroupParticipant" FromRole="Participant" ToRole="Sportsman" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.for_key_idRole_User" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Sportsman">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Birthdate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="IdAddress" Type="Int32" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="IdClub" Type="Int32" />
+          <NavigationProperty Name="Address" Relationship="Self.for_key_idaddress_Participant" FromRole="Sportsman" ToRole="Address" />
+          <NavigationProperty Name="Club" Relationship="Self.for_key_idClub_Pirticipant" FromRole="Sportsman" ToRole="Club" />
+          <NavigationProperty Name="Participants" Relationship="Self.for_key_idParticipant_GroupParticipant" FromRole="Sportsman" ToRole="Participant" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdRole" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.for_key_idRole_User" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="WeightCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartWeight" Type="Int32" Nullable="false" />
+          <Property Name="EndWeight" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Groups" Relationship="Self.for_key_idWeightcategory_group" FromRole="WeightCategory" ToRole="Group" />
+        </EntityType>
+        <Association Name="for_key_idaddress_Participant">
+          <End Role="Address" Type="Self.Address" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Sportsman" Type="Self.Sportsman" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sportsman">
+              <PropertyRef Name="IdAddress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="for_key_idCity_Address">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="IdCity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="for_key_idagecategory_group">
+          <End Role="AgeCategory" Type="Self.AgeCategory" Multiplicity="1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgeCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="IdAgeCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="for_key_idClub_Pirticipant">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="Sportsman" Type="Self.Sportsman" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sportsman">
+              <PropertyRef Name="IdClub" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="for_key_idcompetition_Group">
+          <End Role="Competition" Type="Self.Competition" Multiplicity="1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competition">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="IdCompetition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="for_key_idgroup_GroupParticipant">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="Participant" Type="Self.Participant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Participant">
+              <PropertyRef Name="IdGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="for_key_idWeightcategory_group">
+          <End Role="WeightCategory" Type="Self.WeightCategory" Multiplicity="1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WeightCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="IdWeightCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="for_key_idParticipant_GroupParticipant">
+          <End Role="Sportsman" Type="Self.Sportsman" Multiplicity="1" />
+          <End Role="Participant" Type="Self.Participant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sportsman">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Participant">
+              <PropertyRef Name="IdSportsman" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="for_key_idRole_User">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DoJudoEntitiesV2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Addresses" EntityType="Self.Address" />
+          <EntitySet Name="AgeCategories" EntityType="Self.AgeCategory" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="Clubs" EntityType="Self.Club" />
+          <EntitySet Name="Competitions" EntityType="Self.Competition" />
+          <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="Participants" EntityType="Self.Participant" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Sportsmen" EntityType="Self.Sportsman" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="WeightCategories" EntityType="Self.WeightCategory" />
+          <AssociationSet Name="for_key_idaddress_Participant" Association="Self.for_key_idaddress_Participant">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Sportsman" EntitySet="Sportsmen" />
+          </AssociationSet>
+          <AssociationSet Name="for_key_idCity_Address" Association="Self.for_key_idCity_Address">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="for_key_idagecategory_group" Association="Self.for_key_idagecategory_group">
+            <End Role="AgeCategory" EntitySet="AgeCategories" />
+            <End Role="Group" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="for_key_idClub_Pirticipant" Association="Self.for_key_idClub_Pirticipant">
+            <End Role="Club" EntitySet="Clubs" />
+            <End Role="Sportsman" EntitySet="Sportsmen" />
+          </AssociationSet>
+          <AssociationSet Name="for_key_idcompetition_Group" Association="Self.for_key_idcompetition_Group">
+            <End Role="Competition" EntitySet="Competitions" />
+            <End Role="Group" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="for_key_idgroup_GroupParticipant" Association="Self.for_key_idgroup_GroupParticipant">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="Participant" EntitySet="Participants" />
+          </AssociationSet>
+          <AssociationSet Name="for_key_idWeightcategory_group" Association="Self.for_key_idWeightcategory_group">
+            <End Role="WeightCategory" EntitySet="WeightCategories" />
+            <End Role="Group" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="for_key_idParticipant_GroupParticipant" Association="Self.for_key_idParticipant_GroupParticipant">
+            <End Role="Sportsman" EntitySet="Sportsmen" />
+            <End Role="Participant" EntitySet="Participants" />
+          </AssociationSet>
+          <AssociationSet Name="for_key_idRole_User" Association="Self.for_key_idRole_User">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DoJudoModelStoreContainer" CdmEntityContainer="DoJudoEntitiesV2">
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="DoJudoModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Index" ColumnName="Index" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="IdCity" ColumnName="IdCity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgeCategories">
+            <EntityTypeMapping TypeName="DoJudoModel.AgeCategory">
+              <MappingFragment StoreEntitySet="AgeCategory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StartAge" ColumnName="StartAge" />
+                <ScalarProperty Name="EndAge" ColumnName="EndAge" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="DoJudoModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clubs">
+            <EntityTypeMapping TypeName="DoJudoModel.Club">
+              <MappingFragment StoreEntitySet="Club">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Competitions">
+            <EntityTypeMapping TypeName="DoJudoModel.Competition">
+              <MappingFragment StoreEntitySet="Competition">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="DoJudoModel.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdCompetition" ColumnName="IdCompetition" />
+                <ScalarProperty Name="IdWeightCategory" ColumnName="IdWeightCategory" />
+                <ScalarProperty Name="IdAgeCategory" ColumnName="IdAgeCategory" />
+                <ScalarProperty Name="GenderCategory" ColumnName="GenderCategory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Participants">
+            <EntityTypeMapping TypeName="DoJudoModel.Participant">
+              <MappingFragment StoreEntitySet="Participant">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
+                <ScalarProperty Name="IdSportsman" ColumnName="IdSportsman" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="DoJudoModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sportsmen">
+            <EntityTypeMapping TypeName="DoJudoModel.Sportsman">
+              <MappingFragment StoreEntitySet="Sportsman">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="IdAddress" ColumnName="IdAddress" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="IdClub" ColumnName="IdClub" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DoJudoModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="DoJudoModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeightCategories">
+            <EntityTypeMapping TypeName="DoJudoModel.WeightCategory">
+              <MappingFragment StoreEntitySet="WeightCategory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StartWeight" ColumnName="StartWeight" />
+                <ScalarProperty Name="EndWeight" ColumnName="EndWeight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
