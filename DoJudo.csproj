@@ -97,6 +97,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\CompetitionsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\ParticipantsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -214,6 +218,7 @@
     <Compile Include="Models\Repositories\ParticipantRepository.cs" />
     <Compile Include="Models\Repositories\UserRepository.cs" />
     <Compile Include="ViewModels\AddEditParticipantsViewModel.cs" />
+    <Compile Include="ViewModels\CompetitionsViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ParticipantsViewModel.cs" />
@@ -223,6 +228,9 @@
     </Compile>
     <Compile Include="Views\Pages\AddEditParticipantsPage.xaml.cs">
       <DependentUpon>AddEditParticipantsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\CompetitionsPage.xaml.cs">
+      <DependentUpon>CompetitionsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\ParticipantsPage.xaml.cs">
       <DependentUpon>ParticipantsPage.xaml</DependentUpon>
