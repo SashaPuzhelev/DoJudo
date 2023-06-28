@@ -12,19 +12,14 @@ namespace DoJudo.Models.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class WeightCategory
+    public partial class ParticipantCompetition
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public WeightCategory()
-        {
-            this.Groups = new HashSet<Group>();
-        }
-    
         public int Id { get; set; }
-        public int StartWeight { get; set; }
-        public int EndWeight { get; set; }
+        public int IdGroup { get; set; }
+        public int IdSportsman { get; set; }
+        public double Weight { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Group> Groups { get; set; }
+        public virtual Group Group { get; set; }
+        public virtual Participant Participant { get; set; }
     }
 }

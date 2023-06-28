@@ -17,7 +17,7 @@ namespace DoJudo.Models.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Participant()
         {
-            this.Groups = new HashSet<Group>();
+            this.ParticipantCompetitions = new HashSet<ParticipantCompetition>();
         }
     
         public int Id { get; set; }
@@ -27,10 +27,11 @@ namespace DoJudo.Models.Database
         public string Gender { get; set; }
         public int IdAddress { get; set; }
         public string Phone { get; set; }
-        public Nullable<double> Weight { get; set; }
+        public Nullable<int> IdClub { get; set; }
     
         public virtual Address Address { get; set; }
+        public virtual Club Club { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Group> Groups { get; set; }
+        public virtual ICollection<ParticipantCompetition> ParticipantCompetitions { get; set; }
     }
 }

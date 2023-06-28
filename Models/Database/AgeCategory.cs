@@ -17,7 +17,7 @@ namespace DoJudo.Models.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AgeCategory()
         {
-            this.Categories = new HashSet<Category>();
+            this.Groups = new HashSet<Group>();
         }
     
         public int Id { get; set; }
@@ -25,6 +25,6 @@ namespace DoJudo.Models.Database
         public int EndAge { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<Group> Groups { get; set; }
     }
 }

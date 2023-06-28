@@ -93,7 +93,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\Pages\EditParticipantsPage.xaml">
+    <Page Include="Views\Pages\AddEditParticipantsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,20 +146,56 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="Models\CurrentUser.cs" />
-    <Compile Include="Models\Database\ModelDoJudo.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelDoJudo.Context.tt</DependentUpon>
+    <Compile Include="Models\Database\Address.cs">
+      <DependentUpon>DoJudoModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Database\ModelDoJudo.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelDoJudo.tt</DependentUpon>
+    <Compile Include="Models\Database\AgeCategory.cs">
+      <DependentUpon>DoJudoModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Database\ModelDoJudo.Designer.cs">
+    <Compile Include="Models\Database\City.cs">
+      <DependentUpon>DoJudoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\Club.cs">
+      <DependentUpon>DoJudoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\Competition.cs">
+      <DependentUpon>DoJudoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\DoJudoModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelDoJudo.edmx</DependentUpon>
+      <DependentUpon>DoJudoModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\DoJudoModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DoJudoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\DoJudoModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DoJudoModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\Group.cs">
+      <DependentUpon>DoJudoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\Participant.cs">
+      <DependentUpon>DoJudoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\ParticipantCompetition.cs">
+      <DependentUpon>DoJudoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\Role.cs">
+      <DependentUpon>DoJudoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\sysdiagram.cs">
+      <DependentUpon>DoJudoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\User.cs">
+      <DependentUpon>DoJudoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\WeightCategory.cs">
+      <DependentUpon>DoJudoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Interfaces\IBaseRepository.cs" />
     <Compile Include="Models\Database\DbDoJudo.cs" />
@@ -174,8 +210,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\Pages\EditParticipantsPage.xaml.cs">
-      <DependentUpon>EditParticipantsPage.xaml</DependentUpon>
+    <Compile Include="Views\Pages\AddEditParticipantsPage.xaml.cs">
+      <DependentUpon>AddEditParticipantsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\ParticipantsPage.xaml.cs">
       <DependentUpon>ParticipantsPage.xaml</DependentUpon>
@@ -206,12 +242,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Models\Database\ModelDoJudo.edmx">
+    <EntityDeploy Include="Models\Database\DoJudoModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelDoJudo.Designer.cs</LastGenOutput>
+      <LastGenOutput>DoJudoModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Models\Database\ModelDoJudo.edmx.diagram">
-      <DependentUpon>ModelDoJudo.edmx</DependentUpon>
+    <None Include="Models\Database\DoJudoModel.edmx.diagram">
+      <DependentUpon>DoJudoModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -226,15 +262,15 @@
     <Folder Include="ViewModels\Filters\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\Database\ModelDoJudo.Context.tt">
+    <Content Include="Models\Database\DoJudoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelDoJudo.edmx</DependentUpon>
-      <LastGenOutput>ModelDoJudo.Context.cs</LastGenOutput>
+      <DependentUpon>DoJudoModel.edmx</DependentUpon>
+      <LastGenOutput>DoJudoModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Database\ModelDoJudo.tt">
+    <Content Include="Models\Database\DoJudoModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelDoJudo.edmx</DependentUpon>
-      <LastGenOutput>ModelDoJudo.cs</LastGenOutput>
+      <DependentUpon>DoJudoModel.edmx</DependentUpon>
+      <LastGenOutput>DoJudoModel.cs</LastGenOutput>
     </Content>
     <Content Include="Resources\logo.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

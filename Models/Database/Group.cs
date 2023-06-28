@@ -17,16 +17,19 @@ namespace DoJudo.Models.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Group()
         {
-            this.Participants = new HashSet<Participant>();
+            this.ParticipantCompetitions = new HashSet<ParticipantCompetition>();
         }
     
         public int Id { get; set; }
         public int IdCompetition { get; set; }
-        public int IdCategory { get; set; }
+        public int IdWeightCategory { get; set; }
+        public int IdAgeCategory { get; set; }
+        public string GenderCategory { get; set; }
     
-        public virtual Category Category { get; set; }
+        public virtual AgeCategory AgeCategory { get; set; }
         public virtual Competition Competition { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Participant> Participants { get; set; }
+        public virtual ICollection<ParticipantCompetition> ParticipantCompetitions { get; set; }
+        public virtual WeightCategory WeightCategory { get; set; }
     }
 }

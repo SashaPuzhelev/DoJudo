@@ -21,11 +21,9 @@ namespace DoJudo.Models.Database
         }
     
         public int Id { get; set; }
-        public System.DateTime StartDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
-        public int IdAddress { get; set; }
+        public string Name { get; set; }
+        public System.DateTime Date { get; set; }
     
-        public virtual Address Address { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Group> Groups { get; set; }
     }
