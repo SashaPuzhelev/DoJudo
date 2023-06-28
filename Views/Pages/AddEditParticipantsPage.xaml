@@ -59,13 +59,13 @@
                        Text="Дом">
             </TextBlock>
             <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Name}"></TextBox>
-            <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource MainTextBox}"></TextBox>
-            <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource MainTextBox}"></TextBox>
-            <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource MainTextBox}"></TextBox>
-            <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource MainTextBox}"></TextBox>
-            <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource MainTextBox}"></TextBox>
-            <TextBox Grid.Row="6" Grid.Column="1" Style="{StaticResource MainTextBox}"></TextBox>
-            <TextBox Grid.Row="7" Grid.Column="1" Style="{StaticResource MainTextBox}"></TextBox>
+            <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Surname}"></TextBox>
+            <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Birthdate, StringFormat='dd.MM.yyyy'}"></TextBox>
+            <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Address.City.Name}"></TextBox>
+            <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Address.Street}"></TextBox>
+            <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Address.Number}"></TextBox>
+            <TextBox Grid.Row="6" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Phone}"></TextBox>
+            <TextBox Grid.Row="7" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Gender}"></TextBox>
         </Grid>
         <Grid Grid.Row="3" Grid.ColumnSpan="3" Background="{StaticResource PrimaryColor}">
             <Button Style="{StaticResource MainButton}" HorizontalAlignment="Left" Content="Сохранить" Command="{Binding }"></Button>
