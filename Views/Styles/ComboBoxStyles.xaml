@@ -3,5 +3,6 @@
     <Style TargetType="ComboBox">
         <Setter Property="FontFamily" Value="Arial"/>
         <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="5"/>
     </Style>
 </ResourceDictionary>

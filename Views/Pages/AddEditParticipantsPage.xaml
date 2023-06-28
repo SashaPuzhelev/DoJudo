@@ -33,6 +33,7 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource CenterTextBlock}"
                        Text="Имя">
@@ -43,33 +44,39 @@
             <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource CenterTextBlock}"
                        Text="Дата рождения">
             </TextBlock>
-            <TextBlock Grid.Row="6" Grid.Column="0" Style="{StaticResource CenterTextBlock}"
+            <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource CenterTextBlock}"
                        Text="Телефон">
             </TextBlock>
-            <TextBlock Grid.Row="7" Grid.Column="0" Style="{StaticResource CenterTextBlock}"
+            <TextBlock Grid.Row="4" Grid.Column="0" Style="{StaticResource CenterTextBlock}"
                        Text="Пол">
             </TextBlock>
-            <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource CenterTextBlock}"
+            <TextBlock Grid.Row="5" Grid.Column="0" Style="{StaticResource CenterTextBlock}"
+                       Text="Спортивный клуб"/>
+            <TextBlock Grid.Row="6" Grid.Column="0" Style="{StaticResource CenterTextBlock}"
                        Text="Город">
             </TextBlock>
-            <TextBlock Grid.Row="4" Grid.Column="0" Style="{StaticResource CenterTextBlock}"
+            <TextBlock Grid.Row="7" Grid.Column="0" Style="{StaticResource CenterTextBlock}"
                        Text="Улица">
             </TextBlock>
-            <TextBlock Grid.Row="5" Grid.Column="0" Style="{StaticResource CenterTextBlock}"
+            <TextBlock Grid.Row="8" Grid.Column="0" Style="{StaticResource CenterTextBlock}"
                        Text="Дом">
             </TextBlock>
             <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Name}"></TextBox>
             <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Surname}"></TextBox>
             <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Birthdate, StringFormat='dd.MM.yyyy'}"></TextBox>
-            <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Address.City.Name}"></TextBox>
-            <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Address.Street}"></TextBox>
-            <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Address.Number}"></TextBox>
-            <TextBox Grid.Row="6" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Phone}"></TextBox>
-            <TextBox Grid.Row="7" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Gender}"></TextBox>
+            <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Phone}"></TextBox>
+            <RadioButton Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" GroupName="Gender" IsChecked="{Binding IsMan}">мужской</RadioButton>
+            <RadioButton Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" GroupName="Gender" IsChecked="{Binding IsWoman}">женский</RadioButton>
+            <ComboBox Grid.Row="5" Grid.Column="1" ItemsSource="{Binding Path=Clubs}" DisplayMemberPath="Name" SelectedValuePath="Id" 
+                      SelectedItem="{Binding SelectedClub}"></ComboBox>
+            <ComboBox Grid.Row="6" Grid.Column="1" ItemsSource="{Binding Cities}"
+                      DisplayMemberPath="Name" SelectedValuePath="Id" SelectedItem="{Binding SelectedCity}"></ComboBox>
+            <TextBox Grid.Row="7" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Address.Street}"></TextBox>
+            <TextBox Grid.Row="8" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Address.Number}"></TextBox>
         </Grid>
         <Grid Grid.Row="3" Grid.ColumnSpan="3" Background="{StaticResource PrimaryColor}">
-            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Left" Content="Сохранить" Command="{Binding }"></Button>
-            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Right" Content="Отменить" Command="{Binding }"/>
+            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Left" Content="Сохранить" Command="{Binding SaveCommand}"></Button>
+            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Right" Content="Отменить" Command="{Binding CancelCommand}"/>
         </Grid>
     </Grid>
 </Page>

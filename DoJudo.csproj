@@ -205,10 +205,12 @@
     <Compile Include="Models\Database\WeightCategory.cs">
       <DependentUpon>DoJudoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Interfaces\IAddressRepository.cs" />
     <Compile Include="Models\Interfaces\IBaseRepository.cs" />
     <Compile Include="Models\Database\DbDoJudo.cs" />
     <Compile Include="Models\Interfaces\IParticipantRepository.cs" />
     <Compile Include="Models\Interfaces\IUserRepository.cs" />
+    <Compile Include="Models\Repositories\AddressRepository.cs" />
     <Compile Include="Models\Repositories\ParticipantRepository.cs" />
     <Compile Include="Models\Repositories\UserRepository.cs" />
     <Compile Include="ViewModels\AddEditParticipantsViewModel.cs" />
