@@ -67,12 +67,12 @@
             <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Phone}"></TextBox>
             <RadioButton Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" GroupName="Gender" IsChecked="{Binding IsMan}">мужской</RadioButton>
             <RadioButton Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" GroupName="Gender" IsChecked="{Binding IsWoman}">женский</RadioButton>
-            <ComboBox Grid.Row="5" Grid.Column="1" ItemsSource="{Binding Path=Clubs}" DisplayMemberPath="Name" SelectedValuePath="Id" 
-                      SelectedItem="{Binding SelectedClub}"></ComboBox>
+            <ComboBox Grid.Row="5" Grid.Column="1" ItemsSource="{Binding Clubs}" DisplayMemberPath="Name" SelectedValuePath="Id" 
+                      SelectedItem="{Binding Participant.Club}"></ComboBox>
             <ComboBox Grid.Row="6" Grid.Column="1" ItemsSource="{Binding Cities}"
-                      DisplayMemberPath="Name" SelectedValuePath="Id" SelectedItem="{Binding SelectedCity}"></ComboBox>
-            <TextBox Grid.Row="7" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Address.Street}"></TextBox>
-            <TextBox Grid.Row="8" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Address.Number}"></TextBox>
+                      DisplayMemberPath="Name" SelectedValuePath="Id" SelectedItem="{Binding Address.City}"></ComboBox>
+            <TextBox Grid.Row="7" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Address.Street}"></TextBox>
+            <TextBox Grid.Row="8" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Address.Number}"></TextBox>
         </Grid>
         <Grid Grid.Row="3" Grid.ColumnSpan="3" Background="{StaticResource PrimaryColor}">
             <Button Style="{StaticResource MainButton}" HorizontalAlignment="Left" Content="Сохранить" Command="{Binding SaveCommand}"></Button>

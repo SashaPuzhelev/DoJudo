@@ -3,13 +3,10 @@ using DoJudo.Models.Interfaces;
 using DoJudo.Models.Repositories;
 using DoJudo.Views.Pages;
 using GalaSoft.MvvmLight.Command;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace DoJudo.ViewModels
@@ -17,17 +14,17 @@ namespace DoJudo.ViewModels
     internal class AddEditParticipantsViewModel : INotifyPropertyChanged
     {
         private IParticipantRepository _participantRepository;
+        private IAddressRepository _addressRepository;
         private Participant _participant;
         private ObservableCollection<City> _cities;
         private ObservableCollection<Club> _clubs;
-        private City _selectedCity;
-        private Club _selectedClub;
         private bool _isMan;
         private bool _isWoman;
+        private Address _address;
 
         public Participant Participant
         {
-            get { return _participant;}
+            get { return _participant; }
             set
             {
                 _participant = value;
@@ -52,30 +49,13 @@ namespace DoJudo.ViewModels
                 OnPropertyChanged(nameof(_participant));
             }
         }
-        public City SelectedCity
-        {
-            get { return _selectedCity; }
-            set
-            {
-                _selectedCity = value;
-                OnPropertyChanged(nameof(_selectedCity));
-            }
-        }
-        public Club SelectedClub
-        { 
-            get { return _selectedClub; }
-            set
-            {
-                _selectedClub = value;
-                OnPropertyChanged(nameof(_selectedClub));
-            }
-        }
         public bool IsMan
         {
             get { return _isMan; }
             set
             {
                 _isMan = value;
+                SetGender();
                 OnPropertyChanged(nameof(_isMan));
                 if (_isWoman)
                     _isWoman = false;
@@ -87,28 +67,46 @@ namespace DoJudo.ViewModels
             set
             {
                 _isWoman = value;
+                SetGender();
                 OnPropertyChanged(nameof(_isWoman));
                 if (_isMan)
                     _isMan = false;
             }
         }
-        public ICommand CancelCommand;
-        public ICommand SaveCommand;
+        public Address Address
+        {
+            get { return _address; }
+            set
+            {
+                _address = value;
+                SetGender();
+                OnPropertyChanged(nameof(_address));
+            }
+        }
+
+        public ICommand CancelCommand { get; private set; }
+        public ICommand SaveCommand { get; private set; }
         public AddEditParticipantsViewModel(Participant participant)
         {
             _participant = participant;
             _cities = new ObservableCollection<City>(DbDoJudo.GetInstance().Cities.ToList());
             _clubs = new ObservableCollection<Club>(DbDoJudo.GetInstance().Clubs.ToList());
+            _participantRepository = new ParticipantRepository();
+            _addressRepository = new AddressRepository();
 
-            if (participant.Id != 0) 
+            if (_participant.Id != 0)
             {
-                _selectedClub = participant.Club;
-                _selectedCity = participant.Address.City;
+                _address = _participant.Address;
+            }
+            if (_participant.Id == 0)
+            {
+                _participant = new Participant();
+                _address = new Address();
             }
 
-            if (participant.Gender == "М")
+            if (_participant.Gender == "М")
                 _isMan = true;
-            if (participant.Gender == "Ж")
+            if (_participant.Gender == "Ж")
                 _isWoman = true;
 
             CancelCommand = new RelayCommand(GoToParticipants);
@@ -121,17 +119,38 @@ namespace DoJudo.ViewModels
         }
         private void SaveParticipant()
         {
-            _participantRepository = new ParticipantRepository();
-            if (_participant.Id == 0)
-            {
-                _participantRepository.Add(_participant);
-            }
             if (_participant.Id != 0)
             {
-                _participantRepository.Update(_participant);
+                if (_participantRepository.Update(_participant))
+                {
+                    _addressRepository.Update(_address);
+                    MessageBox.Show("Редактирование прошло успешно!","Информация",
+                        MessageBoxButton.OKCancel, MessageBoxImage.Information);
+                }
+                MessageBox.Show("Не удалось сохранить изменения!","Ошибка",
+                   MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            if (_participant.Id == 0)
+            {
+                _participant.IdAddress = _addressRepository.AddWithReturnIdAddress(_address);
+                if (_participantRepository.Add(_participant))
+                {
+                    MessageBox.Show("Добавление прошло успешно!", "Информация",
+                        MessageBoxButton.OKCancel, MessageBoxImage.Information);
+                    return;
+                }
+                MessageBox.Show("Не удалось добавить участника!", "Ошибка",
+                   MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
+        public void SetGender()
+        {
+            if(_isMan)
+                _participant.Gender = "М";
+            if (_isWoman)
+                _participant.Gender = "Ж";
+        }
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

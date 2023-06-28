@@ -21,7 +21,6 @@ namespace DoJudo.Models.Database
         }
     
         public int Id { get; set; }
-        public int Index { get; set; }
         public string Street { get; set; }
         public string Number { get; set; }
         public int IdCity { get; set; }

@@ -3,12 +3,10 @@ using DoJudo.Models.Interfaces;
 using DoJudo.Models.Repositories;
 using DoJudo.Views.Pages;
 using GalaSoft.MvvmLight.Command;
-using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace DoJudo.ViewModels

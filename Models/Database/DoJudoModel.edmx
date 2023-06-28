@@ -10,7 +10,6 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Index" Type="int" Nullable="false" />
           <Property Name="Street" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IdCity" Type="int" Nullable="false" />
@@ -283,7 +282,6 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Index" Type="Int32" Nullable="false" />
           <Property Name="Street" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IdCity" Type="Int32" Nullable="false" />
@@ -575,7 +573,6 @@
             <EntityTypeMapping TypeName="DoJudoModel.Address">
               <MappingFragment StoreEntitySet="Address">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Index" ColumnName="Index" />
                 <ScalarProperty Name="Street" ColumnName="Street" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="IdCity" ColumnName="IdCity" />

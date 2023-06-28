@@ -9,5 +9,6 @@ namespace DoJudo.Models.Interfaces
 {
     internal interface IAddressRepository : IBaseRepository<Address>
     {
+        int AddWithReturnIdAddress(Address entity);
     }
 }
