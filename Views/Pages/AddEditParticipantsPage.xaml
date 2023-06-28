@@ -10,16 +10,16 @@
 
     <Grid Background="{StaticResource VeryLightColor}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="1" Grid.Column="1">
+        <Grid Grid.Row="1" Grid.Column="1" Margin="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -66,6 +66,10 @@
             <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource MainTextBox}"></TextBox>
             <TextBox Grid.Row="6" Grid.Column="1" Style="{StaticResource MainTextBox}"></TextBox>
             <TextBox Grid.Row="7" Grid.Column="1" Style="{StaticResource MainTextBox}"></TextBox>
+        </Grid>
+        <Grid Grid.Row="3" Grid.ColumnSpan="3" Background="{StaticResource PrimaryColor}">
+            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Left" Content="Добавить"></Button>
+            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Right" Content="Удалить" Command="{Binding DeleteCommand}"/>
         </Grid>
     </Grid>
 </Page>
