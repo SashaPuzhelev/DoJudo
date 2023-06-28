@@ -1,6 +1,7 @@
 ﻿using DoJudo.Models.Database;
 using DoJudo.Models.Interfaces;
 using DoJudo.Models.Repositories;
+using DoJudo.Views.Pages;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -43,6 +44,7 @@ namespace DoJudo.ViewModels
             _ = LoadParticipantsAsync();
             SelectedParticipant = new Participant();
             DeleteCommand = new RelayCommand(DeleteParticipants, CanDeleteParticipants);
+            EditCommand = new RelayCommand(OpenPageAddEditParticipants);
         }
         private async Task LoadParticipantsAsync()
         {
@@ -66,6 +68,12 @@ namespace DoJudo.ViewModels
                 MessageBox.Show("Удаление провалено!", "Ошибка",
                    MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+        private void OpenPageAddEditParticipants(Participant participant)
+        {
+            AddEditParticipantsPage addEditParticipantsPage = new AddEditParticipantsPage();
+            MainWindowViewModel.Instance.CurrentPage = addEditParticipantsPage;
+
         }
         private bool CanDeleteParticipants()
         {

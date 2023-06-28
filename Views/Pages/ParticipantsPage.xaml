@@ -33,7 +33,7 @@
                 <DataGridTextColumn Header="Дата рождения" Binding="{Binding Birthdate, StringFormat='dd.MM.yyyy'}"/>
                 <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}"/>
                 <DataGridTextColumn Header="Пол" Binding="{Binding Gender}"/>
-                <DataGridTextColumn Header="Вес" Binding="{Binding Weight}"/>
+                <DataGridTextColumn Header="Спортивный клуб" Binding="{Binding Club.Name}"/>
                 <DataGridTextColumn Header="Город" Binding="{Binding Address.City.Name}"/>
                 <DataGridTextColumn Header="Адрес">
                     <DataGridTextColumn.Binding>
@@ -46,7 +46,7 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Редактировать" Style="{StaticResource MainButton}" Width="120"/>
+                            <Button Content="Редактировать" Style="{StaticResource MainButton}" Width="120" Command="{Binding EditCommand}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -60,7 +60,7 @@
             </DataGrid.ContextMenu>
         </DataGrid>
         <Grid Grid.Row="1" Background="{StaticResource PrimaryColor}">
-            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Left" Content="Добавить"></Button>
+            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Left" Content="Добавить" Command="{Binding EditCommand}"></Button>
             <Button Style="{StaticResource MainButton}" HorizontalAlignment="Right" Content="Удалить" Command="{Binding DeleteCommand}"/>
         </Grid>
     </Grid>

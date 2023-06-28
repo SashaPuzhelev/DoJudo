@@ -7,7 +7,7 @@ using DoJudo.Models.Database;
 
 namespace DoJudo.Models.Database
 {
-    internal class DbDoJudo : DoJudoEntities
+    internal class DbDoJudo : DoJudoEntitiesV4
     {
         //you need to make constr is PROTECTED in DoJudoEntitites
         private static DbDoJudo instance;

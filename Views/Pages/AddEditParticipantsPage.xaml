@@ -68,8 +68,8 @@
             <TextBox Grid.Row="7" Grid.Column="1" Style="{StaticResource MainTextBox}"></TextBox>
         </Grid>
         <Grid Grid.Row="3" Grid.ColumnSpan="3" Background="{StaticResource PrimaryColor}">
-            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Left" Content="Добавить"></Button>
-            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Right" Content="Удалить" Command="{Binding DeleteCommand}"/>
+            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Left" Content="Сохранить" Command="{Binding }"></Button>
+            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Right" Content="Отменить" Command="{Binding }"/>
         </Grid>
     </Grid>
 </Page>

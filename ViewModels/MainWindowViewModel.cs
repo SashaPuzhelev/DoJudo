@@ -9,13 +9,14 @@ namespace DoJudo.ViewModels
 {
     internal class MainWindowViewModel : INotifyPropertyChanged
     {
+        public static MainWindowViewModel Instance { get; set; }
         private readonly string _pathToPages = "DoJudo.Views.Pages.";
         private Page _currentPage;
         private readonly CurrentUser _currentUser;
         public Page CurrentPage
         {
             get { return _currentPage; }
-            private set
+            set
             {
                 _currentPage = value;
                 OnPropertyChanged(nameof(CurrentPage));
@@ -28,6 +29,7 @@ namespace DoJudo.ViewModels
         public ICommand NavigateCommand { get; private set; }
         public MainWindowViewModel()
         {
+            Instance = this;
             _currentUser = CurrentUser.GetInstance();
             NavigateCommand = new RelayCommand<string>((pageName) =>
             {
