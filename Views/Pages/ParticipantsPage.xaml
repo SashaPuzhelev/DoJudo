@@ -43,24 +43,18 @@
                         </MultiBinding>
                     </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Редактировать" Style="{StaticResource MainButton}" Width="120" Command="{Binding EditCommand}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Добавить"/>
-                    <MenuItem Header="Редактировать"/>
-                    <MenuItem Header="Удалить"/>
+                    <MenuItem Header="Добавить" Command="{Binding AddCommand}"/>
+                    <MenuItem Header="Редактировать" Command="{Binding EditCommand}"/>
+                    <MenuItem Header="Удалить" Command="{Binding DeleteCommand}"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
         <Grid Grid.Row="1" Background="{StaticResource PrimaryColor}">
-            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Left" Content="Добавить" Command="{Binding EditCommand}"></Button>
+            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Left" Content="Добавить" Command="{Binding AddCommand}"></Button>
+            <Button Content="Редактировать" Style="{StaticResource MainButton}" Width="120" Command="{Binding EditCommand}"/>
             <Button Style="{StaticResource MainButton}" HorizontalAlignment="Right" Content="Удалить" Command="{Binding DeleteCommand}"/>
         </Grid>
     </Grid>

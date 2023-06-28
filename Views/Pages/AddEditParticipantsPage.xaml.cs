@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DoJudo.Models.Database;
+using DoJudo.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,10 @@ namespace DoJudo.Views.Pages
     /// </summary>
     public partial class AddEditParticipantsPage : Page
     {
-        public AddEditParticipantsPage()
+        public AddEditParticipantsPage(Participant participant)
         {
             InitializeComponent();
+            DataContext = new AddEditParticipantsViewModel(participant);
         }
     }
 }

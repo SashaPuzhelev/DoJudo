@@ -4,10 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:DoJudo.Views.Pages"
+      xmlns:vm="clr-namespace:DoJudo.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EditParticipantsPage">
-
     <Grid Background="{StaticResource VeryLightColor}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"></ColumnDefinition>
@@ -58,7 +58,7 @@
             <TextBlock Grid.Row="5" Grid.Column="0" Style="{StaticResource CenterTextBlock}"
                        Text="Дом">
             </TextBlock>
-            <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource MainTextBox}"></TextBox>
+            <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding Participant.Name}"></TextBox>
             <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource MainTextBox}"></TextBox>
             <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource MainTextBox}"></TextBox>
             <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource MainTextBox}"></TextBox>

@@ -3,6 +3,7 @@ using DoJudo.Models.Interfaces;
 using DoJudo.Models.Repositories;
 using DoJudo.Views.Pages;
 using GalaSoft.MvvmLight.Command;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -44,7 +45,8 @@ namespace DoJudo.ViewModels
             _ = LoadParticipantsAsync();
             SelectedParticipant = new Participant();
             DeleteCommand = new RelayCommand(DeleteParticipants, CanDeleteParticipants);
-            EditCommand = new RelayCommand(OpenPageAddEditParticipants);
+            EditCommand = new RelayCommand(GoToEditParticipants);
+            AddCommand = new RelayCommand(GoToAddParticipants);
         }
         private async Task LoadParticipantsAsync()
         {
@@ -69,9 +71,15 @@ namespace DoJudo.ViewModels
                    MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void OpenPageAddEditParticipants(Participant participant)
+        private void GoToEditParticipants()
         {
-            AddEditParticipantsPage addEditParticipantsPage = new AddEditParticipantsPage();
+            AddEditParticipantsPage addEditParticipantsPage = new AddEditParticipantsPage(_selectedParticipant);
+            MainWindowViewModel.Instance.CurrentPage = addEditParticipantsPage;
+        }
+        private void GoToAddParticipants()
+        {
+            Participant participant = new Participant();
+            AddEditParticipantsPage addEditParticipantsPage = new AddEditParticipantsPage(participant);
             MainWindowViewModel.Instance.CurrentPage = addEditParticipantsPage;
 
         }
@@ -79,6 +87,7 @@ namespace DoJudo.ViewModels
         {
             return SelectedParticipant != null;
         }
+        public ICommand AddCommand { get; private set;}
         public ICommand EditCommand { get; private set; }
         public ICommand DeleteCommand { get; private set; }
         public event PropertyChangedEventHandler PropertyChanged;
