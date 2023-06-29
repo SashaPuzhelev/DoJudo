@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DoJudo.Models.Database;
+using DoJudo.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,10 @@ namespace DoJudo.Views.Windows
     /// </summary>
     public partial class AddPartitcipantCompetitionWindow : Window
     {
-        public AddPartitcipantCompetitionWindow()
+        public AddPartitcipantCompetitionWindow(Participant participant)
         {
             InitializeComponent();
+            DataContext = new AddParticipantCompetitionWindowViewModel(participant);
         }
     }
 }

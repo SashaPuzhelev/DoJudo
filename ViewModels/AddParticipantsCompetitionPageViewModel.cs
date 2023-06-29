@@ -2,6 +2,7 @@
 using DoJudo.Models.Interfaces;
 using DoJudo.Models.Repositories;
 using DoJudo.Views.Pages;
+using DoJudo.Views.Windows;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -47,6 +49,7 @@ namespace DoJudo.ViewModels
             _ = LoadParticipantsAsync();
             SelectedParticipant = new Participant();
             AddParticipantCommand = new RelayCommand(GoToAddParticipant);
+            AddParticipantCompetitionCommand = new RelayCommand(GoToAddParticipantCompetition);
         }
         private async Task LoadParticipantsAsync()
         {
@@ -55,6 +58,16 @@ namespace DoJudo.ViewModels
         }
         public ICommand AddParticipantCommand { get; private set; }
         public ICommand AddParticipantCompetitionCommand { get; private set; }
+        private  void GoToAddParticipantCompetition()
+        {
+            if (_selectedParticipant.Id != 0)
+            {
+                AddPartitcipantCompetitionWindow addPartitcipantCompetitionWindow = new AddPartitcipantCompetitionWindow(_selectedParticipant);
+                addPartitcipantCompetitionWindow.Show();
+                return;
+            }
+            MessageBox.Show("sdfsdf");
+        }
         private void GoToAddParticipant()
         {
             Participant participant = new Participant();
