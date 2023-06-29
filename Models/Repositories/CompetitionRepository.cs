@@ -40,6 +40,10 @@ namespace DoJudo.Models.Repositories
         {
             return await _dbDoJudo.Competitions.ToListAsync();
         }
+        public IEnumerable<Competition> GetAllNoAsync()
+        {
+            return _dbDoJudo.Competitions.ToList();
+        }
 
         public bool Update(Competition entity)
         {

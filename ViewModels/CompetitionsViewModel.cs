@@ -1,6 +1,7 @@
 ﻿using DoJudo.Models.Database;
 using DoJudo.Models.Interfaces;
 using DoJudo.Models.Repositories;
+using DoJudo.Views.Pages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -45,7 +46,8 @@ namespace DoJudo.ViewModels
         public ICommand ChooseCommand { get; private set; }
         private void GoToCompetition()
         {
-
+            CompetitionPage competitionPage = new CompetitionPage(_selectedCompetition);
+            MainWindowViewModel.Instance.CurrentPage = competitionPage;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

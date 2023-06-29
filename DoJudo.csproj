@@ -97,6 +97,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\CompetitionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\CompetitionsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -234,6 +238,9 @@
     </Compile>
     <Compile Include="Views\Pages\AddEditParticipantsPage.xaml.cs">
       <DependentUpon>AddEditParticipantsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\CompetitionPage.xaml.cs">
+      <DependentUpon>CompetitionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\CompetitionsPage.xaml.cs">
       <DependentUpon>CompetitionsPage.xaml</DependentUpon>
