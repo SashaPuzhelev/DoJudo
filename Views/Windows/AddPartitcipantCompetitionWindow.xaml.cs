@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace DoJudo.Views.Windows
 {
     /// <summary>
-    /// Interaction logic for InputWeightWindow.xaml
+    /// Interaction logic for AddPartitcipantCompetitionWindow.xaml
     /// </summary>
-    public partial class InputWeightWindow : Window
+    public partial class AddPartitcipantCompetitionWindow : Window
     {
-        public InputWeightWindow()
+        public AddPartitcipantCompetitionWindow()
         {
             InitializeComponent();
         }

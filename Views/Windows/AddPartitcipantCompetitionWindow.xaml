@@ -1,0 +1,46 @@
+﻿<Window x:Class="DoJudo.Views.Windows.AddPartitcipantCompetitionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:DoJudo.ViewModels"
+        mc:Ignorable="d"
+        Title="DoJudo" Height="320" Width="450" MinHeight="300" MinWidth="300" WindowStartupLocation="CenterScreen">
+    <Grid Background="{StaticResource VeryLightColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition/>
+            <RowDefinition  Height="70"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="{StaticResource PrimaryColor}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image Source="/Resources/logoImage.png" Grid.Column="0"></Image>
+            <TextBlock Grid.Column="1" Style="{StaticResource HeaderTextBlock}" Text="DoJudo"></TextBlock>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Style="{StaticResource CenterTextBlock}" Text="{Binding Participant.Name}"></TextBlock>
+            <TextBlock Grid.Column="1" Style="{StaticResource CenterTextBlock}" Text="{Binding Participant.Surname}"></TextBlock>
+            <TextBlock Grid.Row="1" Style="{StaticResource CenterTextBlock}" Text="Введите вес:"></TextBlock>
+            <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource MainTextBox}" Height="30" Width="120"></TextBox>
+        </Grid>
+        <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource MainButton}" HorizontalAlignment="Left" Content="Сохранить" Command="{Binding SaveCommand}"></Button>
+        <Button  Grid.Row="2" Grid.Column="1" Style="{StaticResource MainButton}" HorizontalAlignment="Right" Content="Отменить" Command="{Binding CancelCommand}"/>
+    </Grid>
+</Window>
