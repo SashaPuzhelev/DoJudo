@@ -9,6 +9,31 @@
       Title="CompetitionPage">
 
     <Grid Background="{StaticResource VeryLightColor}">
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="1" Style="{StaticResource HeaderTextBlock}" Text="{Binding Competition.Name}"></TextBlock>
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <Button Grid.Row="0" Style="{StaticResource MainButton}" Content="Добавить участников" Width="180" Command="{Binding AddParticipantCompetitionCommand}"/>
+            <Button Grid.Row="1" Style="{StaticResource MainButton}" Content="Участники соревнования" Width="180"></Button>
+            <Button Grid.Row="2" Style="{StaticResource MainButton}" Content="Провести жеребьевку" Width="180" Command="{Binding DoDrawCommand}"></Button>
+            <Button Grid.Row="3" Style="{StaticResource MainButton}" Content="Сетка соревнований" Width="180" Command="{Binding CompetitionGridCommand}"/>
+        </Grid>
+        <Grid Grid.Row="3" Grid.ColumnSpan="3" Background="{StaticResource PrimaryColor}">
+        </Grid>
     </Grid>
 </Page>

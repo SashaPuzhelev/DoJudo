@@ -2,6 +2,7 @@
 using DoJudo.Models.Interfaces;
 using DoJudo.Models.Repositories;
 using DoJudo.Views.Pages;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -41,6 +42,7 @@ namespace DoJudo.ViewModels
             _competitionRepository = new CompetitionRepository();
             _competitions = new ObservableCollection<Competition>(
                     _competitionRepository.GetAllNoAsync());
+            ChooseCommand = new RelayCommand(GoToCompetition);
         }
         public ICommand AddCommand { get; private set; }
         public ICommand ChooseCommand { get; private set; }

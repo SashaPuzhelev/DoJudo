@@ -1,6 +1,4 @@
-﻿using DoJudo.Models.Database;
-using DoJudo.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,14 +16,13 @@ using System.Windows.Shapes;
 namespace DoJudo.Views.Pages
 {
     /// <summary>
-    /// Interaction logic for CompetitionPage.xaml
+    /// Interaction logic for AddParticipantsCompetitionPage.xaml
     /// </summary>
-    public partial class CompetitionPage : Page
+    public partial class AddParticipantsCompetitionPage : Page
     {
-        public CompetitionPage(Competition competition)
+        public AddParticipantsCompetitionPage()
         {
             InitializeComponent();
-            DataContext = new CompetitionViewModel(competition);
         }
     }
 }

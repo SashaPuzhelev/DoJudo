@@ -109,13 +109,12 @@ namespace DoJudo.ViewModels
             if (_participant.Gender == "Ж")
                 _isWoman = true;
 
-            CancelCommand = new RelayCommand(GoToParticipants);
+            CancelCommand = new RelayCommand(GoToLastPage);
             SaveCommand = new RelayCommand(SaveParticipant);
         }
-        private void GoToParticipants()
+        private void GoToLastPage()
         {
-            ParticipantsPage participantsPage = new ParticipantsPage();
-            MainWindowViewModel.Instance.CurrentPage = participantsPage;
+            MainWindowViewModel.Instance.CurrentPage.NavigationService.GoBack();
         }
         private void SaveParticipant()
         {

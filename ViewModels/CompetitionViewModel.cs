@@ -11,6 +11,16 @@ namespace DoJudo.ViewModels
     internal class CompetitionViewModel : INotifyPropertyChanged
     {
         private Competition _competition;
+        public Competition Competition
+        { 
+            get { return _competition; } 
+            set
+            {
+                _competition = value;
+                OnPropertyChanged(nameof(Competition));
+            }
+        }
+
         public CompetitionViewModel(Competition competititon)
         {
             _competition = competititon;
