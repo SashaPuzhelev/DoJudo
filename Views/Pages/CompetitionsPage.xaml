@@ -12,6 +12,10 @@
         <vm:CompetitionsViewModel />
     </Page.DataContext>
     <Grid Background="{StaticResource VeryLightColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
         <ListView ItemsSource="{Binding Competitions}" SelectedItem="{Binding SelectedCompetition, Mode=TwoWay}">
             <ListView.View>
                 <GridView>
@@ -20,5 +24,9 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Grid Grid.Row="1" Background="{StaticResource PrimaryColor}">
+            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Left" Content="Выбрать"></Button>
+            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Right" Content="Добавить" Command="{Binding AddCommand}"></Button>
+        </Grid>
     </Grid>
 </Page>

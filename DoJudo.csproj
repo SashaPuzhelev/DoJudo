@@ -129,6 +129,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Styles\ListViewStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Styles\PasswordBoxStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -212,9 +216,11 @@
     <Compile Include="Models\Interfaces\IAddressRepository.cs" />
     <Compile Include="Models\Interfaces\IBaseRepository.cs" />
     <Compile Include="Models\Database\DbDoJudo.cs" />
+    <Compile Include="Models\Interfaces\ICompetitionRepository.cs" />
     <Compile Include="Models\Interfaces\IParticipantRepository.cs" />
     <Compile Include="Models\Interfaces\IUserRepository.cs" />
     <Compile Include="Models\Repositories\AddressRepository.cs" />
+    <Compile Include="Models\Repositories\CompetitionRepository.cs" />
     <Compile Include="Models\Repositories\ParticipantRepository.cs" />
     <Compile Include="Models\Repositories\UserRepository.cs" />
     <Compile Include="ViewModels\AddEditParticipantsViewModel.cs" />
