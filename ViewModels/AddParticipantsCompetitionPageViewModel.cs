@@ -1,0 +1,71 @@
+﻿using DoJudo.Models.Database;
+using DoJudo.Models.Interfaces;
+using DoJudo.Models.Repositories;
+using DoJudo.Views.Pages;
+using GalaSoft.MvvmLight.Command;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Input;
+
+namespace DoJudo.ViewModels
+{
+    internal class AddParticipantsCompetitionPageViewModel : INotifyPropertyChanged
+    {
+        private readonly IParticipantRepository _participantRepository;
+        private ObservableCollection<Participant> _participants;
+        private Participant _selectedParticipant;
+        public ObservableCollection<Participant> Participants
+        {
+            get { return _participants; }
+            private set
+            {
+                _participants = value;
+                OnPropertyChanged(nameof(Participants));
+            }
+        }
+        public Participant SelectedParticipant
+        {
+            get { return _selectedParticipant; }
+            set
+            {
+                if (_selectedParticipant != value)
+                {
+                    _selectedParticipant = value;
+                    OnPropertyChanged(nameof(SelectedParticipant));
+                }
+            }
+        }
+        public AddParticipantsCompetitionPageViewModel()
+        {
+            _participantRepository = new ParticipantRepository();
+            _ = LoadParticipantsAsync();
+            SelectedParticipant = new Participant();
+            AddParticipantCommand = new RelayCommand(GoToAddParticipant);
+        }
+        private async Task LoadParticipantsAsync()
+        {
+            var participantsList = await _participantRepository.GetAll();
+            Participants = new ObservableCollection<Participant>(participantsList);
+        }
+        public ICommand AddParticipantCommand { get; private set; }
+        public ICommand AddParticipantCompetitionCommand { get; private set; }
+        private void GoToAddParticipant()
+        {
+            Participant participant = new Participant();
+            AddEditParticipantsPage addEditParticipantsPage = new AddEditParticipantsPage(participant);
+            MainWindowViewModel.Instance.CurrentPage = addEditParticipantsPage;
+
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+    }
+}
