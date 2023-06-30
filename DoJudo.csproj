@@ -226,6 +226,7 @@
       <DependentUpon>DoJudoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Interfaces\IAddressRepository.cs" />
+    <Compile Include="Models\Interfaces\IAgeCategoryRepository.cs" />
     <Compile Include="Models\Interfaces\IBaseRepository.cs" />
     <Compile Include="Models\Database\DbDoJudo.cs" />
     <Compile Include="Models\Interfaces\ICompetitionRepository.cs" />
@@ -233,12 +234,15 @@
     <Compile Include="Models\Interfaces\IParticipantCompetitionRepository.cs" />
     <Compile Include="Models\Interfaces\IParticipantRepository.cs" />
     <Compile Include="Models\Interfaces\IUserRepository.cs" />
+    <Compile Include="Models\Interfaces\IWeightCategoryRepository.cs" />
     <Compile Include="Models\Repositories\AddressRepository.cs" />
+    <Compile Include="Models\Repositories\AgeCategoryRepository.cs" />
     <Compile Include="Models\Repositories\CompetitionRepository.cs" />
     <Compile Include="Models\Repositories\GroupRepository.cs" />
     <Compile Include="Models\Repositories\ParticipantCompetitionRepository.cs" />
     <Compile Include="Models\Repositories\ParticipantRepository.cs" />
     <Compile Include="Models\Repositories\UserRepository.cs" />
+    <Compile Include="Models\Repositories\WeightCategoryRepository.cs" />
     <Compile Include="ViewModels\AddEditParticipantsViewModel.cs" />
     <Compile Include="ViewModels\AddParticipantCompetitionWindowViewModel.cs" />
     <Compile Include="ViewModels\AddParticipantsCompetitionPageViewModel.cs" />

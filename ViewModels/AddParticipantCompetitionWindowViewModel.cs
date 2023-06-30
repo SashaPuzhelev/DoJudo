@@ -3,11 +3,7 @@ using DoJudo.Models.Interfaces;
 using DoJudo.Models.Repositories;
 using GalaSoft.MvvmLight.Command;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace DoJudo.ViewModels
@@ -15,7 +11,9 @@ namespace DoJudo.ViewModels
     internal class AddParticipantCompetitionWindowViewModel : INotifyPropertyChanged
     {
         private IParticipantCompetitionRepository _participantCompetitionRepository;
+        private IGroupRepository _groupRepository;
         private Participant _participant;
+        private Group _group;
         private ParticipantCompetition _participantCompetition;
         public Participant Participant
         {
@@ -42,6 +40,8 @@ namespace DoJudo.ViewModels
         {
             _participant = participant;
             _participantCompetitionRepository = new ParticipantCompetitionRepository();
+            _groupRepository = new GroupRepository();
+            _group = new Group();
             _participantCompetition = new ParticipantCompetition();
             CancelCommand = new RelayCommand(CloseWindow);
             SaveCommand = new RelayCommand(SaveParticipantCompetition);

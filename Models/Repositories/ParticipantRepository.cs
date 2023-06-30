@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -68,16 +69,23 @@ namespace DoJudo.Models.Repositories
             throw new NotImplementedException();
         }
 
+        public int GetAge(Participant entity)
+        {
+            int age = DateTime.Today.Year - entity.Birthdate.Year;
+            if (DateTime.Today < entity.Birthdate.AddYears(age))
+            {
+                age--;
+            }
+            return age;
+        }
         public async Task<IEnumerable<Participant>> GetAll()
         {
             return await _dbDoJudo.Participants.ToListAsync();
         }
-
         public Participant GetByPhone(string phone)
         {
             throw new NotImplementedException();
         }
-
         public bool Update(Participant entity)
         {
             try

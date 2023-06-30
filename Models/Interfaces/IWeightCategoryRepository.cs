@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace DoJudo.Models.Interfaces
 {
-    internal interface IGroupRepository : IBaseRepository<Group>
+    internal interface IWeightCategoryRepository : IBaseRepository<WeightCategory>
     {
-        bool IsNoDublicateGroup(Group group);
-        void DefiningGroupCategories(Group group, Participant participant, float weight);
+        WeightCategory GetWeightCategory(float weight);
     }
 }

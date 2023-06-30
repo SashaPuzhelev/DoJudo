@@ -10,9 +10,29 @@ namespace DoJudo.Models.Repositories
 {
     internal class GroupRepository : IGroupRepository
     {
+        private readonly IParticipantRepository _participantRepository;
+        private readonly DbDoJudo _dbDoJudo;
+        public GroupRepository()
+        {
+            _dbDoJudo = DbDoJudo.GetInstance();
+            _participantRepository = new ParticipantRepository();
+        }
         public bool Add(Group entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (IsNoDublicateGroup(entity))
+                {
+                    _dbDoJudo.Groups.Add(entity);
+                    _dbDoJudo.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public bool Delete(Group entity)
@@ -34,10 +54,26 @@ namespace DoJudo.Models.Repositories
         {
             throw new NotImplementedException();
         }
-
         public bool Update(Group entity)
         {
             throw new NotImplementedException();
+        }
+        public bool IsNoDublicateGroup(Group entity)
+        {
+            var groupExists = _dbDoJudo.Groups.Find(entity);
+            if (groupExists is null)
+            {
+                return true;
+            }
+            return false;
+        }
+        public void DefiningGroupCategories(Group entity, Participant participant, float weight)
+        {
+            entity.GenderCategory = participant.Gender;
+            if (_participantRepository.GetAge(participant) > 0)
+            {
+
+            }
         }
     }
 }

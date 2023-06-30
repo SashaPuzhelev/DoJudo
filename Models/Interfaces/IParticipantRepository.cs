@@ -10,5 +10,6 @@ namespace DoJudo.Models.Interfaces
     internal interface IParticipantRepository : IBaseRepository<Participant>
     {
         Participant GetByPhone(string phone);
+        int GetAge(Participant entity);
     }
 }
