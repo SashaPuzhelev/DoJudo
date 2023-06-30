@@ -30,13 +30,20 @@ namespace DoJudo.ViewModels
             Instance = this;
             _competition = competititon;
             AddParticipantsCompetitionCommand = new RelayCommand(GoToAddParticipantsCompetitionPage);
+            ParticipantsCompetitionCommand = new RelayCommand(GoToParticipantsCompetitionPage);
         }
         private void GoToAddParticipantsCompetitionPage()
         {
             AddParticipantsCompetitionPage addParticipantsCompetitionPage = new AddParticipantsCompetitionPage();
             MainWindowViewModel.Instance.CurrentPage = addParticipantsCompetitionPage;
         }
+        private void GoToParticipantsCompetitionPage()
+        {
+            ParticipantsCompetitionPage participantsCompetitionPage = new ParticipantsCompetitionPage();
+            MainWindowViewModel.Instance.CurrentPage = participantsCompetitionPage;
+        }
         public ICommand AddParticipantsCompetitionCommand { get; private set; }
+        public ICommand ParticipantsCompetitionCommand { get; private set; }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
         {

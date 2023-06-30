@@ -2,6 +2,7 @@
 using DoJudo.Models.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Threading.Tasks;
 
 namespace DoJudo.Models.Repositories
@@ -42,9 +43,9 @@ namespace DoJudo.Models.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ParticipantCompetition>> GetAll()
+        public async Task<IEnumerable<ParticipantCompetition>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _dbDoJudo.ParticipantCompetitions.ToListAsync();
         }
 
         public bool Update(ParticipantCompetition entity)
