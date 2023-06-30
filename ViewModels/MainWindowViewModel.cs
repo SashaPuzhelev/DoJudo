@@ -9,7 +9,7 @@ namespace DoJudo.ViewModels
 {
     internal class MainWindowViewModel : INotifyPropertyChanged
     {
-        public static MainWindowViewModel Instance { get; set; }
+        public static MainWindowViewModel Instance { get; private set; }
         private readonly string _pathToPages = "DoJudo.Views.Pages.";
         private Page _currentPage;
         private readonly CurrentUser _currentUser;

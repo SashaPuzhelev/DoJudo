@@ -4,14 +4,17 @@ using DoJudo.Models.Repositories;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace DoJudo.ViewModels
 {
     internal class AddParticipantCompetitionWindowViewModel : INotifyPropertyChanged
     {
-        private IParticipantCompetitionRepository _participantCompetitionRepository;
-        private IGroupRepository _groupRepository;
+        private readonly IParticipantCompetitionRepository _participantCompetitionRepository;
+        private readonly IGroupRepository _groupRepository;
+        private readonly IAgeCategoryRepository _ageCategoryRepository;
+        private readonly IWeightCategoryRepository _weightCategoryRepository;
         private Participant _participant;
         private Group _group;
         private ParticipantCompetition _participantCompetition;
@@ -41,6 +44,8 @@ namespace DoJudo.ViewModels
             _participant = participant;
             _participantCompetitionRepository = new ParticipantCompetitionRepository();
             _groupRepository = new GroupRepository();
+            _ageCategoryRepository = new AgeCategoryRepository();
+            _weightCategoryRepository = new WeightCategoryRepository();
             _group = new Group();
             _participantCompetition = new ParticipantCompetition();
             CancelCommand = new RelayCommand(CloseWindow);
@@ -50,7 +55,30 @@ namespace DoJudo.ViewModels
         public ICommand CancelCommand { get; private set; }
         private void SaveParticipantCompetition()
         {
-            _participantCompetition.IdParticipant = _participant.Id;
+            if (_participantCompetition.Weight != 0)
+            {
+                FillingInGroup();
+
+                _participantCompetition.IdGroup = _groupRepository.AddWithReturnIdGroup(_group);
+
+                _participantCompetition.IdParticipant = _participant.Id;
+
+                if(_participantCompetitionRepository.Add(_participantCompetition))
+                {
+                    MessageBox.Show("Участник успешно добавлен!", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+                MessageBox.Show("При добавлении произошла ошибка!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            MessageBox.Show("Неверно введен вес!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        private void FillingInGroup()
+        {
+            _group.Competition = CompetitionViewModel.Instance.Competition;
+            _group.AgeCategory = _ageCategoryRepository.GetAgeCategory(_participant);
+            _group.WeightCategory = _weightCategoryRepository.GetWeightCategory(_participantCompetition.Weight);
+            _group.GenderCategory = _participant.Gender;
         }
         private void CloseWindow()
         {

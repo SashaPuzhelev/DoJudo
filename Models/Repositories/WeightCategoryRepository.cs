@@ -42,7 +42,7 @@ namespace DoJudo.Models.Repositories
             throw new NotImplementedException();
         }
 
-        public WeightCategory GetWeightCategory(float weight)
+        public WeightCategory GetWeightCategory(double weight)
         {
             var WeightCategoryList = GetAllNoAsync();
             foreach (var item in WeightCategoryList)

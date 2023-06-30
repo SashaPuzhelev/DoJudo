@@ -9,6 +9,6 @@ namespace DoJudo.Models.Interfaces
 {
     internal interface IWeightCategoryRepository : IBaseRepository<WeightCategory>
     {
-        WeightCategory GetWeightCategory(float weight);
+        WeightCategory GetWeightCategory(double weight);
     }
 }

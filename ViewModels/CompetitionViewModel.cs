@@ -13,11 +13,12 @@ namespace DoJudo.ViewModels
 {
     internal class CompetitionViewModel : INotifyPropertyChanged
     {
+        public static CompetitionViewModel Instance { get; private set; }
         private Competition _competition;
         public Competition Competition
         { 
             get { return _competition; } 
-            set
+            private set
             {
                 _competition = value;
                 OnPropertyChanged(nameof(Competition));
@@ -26,6 +27,7 @@ namespace DoJudo.ViewModels
 
         public CompetitionViewModel(Competition competititon)
         {
+            Instance = this;
             _competition = competititon;
             AddParticipantsCompetitionCommand = new RelayCommand(GoToAddParticipantsCompetitionPage);
         }
