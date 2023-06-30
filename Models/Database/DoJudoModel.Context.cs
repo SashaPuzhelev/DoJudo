@@ -13,10 +13,10 @@ namespace DoJudo.Models.Database
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DoJudoEntitiesV4 : DbContext
+    public partial class DoJudoEntities : DbContext
     {
-        public DoJudoEntitiesV4()
-            : base("name=DoJudoEntitiesV4")
+        public DoJudoEntities()
+            : base("name=DoJudoEntities")
         {
         }
     

@@ -16,7 +16,7 @@ namespace DoJudo.Models.Database
     {
         public int Id { get; set; }
         public int IdGroup { get; set; }
-        public int IdSportsman { get; set; }
+        public int IdParticipant { get; set; }
         public double Weight { get; set; }
     
         public virtual Group Group { get; set; }

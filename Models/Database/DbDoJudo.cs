@@ -7,15 +7,27 @@ using DoJudo.Models.Database;
 
 namespace DoJudo.Models.Database
 {
-    internal class DbDoJudo : DoJudoEntitiesV4
+    internal class DbDoJudo : DoJudoEntities
     {
-        //you need to make constr is PROTECTED in DoJudoEntitites
         private static DbDoJudo instance;
         public static DbDoJudo GetInstance() 
         {
             if (instance == null)
                 instance = new DbDoJudo();
             return instance;
+        }
+        public static bool CheckConnection()
+        {
+            try
+            {
+                instance.Database.Connection.Open();
+                instance.Database.Connection.Close();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

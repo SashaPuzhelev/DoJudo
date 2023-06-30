@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DoJudoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DoJudoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="Id" />
@@ -42,7 +42,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -73,7 +73,7 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="IdGroup" Type="int" Nullable="false" />
-          <Property Name="IdSportsman" Type="int" Nullable="false" />
+          <Property Name="IdParticipant" Type="int" Nullable="false" />
           <Property Name="Weight" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Role">
@@ -195,7 +195,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="ParticipantCompetition">
-              <PropertyRef Name="IdSportsman" />
+              <PropertyRef Name="IdParticipant" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -273,7 +273,8 @@
             <End Role="Group" EntitySet="Group" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DoJudoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -319,7 +320,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Groups" Relationship="Self.for_key_idcompetition_Group" FromRole="Competition" ToRole="Group" />
         </EntityType>
         <EntityType Name="Group">
@@ -358,7 +359,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="IdGroup" Type="Int32" Nullable="false" />
-          <Property Name="IdSportsman" Type="Int32" Nullable="false" />
+          <Property Name="IdParticipant" Type="Int32" Nullable="false" />
           <Property Name="Weight" Type="Double" Nullable="false" />
           <NavigationProperty Name="Group" Relationship="Self.for_key_idgroup_GroupParticipant" FromRole="ParticipantCompetition" ToRole="Group" />
           <NavigationProperty Name="Participant" Relationship="Self.for_key_idParticipant_GroupParticipant" FromRole="ParticipantCompetition" ToRole="Participant" />
@@ -497,7 +498,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="ParticipantCompetition">
-              <PropertyRef Name="IdSportsman" />
+              <PropertyRef Name="IdParticipant" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -513,7 +514,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DoJudoEntitiesV4" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DoJudoEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Addresses" EntityType="Self.Address" />
           <EntitySet Name="AgeCategories" EntityType="Self.AgeCategory" />
           <EntitySet Name="Cities" EntityType="Self.City" />
@@ -568,7 +569,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DoJudoModelStoreContainer" CdmEntityContainer="DoJudoEntitiesV4">
+        <EntityContainerMapping StorageEntityContainer="DoJudoModelStoreContainer" CdmEntityContainer="DoJudoEntities">
           <EntitySetMapping Name="Addresses">
             <EntityTypeMapping TypeName="DoJudoModel.Address">
               <MappingFragment StoreEntitySet="Address">
@@ -643,7 +644,7 @@
               <MappingFragment StoreEntitySet="ParticipantCompetition">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
-                <ScalarProperty Name="IdSportsman" ColumnName="IdSportsman" />
+                <ScalarProperty Name="IdParticipant" ColumnName="IdParticipant" />
                 <ScalarProperty Name="Weight" ColumnName="Weight" />
               </MappingFragment>
             </EntityTypeMapping>

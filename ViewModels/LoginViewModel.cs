@@ -7,12 +7,13 @@ using System.Windows;
 using System.Windows.Input;
 using DoJudo.Models.Database;
 using DoJudo.Models.Repositories;
+using DoJudo.Models.Interfaces;
 
 namespace DoJudo.ViewModels
 {
     internal class LoginViewModel : INotifyPropertyChanged
-
     {
+        private readonly IUserRepository _userRepository;
         private string _username;
         private string _password;
         private bool _isLoginEnabled;
@@ -50,6 +51,7 @@ namespace DoJudo.ViewModels
         {
             LoginCommand = new RelayCommand(Login, CanLogin());
             ShutdownAppCommand = new RelayCommand(ShutdownApp);
+            _userRepository = new UserRepository();
         }
         public ICommand LoginCommand { get; private set; }
         public ICommand ShutdownAppCommand { get; private set; }
@@ -59,9 +61,13 @@ namespace DoJudo.ViewModels
         }
         private async void Login()
         {
+            if (DbDoJudo.CheckConnection() == false)
+            {
+                MessageBox.Show("Нет подключения к БД! Обратитесь к админу", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             IsLoginEnabled = false;
-            var userRepository = new UserRepository();
-            var user = await userRepository.CheckLogin(Username, Password);
+            var user = await _userRepository.CheckLogin(Username, Password);
             if (user == null)
             {
                 MessageBox.Show("Неверный логин или пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);

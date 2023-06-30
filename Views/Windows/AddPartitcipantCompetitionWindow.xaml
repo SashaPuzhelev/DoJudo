@@ -38,7 +38,7 @@
             <TextBlock Style="{StaticResource CenterTextBlock}" Text="{Binding Participant.Name}" HorizontalAlignment="Right" Margin="5"></TextBlock>
             <TextBlock Grid.Column="1" Style="{StaticResource CenterTextBlock}" Text="{Binding Participant.Surname}" HorizontalAlignment="Left" Margin="5"></TextBlock>
             <TextBlock Grid.Row="1" Style="{StaticResource CenterTextBlock}" Text="Введите вес:" HorizontalAlignment="Right" Margin="10"></TextBlock>
-            <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource MainTextBox}" Height="25" Width="120" HorizontalAlignment="Left"></TextBox>
+            <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource MainTextBox}" Height="25" Width="120" HorizontalAlignment="Left" Text="{Binding ParticipantCompetition.Weight}"></TextBox>
         </Grid>
         <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource MainButton}" HorizontalAlignment="Left" Content="Сохранить" Command="{Binding SaveCommand}"></Button>
         <Button  Grid.Row="2" Grid.Column="1" Style="{StaticResource MainButton}" HorizontalAlignment="Right" Content="Отменить" Command="{Binding CancelCommand}"/>

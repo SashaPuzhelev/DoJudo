@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace DoJudo.ViewModels
@@ -48,8 +49,13 @@ namespace DoJudo.ViewModels
         public ICommand ChooseCommand { get; private set; }
         private void GoToCompetition()
         {
-            CompetitionPage competitionPage = new CompetitionPage(_selectedCompetition);
-            MainWindowViewModel.Instance.CurrentPage = competitionPage;
+            if (_selectedCompetition.Id != 0)
+            {
+                CompetitionPage competitionPage = new CompetitionPage(_selectedCompetition);
+                MainWindowViewModel.Instance.CurrentPage = competitionPage;
+                return;
+            }
+            MessageBox.Show("Вы не выбрали соревнование!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

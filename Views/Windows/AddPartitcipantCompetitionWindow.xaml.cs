@@ -25,6 +25,12 @@ namespace DoJudo.Views.Windows
         {
             InitializeComponent();
             DataContext = new AddParticipantCompetitionWindowViewModel(participant);
+            (DataContext as AddParticipantCompetitionWindowViewModel).CloseWindowEvent += CloseWindowEventHandler;
+        }
+
+        private void CloseWindowEventHandler(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
