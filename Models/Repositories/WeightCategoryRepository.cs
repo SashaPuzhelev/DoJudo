@@ -10,12 +10,10 @@ namespace DoJudo.Models.Repositories
 {
     internal class WeightCategoryRepository : IWeightCategoryRepository
     {
-        private readonly IParticipantRepository _participantRepository;
         private readonly DbDoJudo _dbDoJudo;
         public WeightCategoryRepository()
         {
             _dbDoJudo = DbDoJudo.GetInstance();
-            _participantRepository = new ParticipantRepository();
         }
         public bool Add(WeightCategory entity)
         {

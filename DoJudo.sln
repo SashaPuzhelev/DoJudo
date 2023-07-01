@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoJudo", "DoJudo.csproj", "{D58BEE0F-9CA0-46C2-B6BE-FC1EC1302558}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoJudoUnitTests", "..\DoJudoUnitTests\DoJudoUnitTests.csproj", "{31942F53-23AE-407F-BF00-0BA81B15CCFD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D58BEE0F-9CA0-46C2-B6BE-FC1EC1302558}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D58BEE0F-9CA0-46C2-B6BE-FC1EC1302558}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D58BEE0F-9CA0-46C2-B6BE-FC1EC1302558}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31942F53-23AE-407F-BF00-0BA81B15CCFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31942F53-23AE-407F-BF00-0BA81B15CCFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31942F53-23AE-407F-BF00-0BA81B15CCFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31942F53-23AE-407F-BF00-0BA81B15CCFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
