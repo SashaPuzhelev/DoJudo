@@ -50,6 +50,7 @@ namespace DoJudo.ViewModels
             SelectedParticipant = new Participant();
             AddParticipantCommand = new RelayCommand(GoToAddParticipant);
             AddParticipantCompetitionCommand = new RelayCommand(GoToAddParticipantCompetition);
+            BackCommand = new RelayCommand(GoToBack);
         }
         private async Task LoadParticipantsAsync()
         {
@@ -58,6 +59,7 @@ namespace DoJudo.ViewModels
         }
         public ICommand AddParticipantCommand { get; private set; }
         public ICommand AddParticipantCompetitionCommand { get; private set; }
+        public ICommand BackCommand { get; private set; }
         private  void GoToAddParticipantCompetition()
         {
             if (_selectedParticipant.Id != 0)
@@ -74,6 +76,10 @@ namespace DoJudo.ViewModels
             AddEditParticipantsPage addEditParticipantsPage = new AddEditParticipantsPage(participant);
             MainWindowViewModel.Instance.CurrentPage = addEditParticipantsPage;
 
+        }
+        private void GoToBack()
+        {
+            MainWindowViewModel.Instance.CurrentPage.NavigationService.GoBack();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)

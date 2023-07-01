@@ -1,6 +1,7 @@
 ﻿using DoJudo.Models.Database;
 using DoJudo.Models.Interfaces;
 using DoJudo.Models.Repositories;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace DoJudo.ViewModels
 {
@@ -33,6 +35,12 @@ namespace DoJudo.ViewModels
         {
             var participantsCompetitionList = await _participantCompetitionRepository.GetAll();
             ParticipantsCompetition = new ObservableCollection<ParticipantCompetition>(participantsCompetitionList);
+            BackCommand = new RelayCommand(GoToBack);
+        }
+        public ICommand BackCommand { get; private set; }
+        private void GoToBack()
+        {
+            MainWindowViewModel.Instance.CurrentPage.NavigationService.GoBack();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)

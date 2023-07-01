@@ -53,7 +53,7 @@
             </DataGrid.ContextMenu>
         </DataGrid>
         <Grid Grid.Row="1" Background="{StaticResource PrimaryColor}">
-
+            <Button Content="Назад" Style="{StaticResource MainButton}" HorizontalAlignment="Right" Command="{Binding BackCommand}"/>
         </Grid>
     </Grid>
 </Page>

@@ -44,7 +44,8 @@
         </DataGrid>
         <Grid Grid.Row="1" Background="{StaticResource PrimaryColor}">
             <Button Style="{StaticResource MainButton}" HorizontalAlignment="Left" Width="170" Content="Добавить участника" Command="{Binding AddParticipantCompetitionCommand}"></Button>
-            <Button Content="Добавить спортсмена" Style="{StaticResource MainButton}" HorizontalAlignment="Right" Width="170" Command="{Binding AddParticipantCommand}"/>
+            <Button Content="Добавить спортсмена" Style="{StaticResource MainButton}" HorizontalAlignment="Center" Width="170" Command="{Binding AddParticipantCommand}"/>
+            <Button Content="Назад" Style="{StaticResource MainButton}" HorizontalAlignment="Right" Width="170" Command="{Binding BackCommand}"/>
         </Grid>
     </Grid>
 </Page>
