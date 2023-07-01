@@ -1,5 +1,6 @@
 ﻿using DoJudo.Models;
 using DoJudo.ViewModels;
+using System;
 using System.Windows;
 
 namespace DoJudo
@@ -12,6 +13,12 @@ namespace DoJudo
         public MainWindow()
         {
             InitializeComponent();
+            (DataContext as MainWindowViewModel).CloseWindowEvent += CloseWindowEventHandler;
+        }
+
+        private void CloseWindowEventHandler(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

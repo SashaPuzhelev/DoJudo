@@ -3,6 +3,7 @@ using DoJudo.Models.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -28,6 +29,10 @@ namespace DoJudo.Models
         public static CurrentUser GetInstance()
         {
             return instance;
+        }
+        public static void SetNullInstance()
+        {
+            instance = null;
         }
         public int Id => _user.Id;
         public string Name => _user.Name;

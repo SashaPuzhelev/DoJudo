@@ -26,6 +26,7 @@
             <Image Source="/Resources/logoImage.png" Grid.Column="0"></Image>
             <TextBlock Grid.Column="1" Style="{StaticResource HeaderTextBlock}" HorizontalAlignment="Left" Text="DoJudo"></TextBlock>
             <TextBlock Style="{StaticResource MainTextBlock}" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2"  Text="{Binding FullNameWithRoleName}" Grid.ColumnSpan="2"></TextBlock>
+            <Button Grid.Column="3" Style="{StaticResource MainButton}" Content="Выход" Command="{Binding ExitCommand}" HorizontalAlignment="Right"></Button>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
