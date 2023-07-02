@@ -1,4 +1,5 @@
-﻿using DoJudo.Models.Database;
+﻿using DoJudo.Models;
+using DoJudo.Models.Database;
 using DoJudo.Models.Interfaces;
 using DoJudo.Models.Repositories;
 using DoJudo.Views.Pages;
@@ -53,21 +54,27 @@ namespace DoJudo.ViewModels
         }
         private void DeleteParticipants()
         {
-            MessageBoxResult messageBoxResult = 
-                MessageBox.Show("Вы точно хотите удалить? Восстановление будет невозможным!", "Информация",
-                    MessageBoxButton.OKCancel, MessageBoxImage.Information);
-            if (MessageBoxResult.OK == messageBoxResult)
+            if (CurrentUser.GetInstance().IsAdmin)
             {
-                if (_participantRepository.Delete(_selectedParticipant))
+                MessageBoxResult messageBoxResult =
+               MessageBox.Show("Вы точно хотите удалить? Восстановление будет невозможным!", "Информация",
+                   MessageBoxButton.OKCancel, MessageBoxImage.Information);
+                if (MessageBoxResult.OK == messageBoxResult)
                 {
-                    MessageBox.Show("Удаление прошло успешно!", "Информация",
-                        MessageBoxButton.OK, MessageBoxImage.Information);
-                    _ = LoadParticipantsAsync();
-                    return;
+                    if (_participantRepository.Delete(_selectedParticipant))
+                    {
+                        MessageBox.Show("Удаление прошло успешно!", "Информация",
+                            MessageBoxButton.OK, MessageBoxImage.Information);
+                        _ = LoadParticipantsAsync();
+                        return;
+                    }
+                    MessageBox.Show("Удаление провалено!", "Ошибка",
+                       MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                MessageBox.Show("Удаление провалено!", "Ошибка",
-                   MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
+            MessageBox.Show("У вас недостаточно прав!", "Ошибка",
+                       MessageBoxButton.OK, MessageBoxImage.Error);
         }
         private void GoToEditParticipants()
         {

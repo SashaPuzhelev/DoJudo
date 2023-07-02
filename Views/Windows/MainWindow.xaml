@@ -37,8 +37,8 @@
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Style="{StaticResource BaseButton}" Content="Спортсмены" Command="{Binding NavigateCommand}" CommandParameter="ParticipantsPage"></Button>
             <Button Grid.Column="1" Style="{StaticResource BaseButton}" Content="Соревнования" Command="{Binding NavigateCommand}" CommandParameter="CompetitionsPage"></Button>
-            <Button Grid.Column="2" Style="{StaticResource BaseButton}" Content="Пользователи" Command="{Binding NavigateCommand}" CommandParameter="UsersPage" IsEnabled="False"></Button>
-            <Button Grid.Column="3" Style="{StaticResource BaseButton}" Content="История посещения пользователей" Command="{Binding NavigateCommand}" CommandParameter="HistoryLoginPage"></Button>
+            <Button Grid.Column="2" Style="{StaticResource BaseButton}" Content="Пользователи" Command="{Binding AdminNavigateCommand}" CommandParameter="UsersPage" IsEnabled="False"></Button>
+            <Button Grid.Column="3" Style="{StaticResource BaseButton}" Content="История посещения пользователей" Command="{Binding AdminNavigateCommand}" CommandParameter="HistoryLoginPage"></Button>
         </Grid>
         <Frame Grid.Row="2" NavigationUIVisibility="Hidden" Content="{Binding CurrentPage}"></Frame>
     </Grid>

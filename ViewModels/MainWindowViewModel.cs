@@ -3,6 +3,7 @@ using DoJudo.UI.Windows;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -28,16 +29,29 @@ namespace DoJudo.ViewModels
             get { return _currentUser.FullNameWithRoleName; }
         }
         public ICommand NavigateCommand { get; private set; }
+        public ICommand AdminNavigateCommand { get; private set; }
         public ICommand ExitCommand { get; private set; }
         public MainWindowViewModel()
         {
             Instance = this;
             _currentUser = CurrentUser.GetInstance();
-            NavigateCommand = new RelayCommand<string>((pageName) =>
-            {
-                CurrentPage = (Page)Activator.CreateInstance(Type.GetType(_pathToPages + pageName));
-            });
+            NavigateCommand = new RelayCommand<string>(GoToThisPage);
             ExitCommand = new RelayCommand(ExitCurrentUser);
+            AdminNavigateCommand = new RelayCommand<string>(GoToAdminPage);
+        }
+        private void GoToThisPage(string pageName)
+        {
+            CurrentPage = (Page)Activator.CreateInstance(Type.GetType(_pathToPages + pageName));
+        }
+        private void GoToAdminPage(string pageName)
+        {
+            if(CurrentUser.GetInstance().IsAdmin)
+            {
+                GoToThisPage(pageName);
+                return;
+            }
+            MessageBox.Show("У вас недостаточно прав!", "Ошибка",
+                      MessageBoxButton.OK, MessageBoxImage.Error);
         }
         private void ExitCurrentUser()
         {
