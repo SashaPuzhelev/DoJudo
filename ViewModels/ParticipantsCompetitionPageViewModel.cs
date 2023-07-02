@@ -30,6 +30,7 @@ namespace DoJudo.ViewModels
         {
             _participantCompetitionRepository = new ParticipantCompetitionRepository();
             _ = LoadParticipantCompetitionsAsync();
+            BackCommand = new RelayCommand(GoToBack);
         }
         private async Task LoadParticipantCompetitionsAsync()
         {

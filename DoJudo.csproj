@@ -125,6 +125,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Styles\CellStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Styles\CheckBoxStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -166,6 +170,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Styles\WindowStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\ParticipantsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -291,6 +299,9 @@
     <Compile Include="Views\Pages\ParticipantsPage.xaml.cs">
       <DependentUpon>ParticipantsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\ParticipantsUserControl.xaml.cs">
+      <DependentUpon>ParticipantsUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\AddPartitcipantCompetitionWindow.xaml.cs">
       <DependentUpon>AddPartitcipantCompetitionWindow.xaml</DependentUpon>
     </Compile>
@@ -338,7 +349,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\Filters\" />
-    <Folder Include="Views\UserControls\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Models\Database\DoJudoModel.Context.tt">
