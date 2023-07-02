@@ -77,6 +77,7 @@ namespace DoJudo.ViewModels
             {
                 MessageBox.Show("Вы успешно вошли!", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                 CurrentUser.SetInstance(user);
+                CurrentUser.StartHistoryLogin();
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
                 CloseWindow();

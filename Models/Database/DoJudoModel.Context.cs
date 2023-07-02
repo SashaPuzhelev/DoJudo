@@ -37,5 +37,6 @@ namespace DoJudo.Models.Database
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<WeightCategory> WeightCategories { get; set; }
+        public virtual DbSet<HistoryLogin> HistoryLogins { get; set; }
     }
 }

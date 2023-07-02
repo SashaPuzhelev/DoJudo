@@ -109,6 +109,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\HistoryLoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\ParticipantsCompetitionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -211,6 +215,9 @@
     <Compile Include="Models\Database\Group.cs">
       <DependentUpon>DoJudoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\HistoryLogin.cs">
+      <DependentUpon>DoJudoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\Participant.cs">
       <DependentUpon>DoJudoModel.tt</DependentUpon>
     </Compile>
@@ -235,6 +242,7 @@
     <Compile Include="Models\Database\DbDoJudo.cs" />
     <Compile Include="Models\Interfaces\ICompetitionRepository.cs" />
     <Compile Include="Models\Interfaces\IGroupRepository.cs" />
+    <Compile Include="Models\Interfaces\IHistoryLoginRepository.cs" />
     <Compile Include="Models\Interfaces\IParticipantCompetitionRepository.cs" />
     <Compile Include="Models\Interfaces\IParticipantRepository.cs" />
     <Compile Include="Models\Interfaces\IUserRepository.cs" />
@@ -243,6 +251,7 @@
     <Compile Include="Models\Repositories\AgeCategoryRepository.cs" />
     <Compile Include="Models\Repositories\CompetitionRepository.cs" />
     <Compile Include="Models\Repositories\GroupRepository.cs" />
+    <Compile Include="Models\Repositories\HistoryLoginRepository.cs" />
     <Compile Include="Models\Repositories\ParticipantCompetitionRepository.cs" />
     <Compile Include="Models\Repositories\ParticipantRepository.cs" />
     <Compile Include="Models\Repositories\UserRepository.cs" />
@@ -252,6 +261,7 @@
     <Compile Include="ViewModels\AddParticipantsCompetitionPageViewModel.cs" />
     <Compile Include="ViewModels\CompetitionsViewModel.cs" />
     <Compile Include="ViewModels\CompetitionViewModel.cs" />
+    <Compile Include="ViewModels\HistoryLoginPageViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ParticipantsCompetitionPageViewModel.cs" />
@@ -271,6 +281,9 @@
     </Compile>
     <Compile Include="Views\Pages\CompetitionsPage.xaml.cs">
       <DependentUpon>CompetitionsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\HistoryLoginPage.xaml.cs">
+      <DependentUpon>HistoryLoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\ParticipantsCompetitionPage.xaml.cs">
       <DependentUpon>ParticipantsCompetitionPage.xaml</DependentUpon>
@@ -325,6 +338,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\Filters\" />
+    <Folder Include="Views\UserControls\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Models\Database\DoJudoModel.Context.tt">

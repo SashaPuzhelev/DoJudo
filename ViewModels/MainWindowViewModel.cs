@@ -41,6 +41,7 @@ namespace DoJudo.ViewModels
         }
         private void ExitCurrentUser()
         {
+            CurrentUser.EndHistoryLogin();
             CurrentUser.SetNullInstance();
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();

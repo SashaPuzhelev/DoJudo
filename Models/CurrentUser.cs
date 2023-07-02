@@ -1,22 +1,27 @@
-﻿using DevExpress.Internal.WinApi.Windows.UI.Notifications;
-using DoJudo.Models.Database;
+﻿using DoJudo.Models.Database;
+using DoJudo.Models.Interfaces;
+using DoJudo.Models.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace DoJudo.Models
 {
-    internal class CurrentUser 
+    internal class CurrentUser
     {
         private static User _user;
         private static CurrentUser instance;
+        public int Id => _user.Id;
+        public string Name => _user.Name;
+        public string Surname => _user.Surname;
+        public int IdRole => _user.IdRole;
+        public bool IsAdmin => _user.IdRole == 1;
+        public HistoryLogin HistoryLogin;
+        public string RoleName => _user.Role.Name;
+        public string FullName => $"{_user.Name} {_user.Surname}";
+        public string FullNameWithRoleName => $"{_user.Role.Name}: {FullName}";
         private CurrentUser(User user)
         {
             _user = user;
+            HistoryLogin = new HistoryLogin();
         }
         public static CurrentUser SetInstance(User user)
         {
@@ -34,14 +39,21 @@ namespace DoJudo.Models
         {
             instance = null;
         }
-        public int Id => _user.Id;
-        public string Name => _user.Name;
-        public string Surname => _user.Surname;
-        public int IdRole => _user.IdRole;
-        public string RoleName => _user.Role.Name;
-        public string FullName => $"{_user.Name} {_user.Surname}";
-        public string FullNameWithRoleName => $"{_user.Role.Name}: {FullName}";
-
-        public bool CanEdit => _user.IdRole == 1;
+        public static void StartHistoryLogin()
+        {
+            if (instance != null)
+            {
+                GetInstance().HistoryLogin.IdUser = _user.Id;
+                GetInstance().HistoryLogin.DateTimeLogin = DateTime.Now;
+            }
+        }
+        public static void EndHistoryLogin()
+        {
+            GetInstance().HistoryLogin.DateTimeExit = DateTime.Now;
+            IHistoryLoginRepository historyLoginRepository = new  HistoryLoginRepository();
+            historyLoginRepository.Add(GetInstance().HistoryLogin);
+        }
+            
+       
     }
 }

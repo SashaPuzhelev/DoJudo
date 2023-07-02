@@ -26,6 +26,8 @@
         <AssociationConnector Association="DoJudoModel.for_key_idWeightcategory_group" ManuallyRouted="false" />
         <AssociationConnector Association="DoJudoModel.for_key_idParticipant_GroupParticipant" ManuallyRouted="false" />
         <AssociationConnector Association="DoJudoModel.for_key_idRole_User" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DoJudoModel.HistoryLogin" Width="1.5" PointX="7.25" PointY="5.375" />
+        <AssociationConnector Association="DoJudoModel.for_key_idUser_HisotryLogin" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -14,6 +14,12 @@ namespace DoJudo.Models.Database
     
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.HistoryLogins = new HashSet<HistoryLogin>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -23,5 +29,7 @@ namespace DoJudo.Models.Database
         public int IdRole { get; set; }
     
         public virtual Role Role { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HistoryLogin> HistoryLogins { get; set; }
     }
 }

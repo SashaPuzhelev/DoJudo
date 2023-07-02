@@ -54,6 +54,15 @@
           <Property Name="IdAgeCategory" Type="int" Nullable="false" />
           <Property Name="GenderCategory" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
+        <EntityType Name="HistoryLogin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="DateTimeLogin" Type="datetime" Nullable="false" />
+          <Property Name="DateTimeExit" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Participant">
           <Key>
             <PropertyRef Name="Id" />
@@ -211,6 +220,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="for_key_idUser_HisotryLogin">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="HistoryLogin" Type="Self.HistoryLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HistoryLogin">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="for_key_idWeightcategory_group">
           <End Role="WeightCategory" Type="Self.WeightCategory" Multiplicity="1" />
           <End Role="Group" Type="Self.Group" Multiplicity="*" />
@@ -230,6 +251,7 @@
           <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Competition" EntityType="Self.Competition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HistoryLogin" EntityType="Self.HistoryLogin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Participant" EntityType="Self.Participant" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ParticipantCompetition" EntityType="Self.ParticipantCompetition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
@@ -267,6 +289,10 @@
           <AssociationSet Name="for_key_idRole_User" Association="Self.for_key_idRole_User">
             <End Role="Role" EntitySet="Role" />
             <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="for_key_idUser_HisotryLogin" Association="Self.for_key_idUser_HisotryLogin">
+            <End Role="User" EntitySet="User" />
+            <End Role="HistoryLogin" EntitySet="HistoryLogin" />
           </AssociationSet>
           <AssociationSet Name="for_key_idWeightcategory_group" Association="Self.for_key_idWeightcategory_group">
             <End Role="WeightCategory" EntitySet="WeightCategory" />
@@ -393,6 +419,7 @@
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IdRole" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Role" Relationship="Self.for_key_idRole_User" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="HistoryLogins" Relationship="DoJudoModel.for_key_idUser_HisotryLogin" FromRole="User" ToRole="HistoryLogin" />
         </EntityType>
         <EntityType Name="WeightCategory">
           <Key>
@@ -562,7 +589,34 @@
             <End Role="Role" EntitySet="Roles" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="HistoryLogins" EntityType="DoJudoModel.HistoryLogin" />
+          <AssociationSet Name="for_key_idUser_HisotryLogin" Association="DoJudoModel.for_key_idUser_HisotryLogin">
+            <End Role="User" EntitySet="Users" />
+            <End Role="HistoryLogin" EntitySet="HistoryLogins" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="HistoryLogin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="DateTimeLogin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateTimeExit" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="User" Relationship="DoJudoModel.for_key_idUser_HisotryLogin" FromRole="HistoryLogin" ToRole="User" />
+        </EntityType>
+        <Association Name="for_key_idUser_HisotryLogin">
+          <End Type="DoJudoModel.User" Role="User" Multiplicity="1" />
+          <End Type="DoJudoModel.HistoryLogin" Role="HistoryLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HistoryLogin">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -686,6 +740,16 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="StartWeight" ColumnName="StartWeight" />
                 <ScalarProperty Name="EndWeight" ColumnName="EndWeight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HistoryLogins">
+            <EntityTypeMapping TypeName="DoJudoModel.HistoryLogin">
+              <MappingFragment StoreEntitySet="HistoryLogin">
+                <ScalarProperty Name="DateTimeExit" ColumnName="DateTimeExit" />
+                <ScalarProperty Name="DateTimeLogin" ColumnName="DateTimeLogin" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
