@@ -68,7 +68,7 @@ namespace DoJudo.ViewModels
                 addPartitcipantCompetitionWindow.Show();
                 return;
             }
-            MessageBox.Show("sdfsdf");
+            MessageBox.Show("Вы не выбрали!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         private void GoToAddParticipant()
         {

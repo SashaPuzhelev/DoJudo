@@ -2,7 +2,10 @@
 using DoJudo.Models.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Automation.Peers;
 
 namespace DoJudo.Models.Repositories
 {
@@ -46,9 +49,9 @@ namespace DoJudo.Models.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Group>> GetAll()
+        public async Task<IEnumerable<Group>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _dbDoJudo.Groups.ToListAsync();
         }
         public bool Update(Group entity)
         {
@@ -56,26 +59,24 @@ namespace DoJudo.Models.Repositories
         }
         public bool IsNoDublicateGroup(Group entity)
         {
-            var groupExists = _dbDoJudo.Groups.Find(entity);
-            if (groupExists is null)
+            if (SearchGroup(entity) == null)
             {
                 return true;
             }
             return false;
         }
-        public int AddWithReturnIdGroup(Group entity)
+        public Group SearchGroup(Group entity)
         {
-            try
+            var list = _dbDoJudo.Groups.ToList();
+            foreach (var item in list)
             {
-                _dbDoJudo.Groups.Add(entity);
-                int id = _dbDoJudo.Groups.Find(entity).Id;
-                _dbDoJudo.SaveChanges();
-                return id;
+                if (entity.AgeCategory == item.AgeCategory && entity.WeightCategory == item.WeightCategory
+                    && entity.GenderCategory == item.GenderCategory)
+                {
+                    return item;
+                }
             }
-            catch (Exception)
-            {
-                return 0;
-            }
+            return null;
         }
     }
 }

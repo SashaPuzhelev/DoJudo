@@ -38,5 +38,6 @@ namespace DoJudo.Models.Database
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<WeightCategory> WeightCategories { get; set; }
         public virtual DbSet<HistoryLogin> HistoryLogins { get; set; }
+        public virtual DbSet<Fight> Fights { get; set; }
     }
 }

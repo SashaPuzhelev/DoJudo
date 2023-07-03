@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:DoJudo.ViewModels"
         mc:Ignorable="d"
-        Title="DoJudo" Height="400" Width="350" MinHeight="300" MinWidth="300" WindowStartupLocation="CenterScreen">
+        Title="DoJudo" Height="400" Width="350" MinHeight="350" MinWidth="300" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:LoginViewModel />
     </Window.DataContext>

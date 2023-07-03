@@ -48,6 +48,17 @@ namespace DoJudo.Models.Repositories
             return await _dbDoJudo.ParticipantCompetitions.ToListAsync();
         }
 
+        public async Task<IEnumerable<ParticipantCompetition>> GetByGroup(Group group)
+        {
+            var list  = await  GetAll();
+            List<ParticipantCompetition> result = new List<ParticipantCompetition>();
+            foreach (var item in list)
+            {
+                if (item.Group == group)
+                    result.Add(item);
+            }
+            return result;
+        }
         public bool Update(ParticipantCompetition entity)
         {
             throw new NotImplementedException();

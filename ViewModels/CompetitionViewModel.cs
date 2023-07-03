@@ -1,4 +1,5 @@
-﻿using DoJudo.Models.Database;
+﻿using DoJudo.Models;
+using DoJudo.Models.Database;
 using DoJudo.Views.Pages;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -31,6 +32,7 @@ namespace DoJudo.ViewModels
             _competition = competititon;
             AddParticipantsCompetitionCommand = new RelayCommand(GoToAddParticipantsCompetitionPage);
             ParticipantsCompetitionCommand = new RelayCommand(GoToParticipantsCompetitionPage);
+            DrawGridCommand = new RelayCommand(DrawGrid);
         }
         private void GoToAddParticipantsCompetitionPage()
         {
@@ -42,8 +44,14 @@ namespace DoJudo.ViewModels
             ParticipantsCompetitionPage participantsCompetitionPage = new ParticipantsCompetitionPage();
             MainWindowViewModel.Instance.CurrentPage = participantsCompetitionPage;
         }
+        private  void DrawGrid()
+        {
+            CompetitionGrid competitionGrid = new CompetitionGrid();
+            competitionGrid.DrawCompetitionGrids();
+        }
         public ICommand AddParticipantsCompetitionCommand { get; private set; }
         public ICommand ParticipantsCompetitionCommand { get; private set; }
+        public ICommand DrawGridCommand { get; private set; }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
         {

@@ -10,6 +10,6 @@ namespace DoJudo.Models.Interfaces
     internal interface IGroupRepository : IBaseRepository<Group>
     {
         bool IsNoDublicateGroup(Group group);
-        int AddWithReturnIdGroup(Group entity);
+        Group SearchGroup(Group entity);
     }
 }

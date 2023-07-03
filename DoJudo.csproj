@@ -189,6 +189,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Models\CompetitionGrid.cs" />
     <Compile Include="Models\CurrentUser.cs" />
     <Compile Include="Models\Database\Address.cs">
       <DependentUpon>DoJudoModel.tt</DependentUpon>
@@ -219,6 +220,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DoJudoModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\Fight.cs">
+      <DependentUpon>DoJudoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\Group.cs">
       <DependentUpon>DoJudoModel.tt</DependentUpon>
@@ -258,8 +262,10 @@
     <Compile Include="Models\Repositories\AddressRepository.cs" />
     <Compile Include="Models\Repositories\AgeCategoryRepository.cs" />
     <Compile Include="Models\Repositories\CompetitionRepository.cs" />
+    <Compile Include="Models\Repositories\FightRepository.cs" />
     <Compile Include="Models\Repositories\GroupRepository.cs" />
     <Compile Include="Models\Repositories\HistoryLoginRepository.cs" />
+    <Compile Include="Models\Interfaces\IFightRepository.cs" />
     <Compile Include="Models\Repositories\ParticipantCompetitionRepository.cs" />
     <Compile Include="Models\Repositories\ParticipantRepository.cs" />
     <Compile Include="Models\Repositories\UserRepository.cs" />

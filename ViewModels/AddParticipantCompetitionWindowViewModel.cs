@@ -59,13 +59,15 @@ namespace DoJudo.ViewModels
             {
                 FillingInGroup();
 
-                _participantCompetition.IdGroup = _groupRepository.AddWithReturnIdGroup(_group);
+                _groupRepository.Add(_group);
+                _participantCompetition.Group = _groupRepository.SearchGroup(_group);
 
                 _participantCompetition.IdParticipant = _participant.Id;
 
                 if(_participantCompetitionRepository.Add(_participantCompetition))
                 {
                     MessageBox.Show("Участник успешно добавлен!", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                    CloseWindow();
                     return;
                 }
                 MessageBox.Show("При добавлении произошла ошибка!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);

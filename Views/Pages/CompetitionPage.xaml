@@ -29,7 +29,7 @@
             </Grid.RowDefinitions>
             <Button Grid.Row="0" Style="{StaticResource MainButton}" Content="Добавить участников" Width="180" Command="{Binding AddParticipantsCompetitionCommand}"/>
             <Button Grid.Row="1" Style="{StaticResource MainButton}" Content="Участники соревнования" Width="180" Command="{Binding ParticipantsCompetitionCommand}"></Button>
-            <Button Grid.Row="2" Style="{StaticResource MainButton}" Content="Провести жеребьевку" Width="180" Command="{Binding DoDrawCommand}"></Button>
+            <Button Grid.Row="2" Style="{StaticResource MainButton}" Content="Провести жеребьевку" Width="180" Command="{Binding DrawGridCommand}"></Button>
             <Button Grid.Row="3" Style="{StaticResource MainButton}" Content="Сетка соревнований" Width="180" Command="{Binding CompetitionGridCommand}"/>
         </Grid>
         <Grid Grid.Row="3" Grid.ColumnSpan="3" Background="{StaticResource PrimaryColor}">

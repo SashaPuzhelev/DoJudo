@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DoJudo.Models.Database;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DoJudo.Models.Interfaces
