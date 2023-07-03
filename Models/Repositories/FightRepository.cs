@@ -47,8 +47,7 @@ namespace DoJudo.Models.Repositories
         {
             throw new NotImplementedException();
         }
-
-        public bool Update(Fight entity)
+                public bool Update(Fight entity)
         {
             throw new NotImplementedException();
         }

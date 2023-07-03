@@ -43,9 +43,15 @@ namespace DoJudo.ViewModels
             _participantRepository = new ParticipantRepository();
             _ = LoadParticipantsAsync();
             SelectedParticipant = new Participant();
+
             DeleteCommand = new RelayCommand(DeleteParticipants, CanDeleteParticipants);
             EditCommand = new RelayCommand(GoToEditParticipants);
             AddCommand = new RelayCommand(GoToAddParticipants);
+            LoadCommand = new RelayCommand(Load);
+        }
+        private void Load()
+        {
+            _ = LoadParticipantsAsync();
         }
         private async Task LoadParticipantsAsync()
         {
@@ -86,7 +92,6 @@ namespace DoJudo.ViewModels
             Participant participant = new Participant();
             AddEditParticipantsPage addEditParticipantsPage = new AddEditParticipantsPage(participant);
             MainWindowViewModel.Instance.CurrentPage = addEditParticipantsPage;
-
         }
         private bool CanDeleteParticipants()
         {
@@ -95,6 +100,7 @@ namespace DoJudo.ViewModels
         public ICommand AddCommand { get; private set;}
         public ICommand EditCommand { get; private set; }
         public ICommand DeleteCommand { get; private set; }
+        public ICommand LoadCommand { get; private set; }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
         {

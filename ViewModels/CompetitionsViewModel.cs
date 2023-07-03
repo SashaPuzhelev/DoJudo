@@ -42,13 +42,19 @@ namespace DoJudo.ViewModels
         public CompetitionsViewModel()
         {
             _competitionRepository = new CompetitionRepository();
-            _competitions = new ObservableCollection<Competition>(
-                    _competitionRepository.GetAllNoAsync());
+            LoadCompetition();
             ChooseCommand = new RelayCommand(GoToCompetition);
             AddCommand = new RelayCommand(GoToAddCompetition);
+            LoadCommand = new RelayCommand(LoadCompetition);
+        }
+        private void LoadCompetition()
+        {
+            _competitions = new ObservableCollection<Competition>(
+                    _competitionRepository.GetAllNoAsync());
         }
         public ICommand AddCommand { get; private set; }
         public ICommand ChooseCommand { get; private set; }
+        public ICommand LoadCommand { get; private set; }
         private void GoToCompetition()
         {
             if (_selectedCompetition.Id != 0)

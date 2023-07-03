@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace DoJudo.Models
 {
-    internal class CompetitionGridsGeneration
+    internal class CompetitionGridsGenerator
     {
         private readonly IParticipantCompetitionRepository _participantCompetitionRepository;
         private readonly IGroupRepository _groupRepository;
         private readonly IFightRepository _fightRepository;
         private readonly Random _random;
-        public CompetitionGridsGeneration()
+        public CompetitionGridsGenerator()
         {
             _random = new Random();
             _fightRepository = new FightRepository();
@@ -53,7 +53,6 @@ namespace DoJudo.Models
         public async void DrawCompetitionGrids(Competition competition)
         {
             var listGroups = await _groupRepository.GetAllByCompetition(competition);
-            
             foreach(var item in listGroups)
             {
                 var listConverter = await _participantCompetitionRepository.GetByGroup(item);

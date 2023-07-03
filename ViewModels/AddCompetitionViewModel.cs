@@ -1,5 +1,6 @@
 ﻿using DoJudo.Models.Database;
 using DoJudo.Models.Interfaces;
+using DoJudo.Models.Repositories;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,7 @@ namespace DoJudo.ViewModels
         public AddCompetitionViewModel()
         {
             Competition = new Competition();
+            _competitionRepository = new CompetitionRepository();
             CancelCommand = new RelayCommand(GoToBack);
             SaveCommand = new RelayCommand(AddCompetition);
         }

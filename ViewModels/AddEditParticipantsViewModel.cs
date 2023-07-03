@@ -125,6 +125,7 @@ namespace DoJudo.ViewModels
                     _addressRepository.Update(_address);
                     MessageBox.Show("Редактирование прошло успешно!","Информация",
                         MessageBoxButton.OKCancel, MessageBoxImage.Information);
+                    GoToLastPage();
                 }
                 MessageBox.Show("Не удалось сохранить изменения!","Ошибка",
                    MessageBoxButton.OK, MessageBoxImage.Error);
@@ -135,7 +136,8 @@ namespace DoJudo.ViewModels
                 if (_participantRepository.Add(_participant))
                 {
                     MessageBox.Show("Добавление прошло успешно!", "Информация",
-                        MessageBoxButton.OKCancel, MessageBoxImage.Information);
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+                    GoToLastPage();
                     return;
                 }
                 MessageBox.Show("Не удалось добавить участника!", "Ошибка",

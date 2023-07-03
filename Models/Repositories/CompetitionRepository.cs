@@ -53,7 +53,6 @@ namespace DoJudo.Models.Repositories
         {
             return _dbDoJudo.Competitions.ToList();
         }
-
         public bool Update(Competition entity)
         {
             throw new NotImplementedException();

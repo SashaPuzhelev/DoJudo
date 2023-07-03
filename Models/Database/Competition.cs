@@ -23,6 +23,7 @@ namespace DoJudo.Models.Database
         public int Id { get; set; }
         public string Name { get; set; }
         public System.DateTime Date { get; set; }
+        public bool IsStarted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Group> Groups { get; set; }
