@@ -6,6 +6,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media;
 
 namespace DoJudo.Models.Repositories
 {
@@ -20,14 +22,27 @@ namespace DoJudo.Models.Repositories
         {
             try
             {
-                _dbDoJudo.Competitions.Add(entity);
-                _dbDoJudo.SaveChanges();
-                return true;
+                if( CheckCompetitionCorrectDate(entity) )
+                {
+                    _dbDoJudo.Competitions.Add(entity);
+                    _dbDoJudo.SaveChanges();
+                    return true;
+                }
+                return false;
             }
             catch (Exception)
             {
                 return false;
             }
+        }
+
+        public bool CheckCompetitionCorrectDate(Competition competition)
+        {
+            if (competition.Date < DateTime.Now)
+            {
+                return false;
+            }
+            return true;
         }
 
         public bool Delete(Competition entity)

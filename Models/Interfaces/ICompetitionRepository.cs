@@ -10,5 +10,6 @@ namespace DoJudo.Models.Interfaces
     internal interface ICompetitionRepository : IBaseRepository<Competition>
     {
         IEnumerable<Competition> GetAllNoAsync();
+        bool CheckCompetitionCorrectDate(Competition competition);
     }
 }

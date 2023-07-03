@@ -38,6 +38,11 @@ namespace DoJudo.ViewModels
         public ICommand CancelCommand { get; private set; }
         private void AddCompetition()
         {
+            if(!_competitionRepository.CheckCompetitionCorrectDate(_competition))
+            {
+                MessageBox.Show("Соревнование не может быть в прошлом!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             if (_competitionRepository.Add(_competition))
             {
                 MessageBox.Show("Соревнование успешно добавлено!", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
