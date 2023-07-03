@@ -99,5 +99,17 @@ namespace DoJudo.Models.Repositories
                 return false;
             }
         }
+        public bool IsParticipantCompetition(Participant participant, Competition competition)
+        {
+            var list = _dbDoJudo.ParticipantCompetitions.ToList();
+            foreach (var item in list)
+            {
+                if (participant.Id == item.IdParticipant && competition == item.Group.Competition)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }

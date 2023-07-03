@@ -64,10 +64,14 @@ namespace DoJudo.ViewModels
         {
             if (_selectedParticipant.Id != 0)
             {
-                AddPartitcipantCompetitionWindow addPartitcipantCompetitionWindow = new AddPartitcipantCompetitionWindow(_selectedParticipant);
-                addPartitcipantCompetitionWindow.Show();
-                return;
-            }
+                if (_participantRepository.IsParticipantCompetition(_selectedParticipant, CompetitionViewModel.Instance.Competition))
+                {
+                    AddPartitcipantCompetitionWindow addPartitcipantCompetitionWindow = new AddPartitcipantCompetitionWindow(_selectedParticipant);
+                    addPartitcipantCompetitionWindow.Show();
+                    return;
+                }
+                MessageBox.Show("Этот спортсмен уже участвует в этих соревнованиях!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;            }
             MessageBox.Show("Вы не выбрали!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         private void GoToAddParticipant()

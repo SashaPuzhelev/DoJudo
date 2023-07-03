@@ -12,6 +12,7 @@ namespace DoJudo.Models.Interfaces
     {
         Task<IEnumerable<ParticipantCompetition>> GetByGroup(Group group);
         Task<IEnumerable<ParticipantCompetition>> GetAllByCompetition(Competition competition);
-        bool IsParticipantCompetition(Participant participant);
+        bool IsNoDublicate(ParticipantCompetition entity);
+        
     }
 }

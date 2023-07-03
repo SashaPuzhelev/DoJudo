@@ -1,4 +1,5 @@
-﻿using DoJudo.Models.Database;
+﻿using DoJudo.Models;
+using DoJudo.Models.Database;
 using DoJudo.Models.Interfaces;
 using DoJudo.Models.Repositories;
 using DoJudo.Views.Pages;
@@ -44,6 +45,7 @@ namespace DoJudo.ViewModels
             _competitions = new ObservableCollection<Competition>(
                     _competitionRepository.GetAllNoAsync());
             ChooseCommand = new RelayCommand(GoToCompetition);
+            AddCommand = new RelayCommand(GoToAddCompetition);
         }
         public ICommand AddCommand { get; private set; }
         public ICommand ChooseCommand { get; private set; }
@@ -57,7 +59,17 @@ namespace DoJudo.ViewModels
             }
             MessageBox.Show("Вы не выбрали соревнование!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
         }
-
+        private void GoToAddCompetition()
+        {
+            if (CurrentUser.GetInstance().IsAdmin)
+            {
+                AddCompetitionPage addCompetitionPage = new AddCompetitionPage();
+                MainWindowViewModel.Instance.CurrentPage = addCompetitionPage;
+                return;
+            }
+            MessageBox.Show("У вас недостаточно прав!", "Ошибка",
+                      MessageBoxButton.OK, MessageBoxImage.Error);
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
         {

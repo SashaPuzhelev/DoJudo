@@ -11,5 +11,6 @@ namespace DoJudo.Models.Interfaces
     {
         Participant GetByPhone(string phone);
         int GetAge(Participant entity);
+        bool IsParticipantCompetition(Participant participant, Competition competition);
     }
 }

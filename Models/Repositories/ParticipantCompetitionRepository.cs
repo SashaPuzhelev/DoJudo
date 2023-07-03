@@ -19,9 +19,13 @@ namespace DoJudo.Models.Repositories
         {
             try
             {
-                _dbDoJudo.ParticipantCompetitions.Add(entity);
-                _dbDoJudo.SaveChanges();
-                return true;
+                if (IsNoDublicate(entity))
+                {
+                    _dbDoJudo.ParticipantCompetitions.Add(entity);
+                    _dbDoJudo.SaveChanges();
+                    return true;
+                }
+                return false;
             }
             catch (Exception)
             {
@@ -73,17 +77,17 @@ namespace DoJudo.Models.Repositories
             return result;
         }
 
-        public bool IsParticipantCompetition(Participant entity)
+        public bool IsNoDublicate(ParticipantCompetition entity)
         {
             var list = _dbDoJudo.ParticipantCompetitions.ToList();
             foreach (var item in list)
             {
-                if (entity.Id == item.IdParticipant)
+                if (entity.IdParticipant == item.IdParticipant && entity.IdGroup == item.IdGroup)
                 {
-                    return true;
+                    return false;
                 }
             }
-            return false;
+            return true;
         }
 
         public bool Update(ParticipantCompetition entity)
