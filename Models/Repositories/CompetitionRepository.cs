@@ -18,7 +18,16 @@ namespace DoJudo.Models.Repositories
         }
         public bool Add(Competition entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _dbDoJudo.Competitions.Add(entity);
+                _dbDoJudo.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public bool Delete(Competition entity)

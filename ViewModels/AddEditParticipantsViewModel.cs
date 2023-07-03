@@ -142,14 +142,14 @@ namespace DoJudo.ViewModels
                    MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
         public void SetGender()
         {
-            if(_isMan)
+            if (_isMan)
                 _participant.Gender = "М";
             if (_isWoman)
                 _participant.Gender = "Ж";
         }
+        public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

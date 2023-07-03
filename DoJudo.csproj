@@ -274,6 +274,7 @@
     <Compile Include="Models\Repositories\ParticipantRepository.cs" />
     <Compile Include="Models\Repositories\UserRepository.cs" />
     <Compile Include="Models\Repositories\WeightCategoryRepository.cs" />
+    <Compile Include="ViewModels\AddCompetitionPageViewModel.cs" />
     <Compile Include="ViewModels\AddEditParticipantsViewModel.cs" />
     <Compile Include="ViewModels\AddParticipantCompetitionWindowViewModel.cs" />
     <Compile Include="ViewModels\AddParticipantsCompetitionPageViewModel.cs" />
