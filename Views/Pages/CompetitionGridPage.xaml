@@ -9,14 +9,14 @@
       Title="CompetitionGridPage">
 
     <Grid Background="{StaticResource VeryLightColor}">
-        <ListBox ItemsSource="{Binding Rounds}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListBox ItemsSource="{Binding ParticipantCompetitions}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <ItemsControl ItemsSource="{Binding Teams}" Margin="0,0,10,0" HorizontalAlignment="Left">
+                        <ItemsControl ItemsSource="{Binding Weight}" Margin="0,0,10,0" HorizontalAlignment="Left">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Name}"/>
+                                    <TextBlock Text="{Binding Weight}"/>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
