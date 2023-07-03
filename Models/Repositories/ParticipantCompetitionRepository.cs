@@ -3,6 +3,7 @@ using DoJudo.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DoJudo.Models.Repositories
@@ -48,6 +49,18 @@ namespace DoJudo.Models.Repositories
             return await _dbDoJudo.ParticipantCompetitions.ToListAsync();
         }
 
+        public async Task<IEnumerable<ParticipantCompetition>> GetAllByCompetition(Competition competition)
+        {
+            var list = await GetAll();
+            List<ParticipantCompetition> result = new List<ParticipantCompetition>();
+            foreach (var item in list)
+            {
+                if (item.Group.Competition == competition)
+                    result.Add(item);
+            }
+            return result;
+        }
+
         public async Task<IEnumerable<ParticipantCompetition>> GetByGroup(Group group)
         {
             var list  = await  GetAll();
@@ -59,6 +72,20 @@ namespace DoJudo.Models.Repositories
             }
             return result;
         }
+
+        public bool IsParticipantCompetition(Participant entity)
+        {
+            var list = _dbDoJudo.ParticipantCompetitions.ToList();
+            foreach (var item in list)
+            {
+                if (entity.Id == item.IdParticipant)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public bool Update(ParticipantCompetition entity)
         {
             throw new NotImplementedException();

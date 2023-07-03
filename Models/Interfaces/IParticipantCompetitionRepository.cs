@@ -11,5 +11,7 @@ namespace DoJudo.Models.Interfaces
     internal interface IParticipantCompetitionRepository : IBaseRepository<ParticipantCompetition>
     {
         Task<IEnumerable<ParticipantCompetition>> GetByGroup(Group group);
+        Task<IEnumerable<ParticipantCompetition>> GetAllByCompetition(Competition competition);
+        bool IsParticipantCompetition(Participant participant);
     }
 }

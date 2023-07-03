@@ -34,7 +34,7 @@ namespace DoJudo.ViewModels
         }
         private async Task LoadParticipantCompetitionsAsync()
         {
-            var participantsCompetitionList = await _participantCompetitionRepository.GetAll();
+            var participantsCompetitionList = await _participantCompetitionRepository.GetAllByCompetition(CompetitionViewModel.Instance.Competition);
             ParticipantsCompetition = new ObservableCollection<ParticipantCompetition>(participantsCompetitionList);
             BackCommand = new RelayCommand(GoToBack);
         }
