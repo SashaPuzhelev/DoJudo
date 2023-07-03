@@ -11,5 +11,6 @@ namespace DoJudo.Models.Interfaces
     {
         bool IsNoDublicateGroup(Group group);
         Group SearchGroup(Group entity);
+        Task<IEnumerable<Group>> GetAllByCompetition(Competition competition);
     }
 }

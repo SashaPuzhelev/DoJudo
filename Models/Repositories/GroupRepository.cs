@@ -2,6 +2,7 @@
 using DoJudo.Models.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -77,6 +78,18 @@ namespace DoJudo.Models.Repositories
                 }
             }
             return null;
+        }
+
+        public async Task<IEnumerable<Group>> GetAllByCompetition(Competition competition)
+        {
+            var list = await GetAll();
+            List<Group> result = new List<Group>();
+            foreach (var item in list)
+            {
+                if (item.Competition == competition)
+                    result.Add(item);
+            }
+            return result;
         }
     }
 }

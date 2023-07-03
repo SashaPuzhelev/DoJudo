@@ -47,7 +47,7 @@ namespace DoJudo.ViewModels
         private  void DrawGrid()
         {
             CompetitionGrid competitionGrid = new CompetitionGrid();
-            competitionGrid.DrawCompetitionGrids();
+            competitionGrid.DrawCompetitionGrids(_competition);
         }
         public ICommand AddParticipantsCompetitionCommand { get; private set; }
         public ICommand ParticipantsCompetitionCommand { get; private set; }

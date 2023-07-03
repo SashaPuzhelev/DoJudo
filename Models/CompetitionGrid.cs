@@ -15,6 +15,7 @@ namespace DoJudo.Models
     internal class CompetitionGrid
     {
         private readonly IParticipantCompetitionRepository _participantCompetitionRepository;
+        private readonly IGroupRepository _groupRepository;
         private readonly IFightRepository _fightRepository;
         private Random _random;
         public CompetitionGrid()
@@ -22,6 +23,7 @@ namespace DoJudo.Models
             _random = new Random();
             _fightRepository = new FightRepository();
             _participantCompetitionRepository = new ParticipantCompetitionRepository();
+            _groupRepository = new GroupRepository();
         }
         private void DrawCompetitionGrid(ObservableCollection<ParticipantCompetition> _participantCompetitions)
         {
@@ -30,23 +32,27 @@ namespace DoJudo.Models
                 int index1 = _random.Next(_participantCompetitions.Count);
                 ParticipantCompetition participant0 = _participantCompetitions[index1];
                 _participantCompetitions.RemoveAt(index1);
+
                 int index2 = _random.Next(_participantCompetitions.Count);
                 ParticipantCompetition participant1 = _participantCompetitions[index2];
                 _participantCompetitions.RemoveAt(index2);
+
                 Fight fight = new Fight();
                 fight.ParticipantCompetition = participant0;
                 fight.ParticipantCompetition1 = participant1;
                 _fightRepository.Add(fight);
             }
         }
-        public async void DrawCompetitionGrids()
+        public async void DrawCompetitionGrids(Competition competition)
         {
-            foreach(var item in DbDoJudo.GetInstance().Groups)
+            var listGroups = await _groupRepository.GetAllByCompetition(competition);
+            
+            foreach(var item in listGroups)
             {
                 var listConverter = await _participantCompetitionRepository.GetByGroup(item);
                 if (listConverter == null)
                     return;
-                var listParticipantCompetition = new ObservableCollection<ParticipantCompetition>((IEnumerable<ParticipantCompetition>)listConverter);
+                var listParticipantCompetition = new ObservableCollection<ParticipantCompetition>(listConverter);
                 DrawCompetitionGrid(listParticipantCompetition);
             }
         }
