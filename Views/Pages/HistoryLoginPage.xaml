@@ -10,7 +10,7 @@
       Title="HistoryLoginPage">
 
     <Page.DataContext>
-        <vm:HistoryLoginPageViewModel />
+        <vm:HistoryLoginViewModel />
     </Page.DataContext>
     <Grid Background="{StaticResource VeryLightColor}">
         <Grid.RowDefinitions>

@@ -274,16 +274,16 @@
     <Compile Include="Models\Repositories\ParticipantRepository.cs" />
     <Compile Include="Models\Repositories\UserRepository.cs" />
     <Compile Include="Models\Repositories\WeightCategoryRepository.cs" />
-    <Compile Include="ViewModels\AddCompetitionPageViewModel.cs" />
+    <Compile Include="ViewModels\AddCompetitionViewModel.cs" />
     <Compile Include="ViewModels\AddEditParticipantsViewModel.cs" />
-    <Compile Include="ViewModels\AddParticipantCompetitionWindowViewModel.cs" />
-    <Compile Include="ViewModels\AddParticipantsCompetitionPageViewModel.cs" />
+    <Compile Include="ViewModels\AddParticipantCompetitionViewModel.cs" />
+    <Compile Include="ViewModels\AddParticipantsCompetitionViewModel.cs" />
     <Compile Include="ViewModels\CompetitionsViewModel.cs" />
     <Compile Include="ViewModels\CompetitionViewModel.cs" />
-    <Compile Include="ViewModels\HistoryLoginPageViewModel.cs" />
+    <Compile Include="ViewModels\HistoryLoginViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\ParticipantsCompetitionPageViewModel.cs" />
+    <Compile Include="ViewModels\ParticipantsCompetitionViewModel.cs" />
     <Compile Include="ViewModels\ParticipantsViewModel.cs" />
     <Compile Include="Views\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

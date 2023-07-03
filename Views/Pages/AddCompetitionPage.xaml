@@ -10,7 +10,7 @@
       Title="AddCompetitionPage">
 
     <Page.DataContext>
-        <vm:AddCompetitionPageViewModel></vm:AddCompetitionPageViewModel>
+        <vm:AddCompetitionViewModel></vm:AddCompetitionViewModel>
     </Page.DataContext>
     <Grid Background="{StaticResource VeryLightColor}">
         <Grid.RowDefinitions>

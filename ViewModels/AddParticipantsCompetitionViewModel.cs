@@ -17,7 +17,7 @@ using System.Windows.Input;
 
 namespace DoJudo.ViewModels
 {
-    internal class AddParticipantsCompetitionPageViewModel : INotifyPropertyChanged
+    internal class AddParticipantsCompetitionViewModel : INotifyPropertyChanged
     {
         private readonly IParticipantRepository _participantRepository;
         private ObservableCollection<Participant> _participants;
@@ -43,7 +43,7 @@ namespace DoJudo.ViewModels
                 }
             }
         }
-        public AddParticipantsCompetitionPageViewModel()
+        public AddParticipantsCompetitionViewModel()
         {
             _participantRepository = new ParticipantRepository();
             _ = LoadParticipantsAsync();

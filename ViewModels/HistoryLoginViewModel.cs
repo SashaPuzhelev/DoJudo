@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DoJudo.ViewModels
 {
-    internal class HistoryLoginPageViewModel : INotifyPropertyChanged
+    internal class HistoryLoginViewModel : INotifyPropertyChanged
     {
         private readonly IHistoryLoginRepository _historyLoginRepository;
         private ObservableCollection<HistoryLogin> _historyLogins;
@@ -21,7 +21,7 @@ namespace DoJudo.ViewModels
                 OnPropertyChanged(nameof(HistoryLogins));
             }
         }
-        public HistoryLoginPageViewModel()
+        public HistoryLoginViewModel()
         {
             _historyLoginRepository = new HistoryLoginRepository();
             _ = LoadHistoryLoginsAsync();

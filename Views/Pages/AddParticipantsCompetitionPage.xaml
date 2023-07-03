@@ -9,7 +9,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddParticipantsCompetitionPage">
     <Page.DataContext>
-        <vm:AddParticipantsCompetitionPageViewModel />
+        <vm:AddParticipantsCompetitionViewModel />
     </Page.DataContext>
     <Grid Background="{StaticResource VeryLightColor}">
         <Grid.RowDefinitions>

@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace DoJudo.ViewModels
 {
-    internal class AddCompetitionPageViewModel : INotifyPropertyChanged
+    internal class AddCompetitionViewModel : INotifyPropertyChanged
     {
         private readonly ICompetitionRepository _competitionRepository;
         private Competition _competition;
@@ -25,7 +25,7 @@ namespace DoJudo.ViewModels
                 OnPropertyChanged(nameof(Competition));
             }
         }
-        public AddCompetitionPageViewModel()
+        public AddCompetitionViewModel()
         {
             Competition = new Competition();
             CancelCommand = new RelayCommand(GoToBack);

@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace DoJudo.ViewModels
 {
-    internal class AddParticipantCompetitionWindowViewModel : INotifyPropertyChanged
+    internal class AddParticipantCompetitionViewModel : INotifyPropertyChanged
     {
         private readonly IParticipantCompetitionRepository _participantCompetitionRepository;
         private readonly IGroupRepository _groupRepository;
@@ -39,7 +39,7 @@ namespace DoJudo.ViewModels
                 OnPropertyChanged(nameof(ParticipantCompetition));
             }
         }
-        public AddParticipantCompetitionWindowViewModel(Participant participant)
+        public AddParticipantCompetitionViewModel(Participant participant)
         {
             _participant = participant;
             _participantCompetitionRepository = new ParticipantCompetitionRepository();
