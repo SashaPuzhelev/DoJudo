@@ -1,5 +1,4 @@
-﻿using DoJudo.Models;
-using DoJudo.ViewModels;
+﻿using DoJudo.ViewModels;
 using System;
 using System.Windows;
 

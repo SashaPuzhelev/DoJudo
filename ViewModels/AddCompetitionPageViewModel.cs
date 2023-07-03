@@ -29,10 +29,10 @@ namespace DoJudo.ViewModels
         {
             Competition = new Competition();
             CancelCommand = new RelayCommand(GoToBack);
-            AddCommand = new RelayCommand(AddCompetition);
+            SaveCommand = new RelayCommand(AddCompetition);
         }
 
-        public ICommand AddCommand { get; private set; }
+        public ICommand SaveCommand { get; private set; }
         public ICommand CancelCommand { get; private set; }
         private void AddCompetition()
         {

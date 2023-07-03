@@ -63,7 +63,7 @@ namespace DoJudo.ViewModels
         {
             if (CurrentUser.GetInstance().IsAdmin)
             {
-                AddCompetitionPageViewModel addCompetitionPage = new AddCompetitionPageViewModel();
+                AddCompetitionPage addCompetitionPage = new AddCompetitionPage();
                 MainWindowViewModel.Instance.CurrentPage = addCompetitionPage;
                 return;
             }

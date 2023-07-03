@@ -49,9 +49,12 @@ namespace DoJudo.Models
         }
         public static void EndHistoryLogin()
         {
-            GetInstance().HistoryLogin.DateTimeExit = DateTime.Now;
-            IHistoryLoginRepository historyLoginRepository = new  HistoryLoginRepository();
-            historyLoginRepository.Add(GetInstance().HistoryLogin);
+            if (instance != null)
+            {
+                GetInstance().HistoryLogin.DateTimeExit = DateTime.Now;
+                IHistoryLoginRepository historyLoginRepository = new HistoryLoginRepository();
+                historyLoginRepository.Add(GetInstance().HistoryLogin);
+            }
         }
             
        

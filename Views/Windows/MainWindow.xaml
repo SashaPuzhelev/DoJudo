@@ -6,17 +6,27 @@
         xmlns:vm="clr-namespace:DoJudo.ViewModels"
         xmlns:local="clr-namespace:DoJudo"
         mc:Ignorable="d"
-        Title="DoJudo" Height="700" Width="900" WindowStartupLocation="CenterScreen" MinHeight="500" MinWidth="700">
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Title="DoJudo" Height="600" Width="900" WindowStartupLocation="CenterScreen" MinHeight="500" MinWidth="700">
     <Window.DataContext>
         <vm:MainWindowViewModel />
     </Window.DataContext>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding ClosedWindowCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid Background="{StaticResource VeryLightColor}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="89*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"></RowDefinition>
             <RowDefinition  Height="30"></RowDefinition>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="{StaticResource PrimaryColor}">
+        <Grid Grid.Row="0" Background="{StaticResource PrimaryColor}" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -28,7 +38,7 @@
             <TextBlock Style="{StaticResource MainTextBlock}" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2"  Text="{Binding FullNameWithRoleName}" Grid.ColumnSpan="2"></TextBlock>
             <Button Grid.Column="3" Style="{StaticResource MainButton}" Content="Выход" Command="{Binding ExitCommand}" HorizontalAlignment="Right"></Button>
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -40,6 +50,6 @@
             <Button Grid.Column="2" Style="{StaticResource BaseButton}" Content="Пользователи" Command="{Binding AdminNavigateCommand}" CommandParameter="UsersPage" IsEnabled="False"></Button>
             <Button Grid.Column="3" Style="{StaticResource BaseButton}" Content="История посещения пользователей" Command="{Binding AdminNavigateCommand}" CommandParameter="HistoryLoginPage"></Button>
         </Grid>
-        <Frame Grid.Row="2" NavigationUIVisibility="Hidden" Content="{Binding CurrentPage}"></Frame>
+        <Frame Grid.Row="2" NavigationUIVisibility="Hidden" Content="{Binding CurrentPage}" Grid.ColumnSpan="2"></Frame>
     </Grid>
 </Window>

@@ -31,13 +31,15 @@ namespace DoJudo.ViewModels
         public ICommand NavigateCommand { get; private set; }
         public ICommand AdminNavigateCommand { get; private set; }
         public ICommand ExitCommand { get; private set; }
+        public ICommand ClosedWindowCommand { get; private set; }
         public MainWindowViewModel()
         {
             Instance = this;
             _currentUser = CurrentUser.GetInstance();
             NavigateCommand = new RelayCommand<string>(GoToThisPage);
-            ExitCommand = new RelayCommand(ExitCurrentUser);
+            ExitCommand = new RelayCommand(ExitAndCloseWindow);
             AdminNavigateCommand = new RelayCommand<string>(GoToAdminPage);
+            ClosedWindowCommand = new RelayCommand(ClosingWindow);
         }
         private void GoToThisPage(string pageName)
         {
@@ -53,14 +55,31 @@ namespace DoJudo.ViewModels
             MessageBox.Show("У вас недостаточно прав!", "Ошибка",
                       MessageBoxButton.OK, MessageBoxImage.Error);
         }
+        private void ClosingWindow()
+        {
+            if (CurrentUser.GetInstance() != null)
+            {
+                ExitCurrentUser();
+                OpenLoginWindow();
+            }
+        }
+        private void ExitAndCloseWindow()
+        {
+            ExitCurrentUser();
+            OpenLoginWindow();
+            CloseWindow();
+        }
         private void ExitCurrentUser()
         {
             CurrentUser.EndHistoryLogin();
             CurrentUser.SetNullInstance();
+        }
+        private void OpenLoginWindow()
+        {
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();
-            CloseWindow();
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
         {
