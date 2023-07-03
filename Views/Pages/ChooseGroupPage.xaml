@@ -39,8 +39,8 @@
                 <DataGridTextColumn Header="Возрастная категория">
                     <DataGridTextColumn.Binding>
                         <MultiBinding StringFormat="{}{0} - {1}">
-                            <Binding Path=" AgeCategory.StartAge"/>
-                            <Binding Path=" AgetCategory.EndAge"/>
+                            <Binding Path="AgeCategory.StartAge"/>
+                            <Binding Path="AgeCategory.EndAge"/>
                         </MultiBinding>
                     </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
