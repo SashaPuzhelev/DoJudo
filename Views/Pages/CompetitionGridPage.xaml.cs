@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DoJudo.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,10 @@ namespace DoJudo.Views.Pages
     /// </summary>
     public partial class CompetitionGridPage : Page
     {
-        public CompetitionGridPage()
+        public CompetitionGridPage(Models.Database.Group group)
         {
             InitializeComponent();
+            DataContext = new CompetitionGridViewModel(group);
         }
     }
 }

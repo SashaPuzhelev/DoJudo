@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using DoJudo.Models.Database;
 using System.Windows.Input;
+using DoJudo.Views.Pages;
+using GalaSoft.MvvmLight.Command;
 
 namespace DoJudo.ViewModels
 {
@@ -42,6 +44,7 @@ namespace DoJudo.ViewModels
             _groupRepository = new GroupRepository();
             SelectedGroup = new Models.Database.Group();
             _ = LoadGroupsAsync();
+            ChooseCommand = new RelayCommand(GoToCompetitionGrid);
         }
         private async Task LoadGroupsAsync()
         {
@@ -51,7 +54,8 @@ namespace DoJudo.ViewModels
         public ICommand ChooseCommand { get; private set; }
         private void  GoToCompetitionGrid()
         {
-
+            CompetitionGridPage page = new CompetitionGridPage(_selectedGroup);
+            MainWindowViewModel.Instance.CurrentPage = page;
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)

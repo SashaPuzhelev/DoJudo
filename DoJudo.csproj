@@ -287,6 +287,7 @@
     <Compile Include="ViewModels\AddParticipantCompetitionViewModel.cs" />
     <Compile Include="ViewModels\AddParticipantsCompetitionViewModel.cs" />
     <Compile Include="ViewModels\ChooseGroupViewModel.cs" />
+    <Compile Include="ViewModels\CompetitionGridViewModel.cs" />
     <Compile Include="ViewModels\CompetitionsViewModel.cs" />
     <Compile Include="ViewModels\CompetitionViewModel.cs" />
     <Compile Include="ViewModels\HistoryLoginViewModel.cs" />

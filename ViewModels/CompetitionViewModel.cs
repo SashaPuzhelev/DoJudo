@@ -61,14 +61,14 @@ namespace DoJudo.ViewModels
             if (messageBoxResult == MessageBoxResult.OK)
             {
                 _competitionGridsGenerator.DrawCompetitionGrids(_competition);
-                _competition.IsStarted = true;
+                _competition.IsNoStarted = false;
                 _competitionRepository.Update(_competition);
                 MessageBox.Show("Жеребьевка успешно проведена!", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
         private void GoToChooseGroup()
         {
-            if (!_competition.IsStarted)
+            if (_competition.IsNoStarted)
             {
                 MessageBox.Show("Вы еще не провели жеребьевку!", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
