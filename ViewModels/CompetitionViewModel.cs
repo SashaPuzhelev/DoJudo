@@ -17,6 +17,18 @@ namespace DoJudo.ViewModels
     {
         public static CompetitionViewModel Instance { get; private set; }
         private Competition _competition;
+        private bool isDoDrawGrids = false;
+        public bool IsDoDrawGrids
+        {
+            get { return isDoDrawGrids; }
+            private set
+            { 
+                isDoDrawGrids = value;
+                OnPropertyChanged(nameof(IsDoDrawGrids));
+            }
+        }
+
+
         public Competition Competition
         { 
             get { return _competition; } 
@@ -33,10 +45,15 @@ namespace DoJudo.ViewModels
             _competition = competititon;
             AddParticipantsCompetitionCommand = new RelayCommand(GoToAddParticipantsCompetitionPage);
             ParticipantsCompetitionCommand = new RelayCommand(GoToParticipantsCompetitionPage);
-            DrawGridCommand = new RelayCommand(DrawGrid);
+            DrawGridsCommand = new RelayCommand(DrawGrids);
         }
         private void GoToAddParticipantsCompetitionPage()
         {
+            if (IsDoDrawGrids)
+            {
+                MessageBox.Show("Вы уже провели жеребьевку и не можете добавлять учатсников!s", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
             AddParticipantsCompetitionPage addParticipantsCompetitionPage = new AddParticipantsCompetitionPage();
             MainWindowViewModel.Instance.CurrentPage = addParticipantsCompetitionPage;
         }
@@ -45,13 +62,19 @@ namespace DoJudo.ViewModels
             ParticipantsCompetitionPage participantsCompetitionPage = new ParticipantsCompetitionPage();
             MainWindowViewModel.Instance.CurrentPage = participantsCompetitionPage;
         }
-        private  void DrawGrid()
+        private  void DrawGrids()
         {
+            if(IsDoDrawGrids)
+            {
+                MessageBox.Show("Жеребьевка уже была успешно проведена!", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
             MessageBoxResult messageBoxResult =
                MessageBox.Show("Вы точно хотите провести жеребьевку? Добавление участников будет невозможным!", "Информация",
                    MessageBoxButton.OKCancel, MessageBoxImage.Information);
             if (messageBoxResult == MessageBoxResult.OK)
             {
+                IsDoDrawGrids = true;
                 CompetitionGridsGeneration competitionGrid = new CompetitionGridsGeneration();
                 competitionGrid.DrawCompetitionGrids(_competition);
                 MessageBox.Show("Жеребьевка успешно проведена!", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -59,7 +82,8 @@ namespace DoJudo.ViewModels
         }
         public ICommand AddParticipantsCompetitionCommand { get; private set; }
         public ICommand ParticipantsCompetitionCommand { get; private set; }
-        public ICommand DrawGridCommand { get; private set; }
+        public ICommand DrawGridsCommand { get; private set; }
+        public ICommand CompetitionGridsCommand { get; private set; }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
         {
