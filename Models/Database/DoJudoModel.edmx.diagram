@@ -4,34 +4,35 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="01bc89861e8245c8b9bd76c5bd83a4d0" Name="Diagram1" ZoomLevel="62">
-        <EntityTypeShape EntityType="DoJudoModel.Address" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoJudoModel.AgeCategory" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoJudoModel.City" Width="1.5" PointX="1.5" PointY="15.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoJudoModel.Club" Width="1.5" PointX="0.75" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoJudoModel.Competition" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoJudoModel.Group" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoJudoModel.Participant" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoJudoModel.ParticipantCompetition" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoJudoModel.Role" Width="1.5" PointX="2.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoJudoModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoJudoModel.User" Width="1.5" PointX="5" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoJudoModel.WeightCategory" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+      <Diagram DiagramId="1008d1de1c764fbfb082c8d4ba6aec15" Name="Diagram1" ZoomLevel="49">
+        <EntityTypeShape EntityType="DoJudoModel.Address" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoJudoModel.AgeCategory" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoJudoModel.City" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoJudoModel.Club" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoJudoModel.Competition" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoJudoModel.Fight" Width="1.5" PointX="9.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoJudoModel.Group" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoJudoModel.HistoryLogin" Width="1.5" PointX="10.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoJudoModel.Participant" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoJudoModel.ParticipantCompetition" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoJudoModel.Role" Width="1.5" PointX="5.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoJudoModel.sysdiagram" Width="1.5" PointX="7.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoJudoModel.User" Width="1.5" PointX="8" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoJudoModel.WeightCategory" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
         <AssociationConnector Association="DoJudoModel.for_key_idaddress_Participant" ManuallyRouted="false" />
         <AssociationConnector Association="DoJudoModel.for_key_idCity_Address" ManuallyRouted="false" />
         <AssociationConnector Association="DoJudoModel.for_key_idagecategory_group" ManuallyRouted="false" />
         <AssociationConnector Association="DoJudoModel.for_key_idClub_Pirticipant" ManuallyRouted="false" />
         <AssociationConnector Association="DoJudoModel.for_key_idcompetition_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="DoJudoModel.for_key_idFirstParticipantCompetition" ManuallyRouted="false" />
+        <AssociationConnector Association="DoJudoModel.for_key_idSecondParticipantCompetition" ManuallyRouted="false" />
+        <AssociationConnector Association="DoJudoModel.for_key_IdWinner" ManuallyRouted="false" />
         <AssociationConnector Association="DoJudoModel.for_key_idgroup_GroupParticipant" ManuallyRouted="false" />
         <AssociationConnector Association="DoJudoModel.for_key_idWeightcategory_group" ManuallyRouted="false" />
+        <AssociationConnector Association="DoJudoModel.for_key_idUser_HisotryLogin" ManuallyRouted="false" />
         <AssociationConnector Association="DoJudoModel.for_key_idParticipant_GroupParticipant" ManuallyRouted="false" />
         <AssociationConnector Association="DoJudoModel.for_key_idRole_User" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="DoJudoModel.HistoryLogin" Width="1.5" PointX="7.25" PointY="5.375" />
-        <AssociationConnector Association="DoJudoModel.for_key_idUser_HisotryLogin" />
-        <EntityTypeShape EntityType="DoJudoModel.Fight" Width="1.5" PointX="7.5" PointY="8.5" />
-        <AssociationConnector Association="DoJudoModel.for_key_idFirstParticipantCompetition" />
-        <AssociationConnector Association="DoJudoModel.for_key_idSecondParticipantCompetition" />
-        </Diagram>
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

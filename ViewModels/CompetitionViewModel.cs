@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace DoJudo.ViewModels
@@ -46,8 +47,15 @@ namespace DoJudo.ViewModels
         }
         private  void DrawGrid()
         {
-            CompetitionGrid competitionGrid = new CompetitionGrid();
-            competitionGrid.DrawCompetitionGrids(_competition);
+            MessageBoxResult messageBoxResult =
+               MessageBox.Show("Вы точно хотите провести жеребьевку? Добавление участников будет невозможным!", "Информация",
+                   MessageBoxButton.OKCancel, MessageBoxImage.Information);
+            if (messageBoxResult == MessageBoxResult.OK)
+            {
+                CompetitionGridsGeneration competitionGrid = new CompetitionGridsGeneration();
+                competitionGrid.DrawCompetitionGrids(_competition);
+                MessageBox.Show("Жеребьевка успешно проведена!", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
         public ICommand AddParticipantsCompetitionCommand { get; private set; }
         public ICommand ParticipantsCompetitionCommand { get; private set; }

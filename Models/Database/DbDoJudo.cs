@@ -20,8 +20,8 @@ namespace DoJudo.Models.Database
         {
             try
             {
-                instance.Database.Connection.Open();
-                instance.Database.Connection.Close();
+                GetInstance().Database.Connection.Open();
+                GetInstance().Database.Connection.Close();
                 return true;
             }
             catch (Exception)

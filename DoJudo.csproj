@@ -193,7 +193,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Models\CompetitionGrid.cs" />
+    <Compile Include="Models\CompetitionGridsGeneration.cs" />
     <Compile Include="Models\CurrentUser.cs" />
     <Compile Include="Models\Database\Address.cs">
       <DependentUpon>DoJudoModel.tt</DependentUpon>

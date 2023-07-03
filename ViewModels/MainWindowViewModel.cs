@@ -60,7 +60,6 @@ namespace DoJudo.ViewModels
             if (CurrentUser.GetInstance() != null)
             {
                 ExitCurrentUser();
-                OpenLoginWindow();
             }
         }
         private void ExitAndCloseWindow()

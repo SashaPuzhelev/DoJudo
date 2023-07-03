@@ -19,6 +19,7 @@ namespace DoJudo.Models.Database
         {
             this.Fights = new HashSet<Fight>();
             this.Fights1 = new HashSet<Fight>();
+            this.Fights2 = new HashSet<Fight>();
         }
     
         public int Id { get; set; }
@@ -26,11 +27,13 @@ namespace DoJudo.Models.Database
         public int IdParticipant { get; set; }
         public double Weight { get; set; }
     
-        public virtual Group Group { get; set; }
-        public virtual Participant Participant { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Fight> Fights { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Fight> Fights1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Fight> Fights2 { get; set; }
+        public virtual Group Group { get; set; }
+        public virtual Participant Participant { get; set; }
     }
 }

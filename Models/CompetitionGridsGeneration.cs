@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace DoJudo.Models
 {
-    internal class CompetitionGrid
+    internal class CompetitionGridsGeneration
     {
         private readonly IParticipantCompetitionRepository _participantCompetitionRepository;
         private readonly IGroupRepository _groupRepository;
         private readonly IFightRepository _fightRepository;
-        private Random _random;
-        public CompetitionGrid()
+        private readonly Random _random;
+        public CompetitionGridsGeneration()
         {
             _random = new Random();
             _fightRepository = new FightRepository();
@@ -40,6 +40,13 @@ namespace DoJudo.Models
                 Fight fight = new Fight();
                 fight.ParticipantCompetition = participant0;
                 fight.ParticipantCompetition1 = participant1;
+                _fightRepository.Add(fight);
+            }
+            if (_participantCompetitions.Count == 1)
+            {
+                Fight fight = new Fight();
+                fight.ParticipantCompetition = _participantCompetitions[0];
+                fight.IdWinner = _participantCompetitions[0].Id;
                 _fightRepository.Add(fight);
             }
         }

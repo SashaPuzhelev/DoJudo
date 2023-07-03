@@ -30,14 +30,14 @@ namespace DoJudo.Models.Database
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Club> Clubs { get; set; }
         public virtual DbSet<Competition> Competitions { get; set; }
+        public virtual DbSet<Fight> Fights { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
+        public virtual DbSet<HistoryLogin> HistoryLogins { get; set; }
         public virtual DbSet<Participant> Participants { get; set; }
         public virtual DbSet<ParticipantCompetition> ParticipantCompetitions { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<WeightCategory> WeightCategories { get; set; }
-        public virtual DbSet<HistoryLogin> HistoryLogins { get; set; }
-        public virtual DbSet<Fight> Fights { get; set; }
     }
 }

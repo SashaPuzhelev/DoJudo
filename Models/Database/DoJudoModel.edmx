@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DoJudoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DoJudoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="Id" />
@@ -49,9 +49,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idZeroParticipantCompetition" Type="int" Nullable="false" />
-          <Property Name="idOneParticipantCompetition" Type="int" Nullable="false" />
-          <Property Name="Result" Type="bit" />
+          <Property Name="IdFirstParticipantCompetition" Type="int" />
+          <Property Name="IdSecondParticipantCompetition" Type="int" />
+          <Property Name="IdWinner" Type="int" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -194,14 +194,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="for_key_idFirstParticipantCompetition">
-          <End Role="ParticipantCompetition" Type="Self.ParticipantCompetition" Multiplicity="1" />
+          <End Role="ParticipantCompetition" Type="Self.ParticipantCompetition" Multiplicity="0..1" />
           <End Role="Fight" Type="Self.Fight" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ParticipantCompetition">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Fight">
-              <PropertyRef Name="idZeroParticipantCompetition" />
+              <PropertyRef Name="IdFirstParticipantCompetition" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -242,14 +242,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="for_key_idSecondParticipantCompetition">
-          <End Role="ParticipantCompetition" Type="Self.ParticipantCompetition" Multiplicity="1" />
+          <End Role="ParticipantCompetition" Type="Self.ParticipantCompetition" Multiplicity="0..1" />
           <End Role="Fight" Type="Self.Fight" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ParticipantCompetition">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Fight">
-              <PropertyRef Name="idOneParticipantCompetition" />
+              <PropertyRef Name="IdSecondParticipantCompetition" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -276,6 +276,18 @@
             </Principal>
             <Dependent Role="Group">
               <PropertyRef Name="IdWeightCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="for_key_IdWinner">
+          <End Role="ParticipantCompetition" Type="Self.ParticipantCompetition" Multiplicity="0..1" />
+          <End Role="Fight" Type="Self.Fight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParticipantCompetition">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Fight">
+              <PropertyRef Name="IdWinner" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -342,8 +354,13 @@
             <End Role="WeightCategory" EntitySet="WeightCategory" />
             <End Role="Group" EntitySet="Group" />
           </AssociationSet>
+          <AssociationSet Name="for_key_IdWinner" Association="Self.for_key_IdWinner">
+            <End Role="ParticipantCompetition" EntitySet="ParticipantCompetition" />
+            <End Role="Fight" EntitySet="Fight" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DoJudoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -392,6 +409,18 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Groups" Relationship="Self.for_key_idcompetition_Group" FromRole="Competition" ToRole="Group" />
         </EntityType>
+        <EntityType Name="Fight">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFirstParticipantCompetition" Type="Int32" />
+          <Property Name="IdSecondParticipantCompetition" Type="Int32" />
+          <Property Name="IdWinner" Type="Int32" />
+          <NavigationProperty Name="ParticipantCompetition" Relationship="Self.for_key_idFirstParticipantCompetition" FromRole="Fight" ToRole="ParticipantCompetition" />
+          <NavigationProperty Name="ParticipantCompetition1" Relationship="Self.for_key_idSecondParticipantCompetition" FromRole="Fight" ToRole="ParticipantCompetition" />
+          <NavigationProperty Name="ParticipantCompetition2" Relationship="Self.for_key_IdWinner" FromRole="Fight" ToRole="ParticipantCompetition" />
+        </EntityType>
         <EntityType Name="Group">
           <Key>
             <PropertyRef Name="Id" />
@@ -405,6 +434,16 @@
           <NavigationProperty Name="Competition" Relationship="Self.for_key_idcompetition_Group" FromRole="Group" ToRole="Competition" />
           <NavigationProperty Name="ParticipantCompetitions" Relationship="Self.for_key_idgroup_GroupParticipant" FromRole="Group" ToRole="ParticipantCompetition" />
           <NavigationProperty Name="WeightCategory" Relationship="Self.for_key_idWeightcategory_group" FromRole="Group" ToRole="WeightCategory" />
+        </EntityType>
+        <EntityType Name="HistoryLogin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="DateTimeLogin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateTimeExit" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="User" Relationship="Self.for_key_idUser_HisotryLogin" FromRole="HistoryLogin" ToRole="User" />
         </EntityType>
         <EntityType Name="Participant">
           <Key>
@@ -426,14 +465,15 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdGroup" Type="Int32" Nullable="false" />
           <Property Name="IdParticipant" Type="Int32" Nullable="false" />
           <Property Name="Weight" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Fights" Relationship="Self.for_key_idFirstParticipantCompetition" FromRole="ParticipantCompetition" ToRole="Fight" />
+          <NavigationProperty Name="Fights1" Relationship="Self.for_key_idSecondParticipantCompetition" FromRole="ParticipantCompetition" ToRole="Fight" />
+          <NavigationProperty Name="Fights2" Relationship="Self.for_key_IdWinner" FromRole="ParticipantCompetition" ToRole="Fight" />
           <NavigationProperty Name="Group" Relationship="Self.for_key_idgroup_GroupParticipant" FromRole="ParticipantCompetition" ToRole="Group" />
           <NavigationProperty Name="Participant" Relationship="Self.for_key_idParticipant_GroupParticipant" FromRole="ParticipantCompetition" ToRole="Participant" />
-          <NavigationProperty Name="Fights" Relationship="DoJudoModel.for_key_idFirstParticipantCompetition" FromRole="ParticipantCompetition" ToRole="Fight" />
-          <NavigationProperty Name="Fights1" Relationship="DoJudoModel.for_key_idSecondParticipantCompetition" FromRole="ParticipantCompetition" ToRole="Fight" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -464,8 +504,8 @@
           <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IdRole" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="HistoryLogins" Relationship="Self.for_key_idUser_HisotryLogin" FromRole="User" ToRole="HistoryLogin" />
           <NavigationProperty Name="Role" Relationship="Self.for_key_idRole_User" FromRole="User" ToRole="Role" />
-          <NavigationProperty Name="HistoryLogins" Relationship="DoJudoModel.for_key_idUser_HisotryLogin" FromRole="User" ToRole="HistoryLogin" />
         </EntityType>
         <EntityType Name="WeightCategory">
           <Key>
@@ -538,6 +578,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="for_key_idFirstParticipantCompetition">
+          <End Role="ParticipantCompetition" Type="Self.ParticipantCompetition" Multiplicity="0..1" />
+          <End Role="Fight" Type="Self.Fight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParticipantCompetition">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Fight">
+              <PropertyRef Name="IdFirstParticipantCompetition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="for_key_idSecondParticipantCompetition">
+          <End Role="ParticipantCompetition" Type="Self.ParticipantCompetition" Multiplicity="0..1" />
+          <End Role="Fight" Type="Self.Fight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParticipantCompetition">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Fight">
+              <PropertyRef Name="IdSecondParticipantCompetition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="for_key_IdWinner">
+          <End Role="ParticipantCompetition" Type="Self.ParticipantCompetition" Multiplicity="0..1" />
+          <End Role="Fight" Type="Self.Fight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParticipantCompetition">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Fight">
+              <PropertyRef Name="IdWinner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="for_key_idgroup_GroupParticipant">
           <End Role="Group" Type="Self.Group" Multiplicity="1" />
           <End Role="ParticipantCompetition" Type="Self.ParticipantCompetition" Multiplicity="*" />
@@ -559,6 +635,20 @@
             </Principal>
             <Dependent Role="Group">
               <PropertyRef Name="IdWeightCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="for_key_idUser_HisotryLogin">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HistoryLogin" Type="Self.HistoryLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HistoryLogin">
+              <PropertyRef Name="IdUser" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -592,7 +682,9 @@
           <EntitySet Name="Cities" EntityType="Self.City" />
           <EntitySet Name="Clubs" EntityType="Self.Club" />
           <EntitySet Name="Competitions" EntityType="Self.Competition" />
+          <EntitySet Name="Fights" EntityType="Self.Fight" />
           <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="HistoryLogins" EntityType="Self.HistoryLogin" />
           <EntitySet Name="Participants" EntityType="Self.Participant" />
           <EntitySet Name="ParticipantCompetitions" EntityType="Self.ParticipantCompetition" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
@@ -619,6 +711,18 @@
             <End Role="Competition" EntitySet="Competitions" />
             <End Role="Group" EntitySet="Groups" />
           </AssociationSet>
+          <AssociationSet Name="for_key_idFirstParticipantCompetition" Association="Self.for_key_idFirstParticipantCompetition">
+            <End Role="ParticipantCompetition" EntitySet="ParticipantCompetitions" />
+            <End Role="Fight" EntitySet="Fights" />
+          </AssociationSet>
+          <AssociationSet Name="for_key_idSecondParticipantCompetition" Association="Self.for_key_idSecondParticipantCompetition">
+            <End Role="ParticipantCompetition" EntitySet="ParticipantCompetitions" />
+            <End Role="Fight" EntitySet="Fights" />
+          </AssociationSet>
+          <AssociationSet Name="for_key_IdWinner" Association="Self.for_key_IdWinner">
+            <End Role="ParticipantCompetition" EntitySet="ParticipantCompetitions" />
+            <End Role="Fight" EntitySet="Fights" />
+          </AssociationSet>
           <AssociationSet Name="for_key_idgroup_GroupParticipant" Association="Self.for_key_idgroup_GroupParticipant">
             <End Role="Group" EntitySet="Groups" />
             <End Role="ParticipantCompetition" EntitySet="ParticipantCompetitions" />
@@ -626,6 +730,10 @@
           <AssociationSet Name="for_key_idWeightcategory_group" Association="Self.for_key_idWeightcategory_group">
             <End Role="WeightCategory" EntitySet="WeightCategories" />
             <End Role="Group" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="for_key_idUser_HisotryLogin" Association="Self.for_key_idUser_HisotryLogin">
+            <End Role="User" EntitySet="Users" />
+            <End Role="HistoryLogin" EntitySet="HistoryLogins" />
           </AssociationSet>
           <AssociationSet Name="for_key_idParticipant_GroupParticipant" Association="Self.for_key_idParticipant_GroupParticipant">
             <End Role="Participant" EntitySet="Participants" />
@@ -635,79 +743,8 @@
             <End Role="Role" EntitySet="Roles" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
-          <EntitySet Name="HistoryLogins" EntityType="DoJudoModel.HistoryLogin" />
-          <AssociationSet Name="for_key_idUser_HisotryLogin" Association="DoJudoModel.for_key_idUser_HisotryLogin">
-            <End Role="User" EntitySet="Users" />
-            <End Role="HistoryLogin" EntitySet="HistoryLogins" />
-          </AssociationSet>
-          <EntitySet Name="Fights" EntityType="DoJudoModel.Fight" />
-          <AssociationSet Name="for_key_idFirstParticipantCompetition" Association="DoJudoModel.for_key_idFirstParticipantCompetition">
-            <End Role="ParticipantCompetition" EntitySet="ParticipantCompetitions" />
-            <End Role="Fight" EntitySet="Fights" />
-          </AssociationSet>
-          <AssociationSet Name="for_key_idSecondParticipantCompetition" Association="DoJudoModel.for_key_idSecondParticipantCompetition">
-            <End Role="ParticipantCompetition" EntitySet="ParticipantCompetitions" />
-            <End Role="Fight" EntitySet="Fights" />
-          </AssociationSet>
-          </EntityContainer>
-        <EntityType Name="HistoryLogin">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdUser" Type="Int32" Nullable="false" />
-          <Property Name="DateTimeLogin" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateTimeExit" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="User" Relationship="DoJudoModel.for_key_idUser_HisotryLogin" FromRole="HistoryLogin" ToRole="User" />
-        </EntityType>
-        <Association Name="for_key_idUser_HisotryLogin">
-          <End Type="DoJudoModel.User" Role="User" Multiplicity="1" />
-          <End Type="DoJudoModel.HistoryLogin" Role="HistoryLogin" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="HistoryLogin">
-              <PropertyRef Name="IdUser" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Fight">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idZeroParticipantCompetition" Type="Int32" Nullable="false" />
-          <Property Name="idOneParticipantCompetition" Type="Int32" Nullable="false" />
-          <Property Name="Result" Type="Boolean" />
-          <NavigationProperty Name="ParticipantCompetition" Relationship="DoJudoModel.for_key_idFirstParticipantCompetition" FromRole="Fight" ToRole="ParticipantCompetition" />
-          <NavigationProperty Name="ParticipantCompetition1" Relationship="DoJudoModel.for_key_idSecondParticipantCompetition" FromRole="Fight" ToRole="ParticipantCompetition" />
-        </EntityType>
-        <Association Name="for_key_idFirstParticipantCompetition">
-          <End Type="DoJudoModel.ParticipantCompetition" Role="ParticipantCompetition" Multiplicity="1" />
-          <End Type="DoJudoModel.Fight" Role="Fight" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ParticipantCompetition">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Fight">
-              <PropertyRef Name="idZeroParticipantCompetition" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="for_key_idSecondParticipantCompetition">
-          <End Type="DoJudoModel.ParticipantCompetition" Role="ParticipantCompetition" Multiplicity="1" />
-          <End Type="DoJudoModel.Fight" Role="Fight" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ParticipantCompetition">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Fight">
-              <PropertyRef Name="idOneParticipantCompetition" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        </Schema>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -757,6 +794,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Fights">
+            <EntityTypeMapping TypeName="DoJudoModel.Fight">
+              <MappingFragment StoreEntitySet="Fight">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdFirstParticipantCompetition" ColumnName="IdFirstParticipantCompetition" />
+                <ScalarProperty Name="IdSecondParticipantCompetition" ColumnName="IdSecondParticipantCompetition" />
+                <ScalarProperty Name="IdWinner" ColumnName="IdWinner" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Groups">
             <EntityTypeMapping TypeName="DoJudoModel.Group">
               <MappingFragment StoreEntitySet="Group">
@@ -765,6 +812,16 @@
                 <ScalarProperty Name="IdWeightCategory" ColumnName="IdWeightCategory" />
                 <ScalarProperty Name="IdAgeCategory" ColumnName="IdAgeCategory" />
                 <ScalarProperty Name="GenderCategory" ColumnName="GenderCategory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HistoryLogins">
+            <EntityTypeMapping TypeName="DoJudoModel.HistoryLogin">
+              <MappingFragment StoreEntitySet="HistoryLogin">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="DateTimeLogin" ColumnName="DateTimeLogin" />
+                <ScalarProperty Name="DateTimeExit" ColumnName="DateTimeExit" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -830,26 +887,6 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="StartWeight" ColumnName="StartWeight" />
                 <ScalarProperty Name="EndWeight" ColumnName="EndWeight" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="HistoryLogins">
-            <EntityTypeMapping TypeName="DoJudoModel.HistoryLogin">
-              <MappingFragment StoreEntitySet="HistoryLogin">
-                <ScalarProperty Name="DateTimeExit" ColumnName="DateTimeExit" />
-                <ScalarProperty Name="DateTimeLogin" ColumnName="DateTimeLogin" />
-                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Fights">
-            <EntityTypeMapping TypeName="DoJudoModel.Fight">
-              <MappingFragment StoreEntitySet="Fight">
-                <ScalarProperty Name="Result" ColumnName="Result" />
-                <ScalarProperty Name="idOneParticipantCompetition" ColumnName="idOneParticipantCompetition" />
-                <ScalarProperty Name="idZeroParticipantCompetition" ColumnName="idZeroParticipantCompetition" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

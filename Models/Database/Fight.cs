@@ -15,11 +15,12 @@ namespace DoJudo.Models.Database
     public partial class Fight
     {
         public int Id { get; set; }
-        public int idZeroParticipantCompetition { get; set; }
-        public int idOneParticipantCompetition { get; set; }
-        public Nullable<bool> Result { get; set; }
+        public Nullable<int> IdFirstParticipantCompetition { get; set; }
+        public Nullable<int> IdSecondParticipantCompetition { get; set; }
+        public Nullable<int> IdWinner { get; set; }
     
         public virtual ParticipantCompetition ParticipantCompetition { get; set; }
         public virtual ParticipantCompetition ParticipantCompetition1 { get; set; }
+        public virtual ParticipantCompetition ParticipantCompetition2 { get; set; }
     }
 }
